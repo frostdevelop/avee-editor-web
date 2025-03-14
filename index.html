@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Avee Editor</title>
+	<style>
+		html {
+			color-scheme: dark;
+		}
+		
+		body {
+			padding: 0 20px;
+			color: #EEE;
+			font-size: 20px;
+			font-family: Arial, sans-serif;
+			/*color-scheme: dark;*/
+			text-shadow: 0 5px 20px rgba(0,0,0,0.8);
+			background: #222;
+			scroll-behavior:smooth;
+		}
+
+		::-webkit-scrollbar {width: 10px;}
+		::-webkit-scrollbar-track {
+			background: #111;
+	 	}
+		::-webkit-scrollbar-thumb {
+			background: #666;
+			border-radius: 10px;
+		}
+		::-webkit-scrollbar-thumb:hover {background:#777;}
+		::-webkit-scrollbar-thumb:active {box-shadow: 0 0 10px white;}
+		
+		/*begin pacifikyneodark*/
+		:root {
+			--hover: #4f4f4f;
+			--border: 2px;
+			--radius: 45px;
+			--height: 8px;
+		}
+		textarea{resize:none;border-radius:20px !important;font-family:inherit;}
+		input:focus,select:focus,textarea:focus {outline:none;}
+		input:active,select:active,input[type="text"]:focus,.button:active {background-image: linear-gradient(to left top, #292929, #121212)};
+		.button,input,select {font-family: Tahoma, Arial, sans-serif;}
+		input:active,select:active,input[type="text"]:focus,.button:active {
+			box-shadow: 2px 2px var(--height) rgba(0,0,0,0.7) inset, -2px -2px var(--height) rgba(240,240,240,0.3) inset;
+			border-color: rgba(0,0,0,0);
+		}
+		details,input,select,.button,.contsolid,textarea {border: var(--border) #292929 solid;box-shadow: 2px 2px var(--height) rgba(0,0,0,0.7), -2px -2px var(--height) rgba(240,240,240,0.3);}
+		input,select,textarea {
+			transition: box-shadow 500ms ease, border 500ms ease;
+			background-image: linear-gradient(to left top, #121212, #292929);
+			color: currentcolor;
+			font-size: 13px;
+			padding: 10px;
+			margin: 5px 0;
+			border-radius: var(--radius);
+			min-width:0px;
+		}
+		select {background-color:#222}
+		input:hover,select:hover,.button:hover,textarea:hover,details:hover,.contsolid:hover {border-color: var(--hover);}
+		.smallinput {width:10em}
+		.button {
+			display: inline-flex;
+			flex-direction: row;
+			justify-content: center;
+			align-content: center;
+			align-items: center;
+			cursor: pointer;
+			background-image: linear-gradient(to left top, #121212, #292929);
+			color: currentColor;
+			transition: box-shadow 500ms ease, border 500ms ease;
+			font-size: 13px;
+			padding: 8px 20px;
+			margin: 4px;
+			border-radius: var(--radius);
+			min-width: 100px;
+		}
+		.iconbutton {
+			min-width: 0;
+			width: 45px;
+			height: 45px;
+			font-size: 30px;
+			border-radius: 50%;
+			font-weight: bold;
+			padding: 0;
+			text-shadow: 0 0 5px rgba(0,0,0,0.5);
+		}
+		.icon {
+			display: inline;
+			height: 25px;
+			width: 25px;
+		}
+		.smallbutton {min-width:5em;}
+		details {
+			border-radius: 20px;
+			padding: 10px;
+			margin: 10px;
+			/*background-image: linear-gradient(to left top, #121212, #292929);*/
+			transition: border .2s ease;
+		}
+		details[open] > summary {
+			border-bottom: rgba(255,255,255,0.2) solid 2px;
+			margin-bottom: 10px;
+		}
+		.gbtn {
+			background-image: linear-gradient(135deg,#33ff33,#11c011);
+			box-shadow: 2px 2px var(--height) rgba(0,0,0,0.8),-2px -2px var(--height) #33ff33,inset 1px 1px rgba(255, 255, 255, 0.1);
+			border-color:#11c011;
+			text-shadow: 0 0 4px rgba(0,0,0,0.5);
+		}
+		.gbtn:hover {border-color:#33ff33;}
+		.gbtn:active {border-color:#11c011;background: linear-gradient(-45deg,#33ff33,#11c011);box-shadow: inset 2px 2px var(--height) rgba(0,0,0,0.8),inset -2px -2px var(--height) #33ff33;}
+		.rbtn {
+			background-image: linear-gradient(135deg,#f95353,#a51212);
+			box-shadow: 2px 2px var(--height) rgba(0,0,0,0.8),-2px -2px var(--height) #f95353,inset 1px 1px rgba(255, 255, 255, 0.1);
+			border-color: #a51212;
+		}
+		.rbtn:hover {border-color: #f95353}
+		.rbtn:active {border-color: #a51212;background-image: linear-gradient(-45deg,#f95353,#a51212);box-shadow: inset 2px 2px var(--height) rgba(0,0,0,0.8), inset -2px -2px var(--height) #f95353;}
+		.disabled {
+			background: #ffcb85 !important;
+			color: #595959 !important;
+			box-shadow: none !important;
+		}
+		.indent {
+			margin: 5px 10px;
+		}
+		
+		hr {width:95%;border-color: #3d3d3d;margin:10px auto;}
+		h2 {
+			font-size: 17px;
+			font-weight: 600;
+		}
+		
+		h3 {
+			color: #bfbfbf;
+			font-weight: 500;
+			font-size: 12px;
+			margin: 2px;
+		}
+		
+		#content {
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			align-items: center;
+		}
+		
+		.buttonicon {
+			width: 20px;
+			height: 20px;
+		}
+		
+		label.iconbutton {
+			height: 25px !important;
+			width: 25px !important;
+		}
+		
+		label {
+			font-weight: 600;
+			font-size: 12px;
+		}
+		
+		.center-container-row {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.contanter-padding {
+			margin: 5px;
+			align-items: left;
+		}
+		
+		footer {
+			margin: 10px;
+			font-size: 10px;
+		}
+		
+		.switch {
+			position: relative;
+			display: inline-block;
+			width: 45px;
+			height: 25px;
+			margin: 0px 3px 0px 0px;
+		}
+		
+		.switch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+		
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: linear-gradient(to left top, #8c8c8c, #b0b0b0);
+			box-shadow: 2px 2px var(--height) rgba(0,0,0,0.7), -2px -2px var(--height) rgba(240,240,240,0.3), #6a6a6a 0px 1px inset;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
+		
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: 20px;
+			width: 20px;
+			left: 3px;
+			bottom: 3px;
+			background: linear-gradient(to left top, #babababa, #d1d1d1);
+			box-shadow: 2px 2px var(--height) rgba(0,0,0,0.7), -2px -2px var(--height) rgba(240,240,240,0.3);
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
+		
+		.switch input:checked + .slider {
+			background: linear-gradient(to right bottom, #0765e8, #14a6f5); //#424242, #6b6b6b
+		}
+		
+		.switch input:active + .slider {
+			box-shadow: 2px 2px var(--height) rgba(0,0,0,0.7) inset, -2px -2px var(--height) rgba(240,240,240,0.3) inset;
+		}
+		
+		.switch input:checked + .slider:before {
+			-webkit-transform: translateX(19px);
+			-ms-transform: translateX(19px);
+			transform: translateX(19px);
+		}
+		
+		.slider.round {
+			 border-radius: 34px;
+		}
+		
+		.slider.round:before {
+			border-radius: 50%;
+		}
+		
+		.vl {
+			display: inline;
+			border: 1px outset #3d3d3d;
+			height: 23px;
+			width: 0px;
+		}
+		
+		.sliderlabel {
+			margin: 5px;
+			text-align: left;
+		}
+		
+		.slidercontainer {
+			display: flex;
+			justify-content: left;
+			margin: 5px;
+			font-size:	15px;
+		}
+		
+		.center-container-column {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		
+		.hid {
+			opacity: 0%;
+			pointer-events: none;
+		}
+		
+		.dialog {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-content: center;
+			justify-content: center;
+			align-items: center;
+			justify-items: center;
+			background: rgba(0,0,0,0.4);
+			backdrop-filter: blur(5px);
+			transition: opacity .3s ease, background .3s ease;
+			z-index: 100;
+		}
+		.flex-cont {
+			display:flex;flex-direction:column;border-radius:10px;margin:10px 0;
+		}
+		.pad-5 {padding:10px;}
+		.flex-cont-row{
+			display:flex;flex-direction:row;padding:10px;
+		}
+		input[type='file']{
+			display:none;
+		}
+		/*End PacifikyNeoDark*/
+		label.neofilebutton input[type='file'] + span[class='button']{
+			
+		}
+		#avee-structure, #avee-files {
+			background: #111;
+			height: 90vh;
+			overflow: auto;
+			border-radius: 10px;
+			padding: 10px;
+			margin: 20px 0;
+		}
+		.avee-elm-controls > summary {
+			list-style-type: '+ ';
+		}
+		.avee-elm-controls[open] > summary {
+			list-style-type: '- ';
+		}
+		.contsolid {
+			padding: 5px 10px;
+			border-radius: 10px;
+			margin: 10px 0;
+			transition: border .2s ease;
+		}
+		input[type='color'] {
+			width: 50px;
+			height: 50px;
+		}
+		img.avee-file-entry-img {
+			max-width: 30vw;
+			max-height: 25vh;
+		}
+		div.avee-file-entry {
+			display: flex;flex-direction:column;align-content:center;align-items:center;padding: 15px 0;
+		}
+		#avee-svg-defs {display:none}
+		.avee-file-entry-control {
+			display: flex;
+			width: 100%;
+			flex-direction: row-reverse;
+			padding-right: 10px;
+		}
+		input.avee-file-entry-name {
+			font-size: 20px;
+			box-shadow: inset 1px 1px rgba(255, 255, 255, 0.1);
+			background: #222;
+		}
+		img.avee-file-entry-img:hover {
+			border-radius: 8px;
+			box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+			transform: scale(1.05);
+		}
+		img.avee-file-entry-img {
+			border-radius: 2px;
+			transition: all .2s ease;
+		}
+		.bbtn, select{
+			background-image: linear-gradient(to left top, #0f4bc5, #51d3e9) !important;
+			border-color: #1f447d;
+			text-shadow: 0 0 4px rgba(0,0,0,0.5);
+			box-shadow: 2px 2px var(--height) rgba(0, 0, 0, 0.8), -2px -2px var(--height) #008eff,inset 1px 1px rgba(255, 255, 255, 0.1);
+		}
+		.bbtn:hover, select:hover {
+			border-color: #43a4ec;
+		}
+		.bbtn:active, select:active {
+			box-shadow: inset 2px 2px var(--height) rgba(0, 0, 0, 0.8), inset -2px -2px var(--height) #4abcff;
+			background-image: linear-gradient(to right bottom, #0f4bc5, #51d3e9) !important;
+			border-color: #1f447d;
+		}
+	</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+</head>
+
+<body lang="en">
+	<h1>Avee Editor</h1>
+	<h2 id='avee-status'>IDLE</h2>
+	<div id='avee-controls'>
+		<label class='neofilebutton'>
+		<input type='file' id='avee-viz-input' accept='.viz, .zip'></input>
+		<span class='button'>Import File</span>
+		</label>
+		<button class='button' id='avee-export'>Export File</button>
+		<br/>
+		<input placeholder='AveeEditorExport.viz' id='avee-filename'></input>
+		<br/>
+	</div>
+	<h2>Effects</h2>
+	<hr/>
+	<button class='button bbtn' id='avee-addcomp-btn'>Add Composition</button>
+	<div id='avee-structure'></div>
+	<h2>Images</h2>
+	<hr/>
+	<label class='neofilebutton'>
+	<input type='file' id='avee-img-input' accept='image/*' multiple></input>
+	<span class='button bbtn'>Upload Image</span>
+	</label>
+	<div id='avee-files'></div>
+	<footer>Version: Ra.1.0<br/>Copyright 2025 Frost. All rights reserved.</footer>
+	<script src="https://cdn.jsdelivr.net/npm/@zip.js/zip.js@2.7.57/dist/zip.min.js"></script>
+	<template id='avee-file-template'>
+		<div class='avee-file-entry contsolid'>
+			<div class="avee-file-entry-control">
+				<button class="button iconbutton rbtn" id='delete'>
+				<svg viewBox="0 0 24 24" width="24" height="24" class='icon' fill="none" xmlns="http://www.w3.org/2000/svg">
+					<use href='#trashicon'></use>
+				</svg>
+				</button>
+				<button class="button iconbutton bbtn" id='download'>
+					<svg width="24" height="24" class='icon' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<use href='#downloadicon'></use>
+					</svg>
+				</button>
+			</div>
+			<input type='text' class='avee-file-entry-name' id='name'></input>
+			<img class='avee-file-entry-img' id='img'></img>
+		</div>
+	</template>
+	<svg xmlns="http://www.w3.org/2000/svg" id='avee-svg-defs'>
+	<defs>
+	<symbol id="trashicon">
+		<rect x="11" y="10" width="2" height="11" rx="1" fill="currentcolor"></rect>
+		<rect x="4" y="7" width="16" height="16" rx="1" stroke="currentcolor" stroke-width="2"></rect>
+		<rect x="2" y="3" width="20" height="4" rx="1" stroke="currentcolor" stroke-width="2"></rect>
+		<rect x="7" y="10" width="2" height="11" rx="1" fill="currentcolor"></rect>
+		<rect x="15" y="10" width="2" height="11" rx="1" fill="currentcolor"></rect>
+		<mask id="mask0_2282_1246" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="8" y="0" width="8" height="2">
+		<rect x="8" width="8" height="2" fill="#D9D9D9"></rect>
+		</mask>
+		<g mask="url(#mask0_2282_1246)">
+		<rect x="10" width="4" height="4" rx="2" fill="currentcolor"></rect>
+		</g>
+	</symbol>
+	<symbol id='downloadicon'>
+		<path fill-rule="evenodd" clip-rule="evenodd" d="M2.85 12C2.38056 12 2 12.3806 2 12.85V17C2 19.1263 3.7237 20.85 5.85 20.85H17.85C19.9763 20.85 21.7 19.1263 21.7 17V12.85C21.7 12.3806 21.3194 12 20.85 12V12C20.3806 12 20 12.3806 20 12.85V17C20 18.1874 19.0374 19.15 17.85 19.15H5.85C4.66259 19.15 3.7 18.1874 3.7 17V12.85C3.7 12.3806 3.31944 12 2.85 12V12Z" fill="currentcolor"></path>
+		<path d="M12.85 3C12.85 2.53056 12.4694 2.15 12 2.15C11.5306 2.15 11.15 2.53056 11.15 3H12.85ZM11.399 16.601C11.7309 16.933 12.2691 16.933 12.601 16.601L18.0104 11.1917C18.3424 10.8597 18.3424 10.3215 18.0104 9.98959C17.6785 9.65765 17.1403 9.65765 16.8083 9.98959L12 14.7979L7.19167 9.98959C6.85973 9.65765 6.32154 9.65765 5.98959 9.98959C5.65765 10.3215 5.65765 10.8597 5.98959 11.1917L11.399 16.601ZM11.15 3V16H12.85V3H11.15Z" fill="currentcolor"></path>
+	</symbol>
+	</defs>
+	</svg>
+	<script>
+	/*
+	const filein = document.getElementById('avee-viz-input');
+	const status = document.getElementById('avee-status');
+	*/
+	class fsort{
+		static quickSort(arr,carr=null){
+			carr || (carr = [...arr.keys()]);
+			if(arr.length > 3){
+				const harr = Math.trunc(arr.length/2);
+				const earr = arr.length-1;
+				const pivsort = fsort.tsort([arr[0],arr[harr],arr[earr]],[carr[0],carr[harr],carr[earr]]);
+				arr[0] = pivsort[0][0];
+				arr[earr] = pivsort[0][2];
+				arr.splice(harr,1);
+				arr.push(pivsort[0][1]);
+				carr[0] = pivsort[1][0];
+				carr[earr] = pivsort[1][2];
+				carr.splice(harr,1);
+				carr.push(pivsort[1][1]);
+				let temp;
+				let si = -1;
+				for(let i=0;i<arr.length;i++){
+					if(arr[i]<=arr[earr]){
+						++si;
+						if(i>si){
+							temp = carr[i];
+							carr[i] = carr[si];
+							carr[si] = temp;
+							temp = arr[i]
+							arr[i] = arr[si];
+							arr[si] = temp;
+						}
+					}
+				}
+				temp = fsort.quickSort(arr.slice(0,si),carr.slice(0,si));
+				arr.splice(0,si,...temp[0]);
+				carr.splice(0,si,...temp[1]);
+				temp = fsort.quickSort(arr.slice(si+1),carr.slice(si+1));
+				arr.splice(si+1,temp[0].length,...temp[0]);
+				carr.splice(si+1,temp[1].length,...temp[1]);
+				return [arr,carr];
+			}else if(arr.length == 3){
+				return fsort.tsort(arr,carr);
+			}else if(arr.length == 2){
+				console.warn("fsort.quickSort : Attempting to sort a length 2 array.");
+				return (arr[0] > arr[1] ? [arr.toReversed(),carr.toReversed()] : [arr,carr]);
+			}else{
+				console.warn("fsort.quickSort : Array length is 0 or 1 no sort needed."); //throw new RangeError();
+				return [arr,carr];
+			}
+		}
+		static tsort(arr,carr=null){
+			const indices = new Uint8Array(3);
+			if(arr[1] < arr[0]){
+					if(arr[2] < arr[0]){
+							if(arr[2] < arr[1]){
+									indices[0] = 2;
+									indices[1] = 1;
+							}else{
+									indices[0] = 1;
+									indices[1] = 2;
+							}
+					}else{
+							indices[0] = 1;
+							indices[2] = 2;
+					}
+			}else if(arr[2] < arr[0]){
+					indices[0] = 2;
+					indices[2] = 1;
+			}else if(arr[2] < arr[1]){
+				indices[1] = 2;
+				indices[2] = 1;
+			}else{
+				indices[1] = 1;
+				indices[2] = 2;
+			}
+			return [[arr[indices[0]],arr[indices[1]],arr[indices[2]]],(carr ? [carr[indices[0]],carr[indices[1]],carr[indices[2]]] : indices)];
+		}
+	}
+	class aveesys{
+		constructor(fileinp,status,structure,exportbtn,filenameinp,controls,filecont,entrytemplate,imginp,compbtn){
+			this.fileinp = fileinp;
+			this.exportbtn = exportbtn;
+			this.filenameinp = filenameinp;
+			this.controls = controls;
+			this.status = status;
+			this.structure = structure;
+			this.scenedata = null;
+			this.filecont = filecont;
+			this.entrytemplate = entrytemplate;
+			this.imginp = imginp;
+			this.compbtn = compbtn;
+			this.images = [];
+			this.processFiles = this.processFiles.bind(this);
+			this.saveFile = this.saveFile.bind(this);
+			this.addImage = this.addImage.bind(this);
+			this.addComp = this.addComp.bind(this);
+			this.fileinp.addEventListener('change',this.processFiles);
+			this.exportbtn.addEventListener('click',this.saveFile);
+			this.imginp.addEventListener('change',this.addImage);
+			this.compbtn.addEventListener('click',this.addComp);
+		}
+		addComp(){
+			const comp = {
+				objType: "Composition",
+				v:"Composition",
+				ver:"10",
+				_name:"Composition",
+				elements:[],
+				introBlendMode:{'o':0,'t':'sel Alpha AddAlpha','tag':'2_introOutro','v':'Alpha'},
+				introFadeColor:{"hint": "","o": 3,"t": "crgba","tag": "2_introOutro","v": -553648128},
+				introFadeDuration:{"hint": "","o": 1,"t": "f 0 10","tag": "2_introOutro","v": 0},
+				outroFadeDuration:{"hint": "","o": 2,"t": "f 0 10","tag": "2_introOutro","v": 0},
+			};
+			this.scenedata.compositions.push(comp);
+			const compelm = this.createCompBase(this.scenedata.compositions.length-1);
+			this.structure.appendChild(compelm);
+			this.updateStatus(4);
+		}
+		addImage(){
+			if(this.imginp.files.length == 0){
+				alert("No files selected!");
+				return;
+			}
+			for(let i=0;i<this.imginp.files.length;i++){
+				this.images.push([this.imginp.files[i].name,this.imginp.files[i]]);
+			}
+			this.updateStatus(1);
+		}
+		async processFiles(){
+			this.scenedata = null;
+			//console.log(this.fileinp.files.length);
+			if(this.fileinp.files.length == 0){
+				alert("No files selected!");
+				return;
+			}else if(this.fileinp.files.length > 1){
+				alert("Multiple files selected! Processing first.");
+			}
+			const extension = this.fileinp.files[0].name.substr(this.fileinp.files[0].name.length-4);
+			if(extension != '.viz' && extension != '.zip'){
+				alert("File isn't a viz file!");
+				return;
+			}
+			this.filenameinp.value = this.fileinp.files[0].name;
+			/*
+			const fr = new FileReader();
+			fr.onload = ()=>{
+			
+			}
+			fr.readAsArrayBuffer(this.fileinp.files[0]);
+			*/
+			const entries = await (new zip.ZipReader(new zip.BlobReader(this.fileinp.files[0]))).getEntries();
+			let scenedata = null;
+			this.images.length = 0;
+			for(let i=0;i<entries.length;i++){
+				if(entries[i].filename == 'scene.json'){
+					scenedata = JSON.parse(await (await entries[i].getData(new zip.BlobWriter())).text());
+				}else{
+					const tempwriter = new zip.BlobWriter;
+					await entries[i].getData(tempwriter);
+					this.images.push([entries[i].filename,await tempwriter.getData()]);
+				}
+			}
+			//parent.console.log(this.images);
+			if(!scenedata){
+				alert("Invalid file format!");
+				return;
+			}
+			this.scenedata = scenedata;
+			//parent
+			parent.console.log(scenedata);
+			this.updateStatus();
+		}
+		createCompBase(i){
+			const compelm = document.createElement('details');
+			const compsummary = document.createElement('summary');
+			compsummary.innerText = i==0 ? 'Final Composition' : 'Composition '+i.toString();
+			compelm.appendChild(compsummary);
+			/*
+			const categoryio = document.createElement('details');
+			const categorysum = document.createElement('summary');
+			categorysum.innerText = 'Intro Outro';
+			categoryio.appendChild(categorysum);
+			*/
+			const options = Object.getOwnPropertyNames(this.scenedata.compositions[i]);
+			options.splice(options.indexOf('_name'),1);
+			options.splice(options.indexOf('elements'),1);
+			options.splice(options.indexOf('v'),1);
+			options.splice(options.indexOf('ver'),1);
+			options.splice(options.indexOf('objType'),1);
+			const cats = [];
+			const catos = [];
+			const catelms = [];
+			const catelmo = [];
+			//const optionelms = new Array(options.length);
+			for(let j=0;j<options.length;j++){
+				const title = aveesys.p2T(options[j]);
+				const ocont = document.createElement('div');
+				const osum = document.createElement('h2');
+				ocont.className = 'contsolid';
+				osum.innerText = title;
+				ocont.appendChild(osum);
+				ocont.appendChild(this.parseAveeInput(this.scenedata.compositions[i][options[j]],title));
+				/*
+				,this.scenedata.compositions[i][options[j]].t,this.scenedata.compositions[i][options[j]].v,title,inp=>{
+					//alert(inp);
+					this.scenedata.compositions[i][options[j]].v = inp;
+				}
+				*/
+				//optionelms[this.scenedata.compositions[i][options[j]].o] = ocont;
+				const indofcat = cats.indexOf(this.scenedata.compositions[i][options[j]].tag);
+				if(indofcat == -1){
+					cats.push(this.scenedata.compositions[i][options[j]].tag);
+					catos.push(parseInt(this.scenedata.compositions[i][options[j]].tag.split('_')[0]));
+					catelms.push([ocont]);
+					catelmo.push([this.scenedata.compositions[i][options[j]].o]);
+				}else{
+					catelms[indofcat].push(ocont);
+					catelmo[indofcat].push(this.scenedata.compositions[i][options[j]].o);
+				}
+			}
+			//There's so many ways of sorting the categories and so many edge cases that can happen... Gosh, I hate this format
+			/*
+			for(let j=0;j<optionelms.length;j++){
+				categoryio.appendChild(optionelms[j]);
+			}
+			const ifd = document.createElement('div');
+			const ifdsum = document.createElement('h2');
+			ifd.className = 'contsolid';
+			ifdsum.innerText = 'Intro Fade Duration';
+			ifd.appendChild(ifdsum);
+			ifd.appendChild(this.parseAveeInput(this.scenedata.compositions[i].introFadeDuration.t,this.scenedata.compositions[i].introFadeDuration.v,inp=>{
+				//alert(inp);
+				this.scenedata.compositions[i].introFadeDuration.v = inp;
+			}));
+			categoryio.appendChild(ifd);
+			*/
+			const controlselm = document.createElement('details');
+			controlselm.className = 'avee-elm-controls';
+			const controlssum = document.createElement('summary');
+			controlssum.innerText = 'Controls';
+			controlselm.appendChild(controlssum);
+			controlselm.className = 'avee-elm-controls';
+			const ninds = fsort.quickSort(catos)[1];
+			for(let j=0;j<ninds.length;j++){
+				const catelm = document.createElement('details');
+				const catsum = document.createElement('summary');
+				catsum.innerText = aveesys.p2T(cats[ninds[j]].split('_')[1]);
+				catelm.appendChild(catsum);
+				const nelminds = fsort.quickSort(catelmo[ninds[j]])[1];
+				for(let k=0;k<nelminds.length;k++){
+					catelm.appendChild(catelms[ninds[j]][nelminds[k]]);
+				}
+				controlselm.appendChild(catelm);
+			}
+			compelm.appendChild(controlselm);
+			return compelm;
+		}
+		updateStatus(mode=0){
+			this.status.innerText = "VERSION: "+this.scenedata.ver+"\nCOMPOSITIONS: "+this.scenedata.compositions.length.toString()+"\nTEMPLATE: "+this.scenedata.template.toString()+"\nIMAGES: "+this.images.length;
+			switch(mode){
+			case 0:
+			case 1:
+			case 3:
+				const tempfilecont = document.createElement('div');
+				for(let i=0;i<this.images.length;i++){
+					const entry = this.entrytemplate.content.cloneNode(true);
+					parent.console.log(entry);
+					const nameelm = entry.getElementById('name');
+					nameelm.removeAttribute('id');
+					nameelm.value = this.images[i][0];
+					nameelm.addEventListener('change',()=>{this.images[i][0] = nameelm.value;this.updateStatus(2);});
+					const url = URL.createObjectURL(this.images[i][1]);
+					const imgelm = entry.getElementById('img');
+					imgelm.removeAttribute('id');
+					imgelm.src = url;
+					imgelm.onload = ()=>URL.revokeObjectURL(url);
+					const delbtn = entry.getElementById('delete');
+					delbtn.removeAttribute('id');
+					delbtn.addEventListener('click',()=>{if(confirm('Are you sure you want to delete this image?')){this.images.splice(i,1);this.updateStatus(3);}})
+					const downloadbtn = entry.getElementById('download');
+					downloadbtn.removeAttribute('id');
+					downloadbtn.addEventListener('click',()=>{
+						const anchor = document.createElement('a');
+						anchor.download = this.images[i][0];
+						anchor.href = URL.createObjectURL(this.images[i][1]);
+						anchor.click();
+						anchor.remove();
+						URL.revokeObjectURL(anchor.href);
+					});
+					tempfilecont.appendChild(entry);
+				}
+				this.filecont.parentElement.insertBefore(tempfilecont,this.filecont);
+				tempfilecont.id = this.filecont.id;
+				tempfilecont.className = this.filecont.className;
+				this.filecont.remove();
+				this.filecont = tempfilecont;
+			}
+			switch(mode){
+			case 0:
+				const tempstruct = document.createElement('div');
+				for(let i=0;i<this.scenedata.compositions.length;i++){
+					const compelm = this.createCompBase(i);
+					for(let j=0;j<this.scenedata.compositions[i].elements.length;j++){
+						const genelm = document.createElement('details');
+						const gensummary = document.createElement('summary');
+						gensummary.innerText = this.scenedata.compositions[i].elements[j]._name;
+						const categoryio = document.createElement('details');
+						const categorysum = document.createElement('summary');
+						categorysum.innerText = 'Ctrl';
+						categoryio.appendChild(categorysum);
+						const options = Object.getOwnPropertyNames(this.scenedata.compositions[i].elements[j]);
+						options.splice(options.indexOf('_name'),1);
+						options.splice(options.indexOf('v'),1);
+						options.splice(options.indexOf('ver'),1);
+						options.splice(options.indexOf('objType'),1);
+						//parent.console.log(options);
+						const cats = [];
+						const catos = [];
+						const catelms = [];
+						const catelmo = [];
+						for(let k=0;k<options.length;k++){
+							const title = aveesys.p2T(options[k]);
+							const ocont = document.createElement('div');
+							const osum = document.createElement('h2');
+							ocont.className = 'contsolid';
+							osum.innerText = title;
+							ocont.appendChild(osum);
+							ocont.appendChild(this.parseAveeInput(this.scenedata.compositions[i].elements[j][options[k]],title));
+							/*
+							,(this.scenedata.compositions[i].elements[j][options[k]].hasOwnProperty("t") ? this.scenedata.compositions[i].elements[j][options[k]].t : ""),this.scenedata.compositions[i].elements[j][options[k]].v,title,inp=>{
+								//alert(inp);
+								this.scenedata.compositions[i].elements[j][options[k]].v = inp;
+							}
+							*/
+							//optionelms[this.scenedata.compositions[i].elements[j][options[k]].o] = ocont;
+							const indofcat = cats.indexOf(this.scenedata.compositions[i].elements[j][options[k]].tag);
+							if(indofcat == -1){
+								cats.push(this.scenedata.compositions[i].elements[j][options[k]].tag);
+								const ordval = parseInt(this.scenedata.compositions[i].elements[j][options[k]].tag.split('_')[0]);
+								catos.push(Number.isNaN(ordval) ? 100 : ordval);
+								catelms.push([ocont]);
+								catelmo.push([this.scenedata.compositions[i].elements[j][options[k]].o]);
+							}else{
+								catelms[indofcat].push(ocont);
+								catelmo[indofcat].push(this.scenedata.compositions[i].elements[j][options[k]].o);
+							}
+						}
+						//parent.console.log(optionelms);
+						//parent.console.log(cats);
+						//parent.console.log(catos);
+						genelm.appendChild(gensummary);
+						const ninds = fsort.quickSort(catos)[1];
+						for(let k=0;k<ninds.length;k++){
+							if(!cats[ninds[k]]){continue;}
+							const catelm = document.createElement('details');
+							const catsum = document.createElement('summary');
+							catsum.innerText = aveesys.p2T(cats[ninds[k]].split('_')[1] ?? cats[ninds[k]]);
+							catelm.appendChild(catsum);
+							const nelminds = fsort.quickSort(catelmo[ninds[k]])[1];
+							for(let l=0;l<nelminds.length;l++){
+								catelm.appendChild(catelms[ninds[k]][nelminds[l]]);
+							}
+							genelm.appendChild(catelm);
+						}
+						compelm.appendChild(genelm);
+					}
+					tempstruct.appendChild(compelm);
+				}
+				this.structure.parentElement.insertBefore(tempstruct,this.structure);
+				tempstruct.id = this.structure.id;
+				tempstruct.className = this.structure.className;
+				this.structure.remove();
+				this.structure = tempstruct;
+				break;
+			case 1:
+			case 2:
+			case 3:{
+				const structimg = Array.from(document.getElementsByClassName('avee-struct-img')).concat(Array.from(document.getElementsByClassName('avee-struct-pimg')));
+				for(let i=0;i<structimg.length;i++){
+					const tempv = structimg[i].value;
+					const structimgo = structimg[i].getElementsByTagName('option');
+					for(let j=structimgo.length-1;j>=0;--j){
+						if(structimgo[j].value.startsWith('local:')){structimgo[j].remove();}
+					}
+					for(let j=0;j<this.images.length;j++){
+						const imgselo = document.createElement('option');
+						imgselo.value = imgselo.innerText = 'local:'+this.images[j][0];
+						structimg[i].appendChild(imgselo);
+					}
+					structimg[i].value = tempv;
+				}
+				break;
+			}
+			case 4:{
+				const structimg = Array.from(document.getElementsByClassName('avee-struct-img')).concat(Array.from(document.getElementsByClassName('avee-struct-pimg')));
+				for(let i=0;i<structimg.length;i++){
+					const tempv = structimg[i].value;
+					const structimgo = structimg[i].getElementsByTagName('option');
+					for(let j=structimgo.length-1;j>=0;--j){
+						if(structimgo[j].value.startsWith('composition:')){structimgo[j].remove();}
+					}
+					for(let j=0;j<this.scenedata.compositions.length;j++){
+						const imgselo = document.createElement('option');
+						imgselo.value = imgselo.innerText = 'composition:'+j.toString();
+						structimg[i].appendChild(imgselo);
+					}
+					structimg[i].value = tempv;
+				}
+				break;
+			}
+			}
+		}
+		async saveFile(){
+			if(!this.scenedata){
+				alert('No file loaded!');
+				return;
+			}
+			parent.console.log(this.scenedata);
+			const zw = new zip.ZipWriter(new zip.BlobWriter("application/zip"), { bufferedWrite: true });
+			const anchor = document.createElement('a');
+			const prog = document.createElement('progress');
+			this.controls.appendChild(prog);
+			await zw.add('scene.json',new zip.TextReader(JSON.stringify(this.scenedata)),{onstart(m){prog.max = m},onprogress(v,m){prog.value = v;prog.max = m;}});
+			for(let i=0;i<this.images.length;i++){
+				await zw.add(this.images[i][0],new zip.BlobReader(this.images[i][1]));
+			}
+			prog.remove();
+			anchor.download = this.filenameinp.value ?? 'AveeEditorExport.viz';
+			anchor.href = URL.createObjectURL(await zw.close());
+			//document.body.appendChild(anchor);
+			anchor.click();
+			anchor.remove();
+			URL.revokeObjectURL(anchor.href);
+		}
+		static p2T(s,h=''){
+			//s[0] = s[0].toUpperCase(); worked in the console...
+			s = s[0].toUpperCase() + s.substr(1);
+			let arr = [];
+			let origin = 0;
+			for(let i=1;i<s.length;i++){
+				if(s[i] === s[i].toUpperCase()){
+					arr.push(s.substring(origin,i));
+					origin = i;
+				}
+			}
+			arr.push(s.substring(origin,s.length));
+			return arr.join(' ') + (h ? " ("+h+")" : h);
+		}
+		parseAveeInput(obj,title){ //,inputstr,v,title,cbk
+			const splitted = obj.t.split(' ');
+			const cmd = splitted.splice(0,1)[0];
+			//parent.console.log(obj.v ? true : false);
+			switch(cmd){
+				case '_child':{
+					const outelm = document.createElement('div');
+					outelm.className = 'avee-struct-'+cmd;
+					if(splitted.length > 0){
+						const sel = document.createElement('select');
+						for(let i=0;i<splitted.length;i++){
+							const optionelm = document.createElement('option');
+							optionelm.value = splitted[i];
+							optionelm.innerText = splitted[i];
+							sel.appendChild(optionelm);
+						}
+						sel.value = obj.v;
+						sel.addEventListener('change',()=>{obj.v = sel.value});
+						outelm.appendChild(sel);
+						//parent.console.log(obj.v);
+					}
+					const children = Object.getOwnPropertyNames(obj);
+					children.splice(children.indexOf('o'),1);
+					children.splice(children.indexOf('t'),1);
+					children.splice(children.indexOf('tag'),1);
+					children.splice(children.indexOf('v'),1);
+					const childelms = new Array(children.length);
+					for(let i=0;i<children.length;i++){
+						const ctitle = aveesys.p2T(children[i]);
+						const ocont = document.createElement('div');
+						const osum = document.createElement('h2');
+						ocont.className = 'contsolid';
+						osum.innerText = ctitle;
+						ocont.appendChild(osum);
+						ocont.appendChild(this.parseAveeInput(obj[children[i]],ctitle)); 
+						/*
+						,obj[children[i]].t,obj[children[i]].v,ctitle,inp=>{
+							//alert(inp);
+							obj[children[i]].v = inp;
+						}
+						*/
+						childelms[obj[children[i]].o] = ocont;
+					}
+					for(let i=0;i<childelms.length;i++){
+						outelm.appendChild(childelms[i]);
+					}
+					return outelm;
+					break;
+				}
+				case 'img':
+				case 'pimg':
+					splitted.push('');
+					for(let i=0;i<this.scenedata.compositions.length;i++){
+						const compstr = "composition:"+i.toString();
+						(splitted.indexOf(compstr) == -1) && (splitted.push(compstr));
+					}
+					for(let i=0;i<this.images.length;i++){
+						splitted.push('local:'+this.images[i][0]);
+					}
+				case 'sel':{
+					const outelm = document.createElement('select');
+					for(let i=0;i<splitted.length;i++){
+						const optionelm = document.createElement('option');
+						optionelm.innerText = optionelm.value = splitted[i];
+						outelm.appendChild(optionelm);
+					}
+					outelm.value = obj.v;
+					outelm.className = 'avee-struct-'+cmd;
+					outelm.addEventListener('change',()=>{obj.v = outelm.value});
+					return outelm;
+					break;
+				}
+				case 'crgba':{
+					const outelm = document.createElement('div');
+					outelm.className = 'avee-struct-'+cmd;
+					const clrinp = document.createElement('input');
+					const ainp = document.createElement('input');
+					const clr = (obj.v >>> 0).toString("16").padStart(8,"0");
+					clrinp.type = 'color';
+					clrinp.value = "#"+clr.substr(2);
+					ainp.type = 'range'
+					ainp.min = 0;
+					ainp.max = 255;
+					ainp.value = parseInt(clr.substr(0,2),16);
+					outelm.appendChild(clrinp);
+					outelm.appendChild(ainp);
+					clrinp.addEventListener('change',()=>{obj.v = parseInt(ainp.value.toString(16)+clrinp.value.substr(1),16) | 0;});
+					ainp.addEventListener('change',()=>{obj.v = parseInt(ainp.value.toString(16)+clrinp.value.substr(1),16) | 0;});
+					return outelm;
+					break;
+				}
+				case 'crgb_hl':
+				case 'crgb':{
+					const outelm = document.createElement('div');
+					outelm.className = 'avee-struct-'+cmd;
+					const clrinp = document.createElement('input');
+					const clr = (obj.v & 0xFFFFFF).toString("16").padStart(6,"0");
+					clrinp.type = 'color';
+					clrinp.value = "#"+clr;
+					outelm.appendChild(clrinp);
+					clrinp.addEventListener('change',()=>{obj.v = (4278190080 + parseInt(clrinp.value.substr(1),16)) | 0;});
+					return outelm;
+					break;
+				}
+				case 'f':{
+					const outelm = document.createElement('div');
+					outelm.className = 'avee-struct-'+cmd;
+					const rinp = document.createElement('input');
+					rinp.type = 'range';
+					rinp.min = splitted[0];
+					rinp.max = splitted[1];
+					rinp.value = obj.v;
+					rinp.step = (rinp.max-rinp.min)/40;
+					const ninp = rinp.cloneNode();
+					ninp.type = 'number';
+					outelm.appendChild(rinp);
+					outelm.appendChild(ninp);
+					const commit = ()=>{
+						//alert(rinp.value);
+						obj.v = parseFloat(rinp.value);
+					};
+					rinp.addEventListener('change',commit);
+					ninp.addEventListener('change',commit);
+					rinp.addEventListener('input',()=>{
+						ninp.value = rinp.value;
+					});
+					ninp.addEventListener('input',()=>{
+						rinp.value = ninp.value;
+					});
+					return outelm;
+					break;
+				}
+				case 'ih':
+				case 'i':{
+					const outelm = document.createElement('div');
+					outelm.className = 'avee-struct-'+cmd;
+					const rinp = document.createElement('input');
+					rinp.type = 'range';
+					rinp.min = splitted[0];
+					rinp.max = splitted[1];
+					rinp.value = obj.v;
+					const ninp = rinp.cloneNode();
+					ninp.type = 'number';
+					outelm.appendChild(rinp);
+					outelm.appendChild(ninp);
+					const commit = ()=>{
+						obj.v = parseInt(rinp.value);
+					};
+					rinp.addEventListener('change',commit);
+					ninp.addEventListener('change',commit);
+					rinp.addEventListener('input',()=>{
+						ninp.value = rinp.value;
+					});
+					ninp.addEventListener('input',()=>{
+						rinp.value = ninp.value;
+					});
+					return outelm;
+					break;
+				}
+				case 'pb':
+				case 'b':{
+					const outelm = document.createElement("div");
+					outelm.className = 'avee-struct-'+cmd;
+					outelm.className = 'slidercontainer';
+					const switchcont = document.createElement("label");
+					switchcont.className = 'switch';
+					const switcher = document.createElement("input");
+					switcher.type = 'checkbox';
+					switcher.id = "aveechkb."+crypto.randomUUID();
+					const slider = document.createElement("span");
+					slider.className = 'slider round';
+					switchcont.appendChild(switcher);
+					switchcont.appendChild(slider);
+					outelm.appendChild(switchcont);
+					const divider = document.createElement("vl");
+					divider.className =  'vl';
+					outelm.appendChild(divider);
+					const label = document.createElement('label');
+					label.setAttribute('for',switcher.id);
+					label.className = 'sliderlabel';
+					label.innerText = title;
+					outelm.appendChild(label);
+					switcher.addEventListener('change',()=>{
+						//alert(switcher.checked);
+						obj.v = switcher.checked;
+					});
+					switcher.checked = obj.v;
+					return outelm;
+				}
+				case "f2":{
+					const outelm = document.createElement('div');
+					outelm.className = 'avee-struct-'+cmd;
+					const vals = obj.v.split(' ');
+					const rinp1 = document.createElement('input');
+					rinp1.type = 'range';
+					rinp1.min = splitted[0];
+					rinp1.max = splitted[1];
+					rinp1.value = vals[0];
+					rinp1.step = (rinp1.max-rinp1.min)/40;
+					const ninp1 = rinp1.cloneNode();
+					ninp1.type = 'number';
+					const rinp2 = rinp1.cloneNode();
+					rinp2.value = vals[1];
+					const ninp2 = ninp1.cloneNode();
+					ninp2.value = vals[1];
+					outelm.appendChild(rinp1);
+					outelm.appendChild(ninp1);
+					outelm.appendChild(document.createElement("br"));
+					outelm.appendChild(rinp2);
+					outelm.appendChild(ninp2);
+					const commit = ()=>{
+						//alert(rinp1.value+' '+rinp2.value);
+						obj.v = rinp1.value+' '+rinp2.value;
+					};
+					rinp1.addEventListener('change',commit);
+					ninp1.addEventListener('change',commit);
+					rinp2.addEventListener('change',commit);
+					ninp2.addEventListener('change',commit);
+					rinp1.addEventListener('input',()=>{
+						ninp1.value = rinp1.value;
+					});
+					ninp1.addEventListener('input',()=>{
+						rinp1.value = ninp1.value;
+					});
+					rinp2.addEventListener('input',()=>{
+						ninp2.value = rinp2.value;
+					});
+					ninp2.addEventListener('input',()=>{
+						rinp2.value = ninp2.value;
+					});
+					return outelm;
+				}
+				case 'passet':{
+					const outelm = document.createElement("input");
+					outelm.className = 'avee-struct-'+cmd;
+					outelm.type = 'text';
+					outelm.placeholder = title;
+					outelm.value = obj.v;
+					outelm.addEventListener('change',()=>{obj.v = outelm.value});
+					return outelm;
+					break;
+				}
+				case 'mvarf':{
+					const outelm = document.createElement("h2");
+					outelm.innerText = "mvarf";
+					return outelm;
+					break;
+				}
+				case 'mvarf2':{
+					const outelm = document.createElement("h2");
+					outelm.innerText = "mvarf2";
+					return outelm;
+					break;
+				}
+				case 'chsla4f':{
+					const outelm = document.createElement("h2");
+					outelm.innerText = "chsla4f";
+					return outelm;
+					break;
+				}
+				default:{
+					const outelm = document.createElement("h2");
+					outelm.innerText = "Unimplemented";
+					return outelm;
+					break;
+				}
+			}
+		}
+	}
+	const sys = new aveesys(document.getElementById('avee-viz-input'),document.getElementById('avee-status'),document.getElementById('avee-structure'),document.getElementById('avee-export'),document.getElementById('avee-filename'),document.getElementById('avee-controls'),document.getElementById('avee-files'),document.getElementById('avee-file-template'),document.getElementById('avee-img-input'),document.getElementById('avee-addcomp-btn'));
+	//alert(aveesys.p2T('helloWrldLol'))
+	</script>
+</body>
+</html>
