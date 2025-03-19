@@ -474,7 +474,7 @@
 	<span class='button bbtn'>Upload Image</span>
 	</label>
 	<div id='avee-files'></div>
-	<footer>Version: Ra.1.1.1<br/>Copyright 2025 Frost. All rights reserved.</footer>
+	<footer>Version: Ra1.1.2<br/>Copyright 2025 Frost. CC-BY-NC-SA 4.0</footer>
 	<script src="zip.min.js"></script>
 	<template id='avee-file-template'>
 		<div class='avee-file-entry contsolid'>
@@ -571,8 +571,23 @@
 	<!-- my browser flipping crashed 2 times -->
 	<script>
 		const connectSvg = (n,s)=>{
+			//supports filteranimations now.
 			const tempnode = n.getElementById(s);
-			tempnode.id = tempnode.id+crypto.randomUUID().split('-').join('');const transformelms = Array.from(tempnode.getElementsByTagName('animateTransform')).concat(Array.from(tempnode.getElementsByTagName('animate')));for(let i=0;i<transformelms.length;i++){const bsplit = transformelms[i].getAttribute('begin').split('.');bsplit[0] = tempnode.id;transformelms[i].setAttribute('begin',bsplit.join('.'));const endatt = transformelms[i].getAttribute('end');if(endatt){const esplit = endatt.split('.');esplit[0] = tempnode.id;transformelms[i].setAttribute('end',esplit.join('.'));}};
+			tempnode.id += crypto.randomUUID().split('-').join('');const transformelms = Array.from(tempnode.getElementsByTagName('animateTransform')).concat(Array.from(tempnode.getElementsByTagName('animate')));for(let i=0;i<transformelms.length;i++){const bsplit = transformelms[i].getAttribute('begin').split('.');bsplit[0] = tempnode.id;transformelms[i].setAttribute('begin',bsplit.join('.'));const endatt = transformelms[i].getAttribute('end');if(endatt){const esplit = endatt.split('.');esplit[0] = tempnode.id;transformelms[i].setAttribute('end',esplit.join('.'));}};
+			const filters = tempnode.getElementsByTagName('filter');
+			const groups = Array.from(tempnode.getElementsByTagName('g'));
+			for(let i=0;i<filters.length;i++){
+				const origid = filters[i].id;
+				filters[i].id += crypto.randomUUID().split('-').join('');
+				for(let j=groups.length-1;j>=0;j--){
+					const filt = groups[j].getAttribute('filter');
+					if(filt){
+						groups[j].setAttribute('filter',filt.replace(origid,filters[i].id));
+					}else{
+						groups.splice(j,1);
+					}
+				}
+			}
 		}
 		const template = document.getElementById('avee-file-template');
 		const orig = template.content.cloneNode;
@@ -594,6 +609,7 @@
 			connectSvg(node,'m8evgida46283542');
 			connectSvg(node,'m8eueg0k78822433');
 			connectSvg(node,'m8etfmld26321056');
+			connectSvg(node,'m8eu91qa97694953');
 			return node;
 		};
 		const template3 = document.getElementById('avee-effect-template');
@@ -763,23 +779,23 @@
 			}
 			fr.readAsArrayBuffer(this.fileinp.files[0]);
 			*/
+			let scenedata = null;
 			try{
 				const entries = await (new zip.ZipReader(new zip.BlobReader(this.fileinp.files[0]))).getEntries();
+				this.images.length = 0;
+				for(let i=0;i<entries.length;i++){
+					if(entries[i].filename === 'scene.json'){
+						scenedata = JSON.parse(await (await entries[i].getData(new zip.BlobWriter())).text());
+					}else{
+						const tempwriter = new zip.BlobWriter;
+						await entries[i].getData(tempwriter);
+						this.images.push([entries[i].filename,await tempwriter.getData()]);
+					}
+				}
 			}catch(e){
 				alert('There was an error reading the file! (log)');
 				console.log(e.stack);
 				return;
-			}
-			let scenedata = null;
-			this.images.length = 0;
-			for(let i=0;i<entries.length;i++){
-				if(entries[i].filename === 'scene.json'){
-					scenedata = JSON.parse(await (await entries[i].getData(new zip.BlobWriter())).text());
-				}else{
-					const tempwriter = new zip.BlobWriter;
-					await entries[i].getData(tempwriter);
-					this.images.push([entries[i].filename,await tempwriter.getData()]);
-				}
 			}
 			//parent.console.log(this.images);
 			if(!scenedata){
