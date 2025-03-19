@@ -474,7 +474,7 @@
 	<span class='button bbtn'>Upload Image</span>
 	</label>
 	<div id='avee-files'></div>
-	<footer>Version: Ra.1.1<br/>Copyright 2025 Frost. All rights reserved.</footer>
+	<footer>Version: Ra.1.1.1<br/>Copyright 2025 Frost. All rights reserved.</footer>
 	<script src="zip.min.js"></script>
 	<template id='avee-file-template'>
 		<div class='avee-file-entry contsolid'>
@@ -763,7 +763,13 @@
 			}
 			fr.readAsArrayBuffer(this.fileinp.files[0]);
 			*/
-			const entries = await (new zip.ZipReader(new zip.BlobReader(this.fileinp.files[0]))).getEntries();
+			try{
+				const entries = await (new zip.ZipReader(new zip.BlobReader(this.fileinp.files[0]))).getEntries();
+			}catch(e){
+				alert('There was an error reading the file! (log)');
+				console.log(e.stack);
+				return;
+			}
 			let scenedata = null;
 			this.images.length = 0;
 			for(let i=0;i<entries.length;i++){
@@ -781,8 +787,7 @@
 				return;
 			}
 			this.scenedata = scenedata;
-			//parent
-			parent.console.log(scenedata);
+			console.log(scenedata);
 			this.updateStatus();
 		}
 		createEffectBase(i,j,compelm){
