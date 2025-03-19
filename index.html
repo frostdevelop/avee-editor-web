@@ -102,13 +102,13 @@
 			margin-bottom: 10px;
 		}
 		.gbtn {
-			background-image: linear-gradient(135deg,#33ff33,#11c011);
+			background-image: linear-gradient(135deg,#33ff33,#069306);
 			box-shadow: 2px 2px var(--height) rgba(0,0,0,0.8),-2px -2px var(--height) #33ff33,inset 1px 1px rgba(255, 255, 255, 0.1);
 			border-color:#11c011;
 			text-shadow: 0 0 4px rgba(0,0,0,0.5);
 		}
 		.gbtn:hover {border-color:#33ff33;}
-		.gbtn:active {border-color:#11c011;background: linear-gradient(-45deg,#33ff33,#11c011);box-shadow: inset 2px 2px var(--height) rgba(0,0,0,0.8),inset -2px -2px var(--height) #33ff33;}
+		.gbtn:active {border-color:#11c011;background: linear-gradient(-45deg,#33ff33,#069306);box-shadow: inset 2px 2px var(--height) rgba(0,0,0,0.8),inset -2px -2px var(--height) #33ff33;}
 		.rbtn {
 			background-image: linear-gradient(135deg,#f95353,#a51212);
 			box-shadow: 2px 2px var(--height) rgba(0,0,0,0.8),-2px -2px var(--height) #f95353,inset 1px 1px rgba(255, 255, 255, 0.1);
@@ -363,9 +363,91 @@
 			background-image: linear-gradient(to right bottom, #0f4bc5, #51d3e9) !important;
 			border-color: #1f447d;
 		}
+		.avee-comp-temp-controls {
+    		float: right;
+    		display: flex;
+    		flex-direction: row-reverse;
+    		align-items: center;
+    		align-content: center;
+    		margin-top: -15px;
+		}
+		@keyframes rotateicon {
+			0% {transform: rotate(0deg)}
+			20% {transform: rotate(-20deg)}
+			100% {transform: rotate(360deg)}
+		}
+		.roticon {
+			transition: transform .4s cubic-bezier(0.85, -0.37, 0.09, 1);
+		}
+		.iconbutton:hover .roticon {
+			transform: rotate(360deg);
+			/*animation: rotateicon .5s ease;*/
+		}
+		.avee-add-btn {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+			align-content: center;
+		}
+		.avee-add-menu {
+			display: flex;
+			z-index: 100;
+			flex-direction: column;
+			align-items: flex-end;
+			align-content: flex-end;
+			justify-content: flex-start;
+			position: absolute;
+			/* margin-top: 53px; */
+			pointer-events: none;
+			transition: opacity .3s ease, height .4s ease;
+			opacity: 0;
+			overflow-y: clip;
+			height: 53px;
+			width: 53px;
+			overflow-x: visible;
+		}
+		.avee-add-btn:hover .avee-add-menu {
+			opacity: 100%;
+			pointer-events: all;
+			height: 477px;
+		}
+		.avee-captionedbutton {
+			width: max-content;
+			display: flex;
+			align-content: center;
+			align-items: center;
+		}
+		.avee-captionedbutton > span.caption {
+			background: rgba(0, 0, 0, 0.6);
+			padding: 4px;
+			border-radius: 7px;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity .5s ease;
+			transition-delay: .2s;
+		}
+		.avee-add-btn:hover span.caption {
+			opacity: 1;
+		}
+		.iconbutton .bluricon {
+			filter: blur(2px);
+			transition: filter .2s ease;
+		}
+		.iconbutton:hover .bluricon {
+			filter: blur(0);
+		}
+		.avee-add-btn > button {
+			transition: opacity .3s ease;
+		}
+		.avee-add-btn:hover > button {
+			opacity:0;
+		}
 	</style>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
+	<!-- https://cdn.jsdelivr.net/npm/@zip.js/zip.js@2.7.57/dist/zip.min.js -->
+	<link rel='preload' href='zip.min.js' as='script'/>
 </head>
 
 <body lang="en">
@@ -392,56 +474,145 @@
 	<span class='button bbtn'>Upload Image</span>
 	</label>
 	<div id='avee-files'></div>
-	<footer>Version: Ra.1.0<br/>Copyright 2025 Frost. All rights reserved.</footer>
-	<script src="https://cdn.jsdelivr.net/npm/@zip.js/zip.js@2.7.57/dist/zip.min.js"></script>
+	<footer>Version: Ra.1.1<br/>Copyright 2025 Frost. All rights reserved.</footer>
+	<script src="zip.min.js"></script>
 	<template id='avee-file-template'>
 		<div class='avee-file-entry contsolid'>
 			<div class="avee-file-entry-control">
 				<button class="button iconbutton rbtn" id='delete'>
-				<svg viewBox="0 0 24 24" width="24" height="24" class='icon' fill="none" xmlns="http://www.w3.org/2000/svg">
-					<use href='#trashicon'></use>
-				</svg>
+					<svg xmlns="http://www.w3.org/2000/svg" style='width:64px;height:66px;border-radius:inherit' class='icon' xmlns:xlink="http://www.w3.org/1999/xlink" id="m89vmf1p31561066" viewBox="-8 -8 48 49.5"><g><defs><clipPath id="m89vmf1p31561066_clipPath" x="-50%" y="-50%" width="200%" height="200%"><path d="M0.01,0h31.98c0.00552,0 0.01,0.00448 0.01,0.01v32.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-31.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-32.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill="white" clip-rule="nonzero"></path></clipPath></defs><g clip-path="url(#m89vmf1p31561066_clipPath)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 1.2424;0 0.9408;0 1.0143;0 1" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;0.28;0.55;0.81;1" keySplines="0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1" fill="freeze" begin="m89vmf1p31561066.mouseenter"></animateTransform><g transform="matrix(1,0,0,1,7,11)"><g transform="matrix(1,0,0,1,8,4)"><path d="M1,0v0c0.55228,0 1,0.44772 1,1v9c0,0.55228 -0.44772,1 -1,1v0c-0.55228,0 -1,-0.44772 -1,-1v-9c0,-0.55228 0.44772,-1 1,-1z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g><g transform="matrix(1,0,0,1,0,0)"><defs><clipPath id="m89vmf1q04424234_stroke_clip_path" clipPathUnits="userSpaceOnUse"><path id="m89vmf1q04424234_stroke_path" d="M2,0h14c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-14c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z"></path></clipPath></defs><g clip-path="url(#m89vmf1q04424234_stroke_clip_path)"><path id="m89vmf1q04424234_stroke_path" d="M2,0h14c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-14c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z" fill="none" stroke="currentcolor" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"></path><defs><mask id="m89vmf1q04424234_gradient_mask"></mask></defs><rect x="-22" y="-22" width="66" height="66" fill="url(#m89vmf1q04424234ps0)" mask="url(#m89vmf1q04424234_gradient_mask)"></rect></g></g><g transform="matrix(1,0,0,1,12,4)"><path d="M1,0v0c0.55228,0 1,0.44772 1,1v9c0,0.55228 -0.44772,1 -1,1v0c-0.55228,0 -1,-0.44772 -1,-1v-9c0,-0.55228 0.44772,-1 1,-1z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g><g transform="matrix(1,0,0,1,4,4)"><path d="M1,0v0c0.55228,0 1,0.44772 1,1v9c0,0.55228 -0.44772,1 -1,1v0c-0.55228,0 -1,-0.44772 -1,-1v-9c0,-0.55228 0.44772,-1 1,-1z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="0 1;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" fill="freeze" begin="m89vmf1p31561066.mouseleave"></animateTransform></g><g><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="5.0303 -5.9999;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" fill="freeze" begin="m89vmf1p31561066.mouseleave"></animateTransform><animateTransform attributeName="transform" type="translate" values="0 0;6.2498 -7.4545;4.7326 -5.6448;5.1024 -6.0859;5.0303 -5.9999" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;0.28;0.55;0.81;1" keySplines="0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1" fill="freeze" begin="m89vmf1p31561066.mouseenter"></animateTransform><g transform="matrix(1,0,0,1,5,5)"><g id="m89vmf1u57720251" opacity="1" style="mix-blend-mode:normal"><animateTransform attributeName="transform" type="rotate" values="0 0 0;27.6547 0 0;20.9411 0 0;22.5776 0 0;22.2585 0 0" dur="0.3" repeatCount="1" calcMode="spline" keyTimes="0;0.28;0.55;0.81;1" keySplines="0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1" fill="freeze" begin="m89vmf1p31561066.mouseenter"></animateTransform><g transform="matrix(1,0,0,1,0,2)"><defs><clipPath id="m89vmf1u70867559_stroke_clip_path" clipPathUnits="userSpaceOnUse"><path id="m89vmf1u70867559_stroke_path" d="M2,0h18c1.10457,0 2,0.89543 2,2v2c0,1.10457 -0.89543,2 -2,2h-18c-1.10457,0 -2,-0.89543 -2,-2v-2c0,-1.10457 0.89543,-2 2,-2z"></path></clipPath></defs><g style="mix-blend-mode:normal"><g clip-path="url(#m89vmf1u70867559_stroke_clip_path)"><path id="m89vmf1u70867559_stroke_path" d="M2,0h18c1.10457,0 2,0.89543 2,2v2c0,1.10457 -0.89543,2 -2,2h-18c-1.10457,0 -2,-0.89543 -2,-2v-2c0,-1.10457 0.89543,-2 2,-2z" fill="none" stroke="currentcolor" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"></path><defs><mask id="m89vmf1u70867559_gradient_mask"></mask></defs><rect x="-26" y="-10" width="78" height="30" fill="url(#m89vmf1u70867559ps0)" mask="url(#m89vmf1u70867559_gradient_mask)"></rect></g></g></g><defs><mask id="m89vmf1v99593132_mask" style="mask-type:alpha" x="-50%" y="-50%" width="200%" height="200%"><g id="m89vmf1v99593132_translate"><g transform="matrix(1,0,0,1,7,0)"><g id="m89vmf1v99593132" opacity="1" style="mix-blend-mode:normal"><g><g><path d="M0.01,0h7.98c0.00552,0 0.01,0.00448 0.01,0.01v1.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-7.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-1.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill-rule="nonzero" fill="rgb(217, 217, 217)" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g></g></g></g></mask></defs><g mask="url(#m89vmf1v99593132_mask)"><g transform="matrix(1,0,0,1,9,0)"><path d="M2,0v0c1.10457,0 2,0.89543 2,2v0c0,1.10457 -0.89543,2 -2,2v0c-1.10457,0 -2,-0.89543 -2,-2v0c0,-1.10457 0.89543,-2 2,-2z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="rotate" values="22.2585 0 0;0 0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" fill="freeze" begin="m89vmf1p31561066.mouseleave"></animateTransform></g></g></g></g></g></svg>
 				</button>
 				<button class="button iconbutton bbtn" id='download'>
-					<svg width="24" height="24" class='icon' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<use href='#downloadicon'></use>
-					</svg>
+					<svg xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px;border-radius:inherit" class='icon' xmlns:xlink="http://www.w3.org/1999/xlink" id="m89otsp870562513" class="icon" viewBox="-12 -12 48 48"><g><defs><clipPath id="m89otsp870562513_clipPath" x="-50%" y="-50%" width="200%" height="200%"><path d="M0.01,0h23.98c0.00552,0 0.01,0.00448 0.01,0.01v23.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-23.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-23.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill="white" clip-rule="nonzero"></path></clipPath></defs><g clip-path="url(#m89otsp870562513_clipPath)"><g><g transform="matrix(1,0,0,1,2,12)"><g opacity="1" style="mix-blend-mode:normal"><g><g><path d="M0.85,0c-0.4694,0 -0.85,0.3806 -0.85,0.85v4.15c0,2.1263 1.7237,3.85 3.85,3.85h12c2.1263,0 3.85,-1.7237 3.85,-3.85v-4.15c0,-0.4694 -0.3806,-0.85 -0.85,-0.85v0c-0.4694,0 -0.85,0.3806 -0.85,0.85v4.15c0,1.1874 -0.9626,2.15 -2.15,2.15h-12c-1.1874,0 -2.15,-0.9626 -2.15,-2.15v-4.15c0,-0.4694 -0.3806,-0.85 -0.85,-0.85v0z" fill-rule="evenodd" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g></g></g><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="0 0;0 3" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" begin="m89otsp870562513.mouseenter" fill="freeze"></animateTransform><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="0 3;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" begin="m89otsp870562513.mouseleave" fill="freeze"></animateTransform></g><g><g transform="matrix(0,1,-1,0,12,3)"><g opacity="1" style="mix-blend-mode:normal"><path d="M0,0h13" fill="none" stroke="currentcolor" stroke-width="1.7" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"></path><path d="M-0.85,0c0,-0.46944 0.38056,-0.85 0.85,-0.85c0.46944,0 0.85,0.38056 0.85,0.85c0,0.46944 -0.38056,0.85 -0.85,0.85c-0.46944,0 -0.85,-0.38056 -0.85,-0.85z" transform="matrix(-1,1.2246467991473532e-16,-1.2246467991473532e-16,-1,0,0)" fill="currentcolor"></path><path d="M3.3095 4.5L0.3255 1.457C0.1315 1.26 0.1355 0.942998 0.3315 0.749998C0.5295 0.556998 0.8455 0.559998 1.0385 0.756998L4.8575 4.65C5.0475 4.844 5.0475 5.156 4.8575 5.35L1.0385 9.243C0.8455 9.44 0.5285 9.443 0.3315 9.25C0.1345 9.057 0.1315 8.74 0.3255 8.543L3.3095 5.5V4.5Z" transform="matrix(1.7,0,0,1.7,7.05,-8.5)" fill="currentcolor"></path></g></g><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="0 0;0 -2" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" begin="m89otsp870562513.mouseenter" keySplines="0 0 0.58 1" fill="freeze"></animateTransform><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="0 -2;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" begin="m89otsp870562513.mouseleave" keySplines="0 0 0.58 1" fill="freeze"></animateTransform></g></g></g></svg>
 				</button>
 			</div>
 			<input type='text' class='avee-file-entry-name' id='name'></input>
 			<img class='avee-file-entry-img' id='img'></img>
 		</div>
 	</template>
-	<svg xmlns="http://www.w3.org/2000/svg" id='avee-svg-defs'>
-	<defs>
-	<symbol id="trashicon">
-		<rect x="11" y="10" width="2" height="11" rx="1" fill="currentcolor"></rect>
-		<rect x="4" y="7" width="16" height="16" rx="1" stroke="currentcolor" stroke-width="2"></rect>
-		<rect x="2" y="3" width="20" height="4" rx="1" stroke="currentcolor" stroke-width="2"></rect>
-		<rect x="7" y="10" width="2" height="11" rx="1" fill="currentcolor"></rect>
-		<rect x="15" y="10" width="2" height="11" rx="1" fill="currentcolor"></rect>
-		<mask id="mask0_2282_1246" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="8" y="0" width="8" height="2">
-		<rect x="8" width="8" height="2" fill="#D9D9D9"></rect>
-		</mask>
-		<g mask="url(#mask0_2282_1246)">
-		<rect x="10" width="4" height="4" rx="2" fill="currentcolor"></rect>
-		</g>
-	</symbol>
-	<symbol id='downloadicon'>
-		<path fill-rule="evenodd" clip-rule="evenodd" d="M2.85 12C2.38056 12 2 12.3806 2 12.85V17C2 19.1263 3.7237 20.85 5.85 20.85H17.85C19.9763 20.85 21.7 19.1263 21.7 17V12.85C21.7 12.3806 21.3194 12 20.85 12V12C20.3806 12 20 12.3806 20 12.85V17C20 18.1874 19.0374 19.15 17.85 19.15H5.85C4.66259 19.15 3.7 18.1874 3.7 17V12.85C3.7 12.3806 3.31944 12 2.85 12V12Z" fill="currentcolor"></path>
-		<path d="M12.85 3C12.85 2.53056 12.4694 2.15 12 2.15C11.5306 2.15 11.15 2.53056 11.15 3H12.85ZM11.399 16.601C11.7309 16.933 12.2691 16.933 12.601 16.601L18.0104 11.1917C18.3424 10.8597 18.3424 10.3215 18.0104 9.98959C17.6785 9.65765 17.1403 9.65765 16.8083 9.98959L12 14.7979L7.19167 9.98959C6.85973 9.65765 6.32154 9.65765 5.98959 9.98959C5.65765 10.3215 5.65765 10.8597 5.98959 11.1917L11.399 16.601ZM11.15 3V16H12.85V3H11.15Z" fill="currentcolor"></path>
-	</symbol>
-	</defs>
+	<template id='avee-comp-template'>
+		<details id='details' class='avee-comp-container'>
+			<summary>
+				<span id='title' class='avee-comp-title'>Error Comp</span>
+				<div class='avee-comp-temp-controls'>
+					<button class="button iconbutton rbtn" id='delete'>
+						<svg xmlns="http://www.w3.org/2000/svg" style='width:64px;height:66px;border-radius:inherit' class='icon' xmlns:xlink="http://www.w3.org/1999/xlink" id="2912115da0ef4772895e4fdab22a508d" viewBox="-8 -8 48 49.5"><g><defs><clipPath id="m89vmf1p31561066_clipPath" x="-50%" y="-50%" width="200%" height="200%"><path d="M0.01,0h31.98c0.00552,0 0.01,0.00448 0.01,0.01v32.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-31.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-32.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill="white" clip-rule="nonzero"></path></clipPath></defs><g clip-path="url(#m89vmf1p31561066_clipPath)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 1.2424;0 0.9408;0 1.0143;0 1" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;0.28;0.55;0.81;1" keySplines="0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1" fill="freeze" begin="2912115da0ef4772895e4fdab22a508d.mouseenter"></animateTransform><g transform="matrix(1,0,0,1,7,11)"><g transform="matrix(1,0,0,1,8,4)"><path d="M1,0v0c0.55228,0 1,0.44772 1,1v9c0,0.55228 -0.44772,1 -1,1v0c-0.55228,0 -1,-0.44772 -1,-1v-9c0,-0.55228 0.44772,-1 1,-1z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g><g transform="matrix(1,0,0,1,0,0)"><defs><clipPath id="m89vmf1q04424234_stroke_clip_path" clipPathUnits="userSpaceOnUse"><path id="m89vmf1q04424234_stroke_path" d="M2,0h14c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-14c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z"></path></clipPath></defs><g clip-path="url(#m89vmf1q04424234_stroke_clip_path)"><path id="m89vmf1q04424234_stroke_path" d="M2,0h14c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-14c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z" fill="none" stroke="currentcolor" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"></path><defs><mask id="m89vmf1q04424234_gradient_mask"></mask></defs><rect x="-22" y="-22" width="66" height="66" fill="url(#m89vmf1q04424234ps0)" mask="url(#m89vmf1q04424234_gradient_mask)"></rect></g></g><g transform="matrix(1,0,0,1,12,4)"><path d="M1,0v0c0.55228,0 1,0.44772 1,1v9c0,0.55228 -0.44772,1 -1,1v0c-0.55228,0 -1,-0.44772 -1,-1v-9c0,-0.55228 0.44772,-1 1,-1z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g><g transform="matrix(1,0,0,1,4,4)"><path d="M1,0v0c0.55228,0 1,0.44772 1,1v9c0,0.55228 -0.44772,1 -1,1v0c-0.55228,0 -1,-0.44772 -1,-1v-9c0,-0.55228 0.44772,-1 1,-1z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="0 1;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" fill="freeze" begin="2912115da0ef4772895e4fdab22a508d.mouseleave"></animateTransform></g><g><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="5.0303 -5.9999;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" fill="freeze" begin="2912115da0ef4772895e4fdab22a508d.mouseleave"></animateTransform><animateTransform attributeName="transform" type="translate" values="0 0;6.2498 -7.4545;4.7326 -5.6448;5.1024 -6.0859;5.0303 -5.9999" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;0.28;0.55;0.81;1" keySplines="0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1" fill="freeze" begin="2912115da0ef4772895e4fdab22a508d.mouseenter"></animateTransform><g transform="matrix(1,0,0,1,5,5)"><g id="m89vmf1u57720251" opacity="1" style="mix-blend-mode:normal"><animateTransform attributeName="transform" type="rotate" values="0 0 0;27.6547 0 0;20.9411 0 0;22.5776 0 0;22.2585 0 0" dur="0.3" repeatCount="1" calcMode="spline" keyTimes="0;0.28;0.55;0.81;1" keySplines="0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1" fill="freeze" begin="2912115da0ef4772895e4fdab22a508d.mouseenter"></animateTransform><g transform="matrix(1,0,0,1,0,2)"><defs><clipPath id="m89vmf1u70867559_stroke_clip_path" clipPathUnits="userSpaceOnUse"><path id="m89vmf1u70867559_stroke_path" d="M2,0h18c1.10457,0 2,0.89543 2,2v2c0,1.10457 -0.89543,2 -2,2h-18c-1.10457,0 -2,-0.89543 -2,-2v-2c0,-1.10457 0.89543,-2 2,-2z"></path></clipPath></defs><g style="mix-blend-mode:normal"><g clip-path="url(#m89vmf1u70867559_stroke_clip_path)"><path id="m89vmf1u70867559_stroke_path" d="M2,0h18c1.10457,0 2,0.89543 2,2v2c0,1.10457 -0.89543,2 -2,2h-18c-1.10457,0 -2,-0.89543 -2,-2v-2c0,-1.10457 0.89543,-2 2,-2z" fill="none" stroke="currentcolor" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"></path><defs><mask id="m89vmf1u70867559_gradient_mask"></mask></defs><rect x="-26" y="-10" width="78" height="30" fill="url(#m89vmf1u70867559ps0)" mask="url(#m89vmf1u70867559_gradient_mask)"></rect></g></g></g><defs><mask id="m89vmf1v99593132_mask" style="mask-type:alpha" x="-50%" y="-50%" width="200%" height="200%"><g id="m89vmf1v99593132_translate"><g transform="matrix(1,0,0,1,7,0)"><g id="m89vmf1v99593132" opacity="1" style="mix-blend-mode:normal"><g><g><path d="M0.01,0h7.98c0.00552,0 0.01,0.00448 0.01,0.01v1.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-7.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-1.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill-rule="nonzero" fill="rgb(217, 217, 217)" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g></g></g></g></mask></defs><g mask="url(#m89vmf1v99593132_mask)"><g transform="matrix(1,0,0,1,9,0)"><path d="M2,0v0c1.10457,0 2,0.89543 2,2v0c0,1.10457 -0.89543,2 -2,2v0c-1.10457,0 -2,-0.89543 -2,-2v0c0,-1.10457 0.89543,-2 2,-2z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="rotate" values="22.2585 0 0;0 0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" fill="freeze" begin="2912115da0ef4772895e4fdab22a508d.mouseleave"></animateTransform></g></g></g></g></g></svg>
+					</button>
+					<div class="avee-add-btn">
+					<button class="button iconbutton gbtn" id="addbtn">
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="m8annzmc16585153" viewBox="-13 -13 52 52" style="width: 52px;height: 52px;border-radius: inherit;"><defs><clipPath id="m8annzmc16585153_clipPath" x="-50%" y="-50%" width="200%" height="200%"><path id="m8annzmc16585153_fill_path" d="M0.01,0h25.98c0.00552,0 0.01,0.00448 0.01,0.01v25.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-25.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-25.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill="white" clip-rule="nonzero"></path></clipPath></defs><g clip-path="url(#m8annzmc16585153_clipPath)"><g><animateTransform attributeName="transform" type="translate" values="0 0;6 0;-4.0167 0;0 0;0 0" dur="0.5s" repeatCount="1" calcMode="spline" keyTimes="0;0.4;0.7;1;1" keySplines="0 0 0 1;0.42 0 0.58 1;0.42 0 0.25 1;0.5 0.35 0.25 1" fill="freeze" begin="m8annzmc16585153.mouseenter"></animateTransform><g transform="matrix(1,0,0,1,12,2)"><path id="m8annzmd32573494_fill_path" d="M1,0v0c0.55228,0 1,0.44772 1,1v20c0,0.55228 -0.44772,1 -1,1v0c-0.55228,0 -1,-0.44772 -1,-1v-20c0,-0.55228 0.44772,-1 1,-1z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 4.019;0 0;0 0" dur="0.5s" repeatCount="1" calcMode="spline" keyTimes="0;0.4;0.7;1;1" keySplines="0 0 0 1;0.42 0 0.58 1;0.42 0 0.25 1;0.5 0.35 0.25 1" fill="freeze" begin="m8annzmc16585153.mouseenter"></animateTransform><g transform="matrix(0,-1,1,0,2,14)"><path id="m8annzme23016034_fill_path" d="M1,0v0c0.55228,0 1,0.44772 1,1v20c0,0.55228 -0.44772,1 -1,1v0c-0.55228,0 -1,-0.44772 -1,-1v-20c0,-0.55228 0.44772,-1 1,-1z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g></g></svg>
+					</button><div class="avee-add-menu"><button class="button iconbutton bbtn" id='imgbtn'><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="m8eu91qa97694953" viewBox="-5 -5 35 35"><g><g transform="matrix(1,0,0,1,1,4)"><defs><clipPath id="m8eu91qb20165476_stroke_clip_path" clipPathUnits="userSpaceOnUse"><path id="m8eu91qb20165476_stroke_path" d="M2,0h20c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-20c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z"></path></clipPath></defs><g clip-path="url(#m8eu91qb20165476_stroke_clip_path)"><path d="M2,0h20c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-20c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"></path></g></g></g><g><g transform="matrix(1,0,0,1,4,7)"><path d="M6,3c0,1.6569 -1.3431,3 -3,3c-1.6569,0 -3,-1.3431 -3,-3c0,-1.6569 1.3431,-3 3,-3c1.6569,0 3,1.3431 3,3z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g><animateTransform attributeName="transform" type="translate" values="0 0;-1 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8eu91qa97694953.mouseenter"></animateTransform><animateTransform attributeName="transform" type="translate" values="-1 0;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8eu91qa97694953.mouseleave"></animateTransform></g><g mask="url(#m8eu91qe64628154_mask)"><g><g transform="matrix(1,0,0,1,1.1476,10.5)"><path d="M6.3524,4l4.5,2.5l8.5,-6.5l7.6476,11.06137h-27z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g><animateTransform attributeName="transform" type="translate" values="0 0;1.0024 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8eu91qa97694953.mouseenter"></animateTransform><animateTransform attributeName="transform" type="translate" values="1.0024 0;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8eu91qa97694953.mouseleave"></animateTransform></g></g><defs><mask id="m8eu91qe64628154_mask" style="mask-type:alpha" x="-50%" y="-50%" width="200%" height="200%"><g id="m8eu91qe64628154_translate"><g transform="matrix(1,0,0,1,1,4)"><g id="m8eu91qe64628154" opacity="1" style="mix-blend-mode:normal"><g><g><path id="m8eu91qe64628154_fill_path" d="M2,0h20c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-20c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z" fill-rule="nonzero" fill="rgb(255, 255, 255)" fill-opacity="1" style="mix-blend-mode:normal"></path><defs><clipPath id="m8eu91qe64628154_stroke_clip_path" clipPathUnits="userSpaceOnUse"><path id="m8eu91qe64628154_stroke_path" d="M2,0h20c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-20c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z"></path></clipPath></defs><g style="mix-blend-mode:normal"><g clip-path="url(#m8eu91qe64628154_stroke_clip_path)"><path id="m8eu91qe64628154_stroke_path" d="M2,0h20c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-20c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z" fill="none" stroke="rgb(0, 0, 0)" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"></path><defs><mask id="m8eu91qe64628154_gradient_mask"></mask></defs><rect x="-25" y="-19" width="75" height="57" fill="url(#m8eu91qe64628154ps0)" mask="url(#m8eu91qe64628154_gradient_mask)"></rect></g></g></g></g></g></g></g></mask></defs></svg></button><div class="avee-captionedbutton"><span class="caption">Bars</span><button class="button iconbutton bbtn" id="barbtn"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="m8etfmld26321056" viewBox="-5 -4 35 35"><g><g transform="matrix(-1,0,0,-1,8,23)"><path d="M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v11.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-11.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"><animate attributeName="d" values="M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v11.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-11.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v13.9907c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-13.9907c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v15.1696c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-15.1696c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v16.0102c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-16.0102c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v16.6353c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-16.6353c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.1036c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.1036c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.4498c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.4498c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.6966c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.6966c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.8597c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.8597c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.9512c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.9512c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v15.9693c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-15.9693c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v14.7904c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-14.7904c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v13.9498c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-13.9498c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v13.3247c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-13.3247c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.8564c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.8564c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.5102c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.5102c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.2634c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.2634c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.1003c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.1003c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.0088c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.0088c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v11.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-11.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" dur="0.4s" repeatCount="indefinite" keyTimes="0;0.05;0.1;0.15;0.2;0.25;0.3;0.35;0.4;0.45;0.5;0.55;0.6;0.65;0.7;0.75;0.8;0.85;0.9;0.95;1" fill="remove" begin="m8etfmld26321056.mouseenter" end="m8etfmld26321056.mouseleave"></animate></path></g><g transform="matrix(-1,0,0,-1,16,23)"><path d="M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"><animate attributeName="d" values="M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v15.9693c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-15.9693c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v14.7904c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-14.7904c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v13.9498c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-13.9498c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v13.3247c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-13.3247c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.8564c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.8564c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.5102c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.5102c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.2634c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.2634c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.1003c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.1003c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.0088c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.0088c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v11.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-11.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v13.9907c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-13.9907c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v15.1696c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-15.1696c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v16.0102c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-16.0102c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v16.6353c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-16.6353c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.1036c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.1036c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.4498c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.4498c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.6966c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.6966c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.8597c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.8597c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.9512c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.9512c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" dur="0.4s" repeatCount="indefinite" keyTimes="0;0.05;0.1;0.15;0.2;0.25;0.3;0.35;0.4;0.45;0.5;0.55;0.6;0.65;0.7;0.75;0.8;0.85;0.9;0.95;1" fill="remove" begin="m8etfmld26321056.mouseenter" end="m8etfmld26321056.mouseleave"></animate></path></g><g transform="matrix(-1,0,0,-1,24,23)"><path d="M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v11.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-11.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"><animate attributeName="d" values="M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v11.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-11.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v13.9907c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-13.9907c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v15.1696c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-15.1696c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v16.0102c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-16.0102c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v16.6353c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-16.6353c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.1036c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.1036c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.4498c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.4498c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.6966c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.6966c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.8597c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.8597c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.9512c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.9512c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v17.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-17.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v15.9693c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-15.9693c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v14.7904c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-14.7904c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v13.9498c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-13.9498c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v13.3247c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-13.3247c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.8564c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.8564c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.5102c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.5102c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.2634c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.2634c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.1003c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.1003c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v12.0088c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-12.0088c0,-0.00552 0.00448,-0.01 0.01,-0.01z;M0.01,0h5.98c0.00552,0 0.01,0.00448 0.01,0.01v11.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-5.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-11.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" dur="0.4s" repeatCount="indefinite" keyTimes="0;0.05;0.1;0.15;0.2;0.25;0.3;0.35;0.4;0.45;0.5;0.55;0.6;0.65;0.7;0.75;0.8;0.85;0.9;0.95;1" fill="remove" begin="m8etfmld26321056.mouseenter" end="m8etfmld26321056.mouseleave"></animate></path></g></g></svg></button></div><div class="avee-captionedbutton"><span class="caption">BlurEffect</span><button class="button iconbutton bbtn" id="blurbtn"><svg width="30" height="30" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="bluricon"><circle cx="5" cy="5" r="4" fill="currentcolor"></circle></svg></button></div><div class="avee-captionedbutton"><span class="caption">MotionBlurEffect</span><button class="button iconbutton bbtn" id="motionblurbtn"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="m8eueg0k78822433" viewBox="0 0 26 26"><g><g transform="matrix(1,0,0,1,2,7)"><defs><filter x="-36.66666666666667%" y="-36.66666666666667%" width="173.33333333333334%" height="173.33333333333334%" filterres="0.5" filterUnits="objectBoundingBox" id="m8eueg0l53121937_layerBlur_0"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix"></feBlend><feGaussianBlur stdDeviation="0"><animate xmlns="http://www.w3.org/2000/svg" attributeName="stdDeviation" values="1;0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0.5 0.35 0.15 1" fill="freeze" begin="m8eueg0k78822433.mouseenter"></animate><animate xmlns="http://www.w3.org/2000/svg" attributeName="stdDeviation" values="0;1" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0.5 0.35 0.15 1" fill="freeze" begin="m8eueg0k78822433.mouseleave"></animate></feGaussianBlur></filter></defs><g filter="url(#m8eueg0l53121937_layerBlur_0)" opacity="0.2"><path d="M12,6c0,3.3138 -2.6862,6 -6,6c-3.3138,0 -6,-2.6862 -6,-6c0,-3.3138 2.6862,-6 6,-6c3.3138,0 6,2.6862 6,6z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g><animateTransform attributeName="transform" type="translate" values="0 0;3 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8eueg0k78822433.mouseenter"></animateTransform><animateTransform attributeName="transform" type="translate" values="3 0;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8eueg0k78822433.mouseleave"></animateTransform></g><g><g transform="matrix(1,0,0,1,7,7)"><defs><filter x="-28.333333333333332%" y="-28.333333333333332%" width="156.66666666666666%" height="156.66666666666666%" filterres="0.5" filterUnits="objectBoundingBox" id="m8eueg0m48271450_layerBlur_0"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix"></feBlend><feGaussianBlur stdDeviation="0"><animate xmlns="http://www.w3.org/2000/svg" attributeName="stdDeviation" values="0.5;0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0.5 0.35 0.15 1" fill="freeze" begin="m8eueg0k78822433.mouseenter"></animate><animate xmlns="http://www.w3.org/2000/svg" attributeName="stdDeviation" values="0;0.5" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0.5 0.35 0.15 1" fill="freeze" begin="m8eueg0k78822433.mouseleave"></animate></feGaussianBlur></filter></defs><g filter="url(#m8eueg0m48271450_layerBlur_0)" opacity="0.5"><path d="M12,6c0,3.3138 -2.6862,6 -6,6c-3.3138,0 -6,-2.6862 -6,-6c0,-3.3138 2.6862,-6 6,-6c3.3138,0 6,2.6862 6,6z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g></g><g><g transform="matrix(1,0,0,1,13,7)"><path d="M12,6c0,3.3138 -2.6862,6 -6,6c-3.3138,0 -6,-2.6862 -6,-6c0,-3.3138 2.6862,-6 6,-6c3.3138,0 6,2.6862 6,6z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g><animateTransform attributeName="transform" type="translate" values="0 0;-3 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8eueg0k78822433.mouseenter"></animateTransform><animateTransform attributeName="transform" type="translate" values="-3 0;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8eueg0k78822433.mouseleave"></animateTransform></g></svg></button></div><div class="avee-captionedbutton"><span class="caption">Text</span><button class="button iconbutton bbtn" id="textbtn"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="m8evgida46283542" viewBox="-5 -5 35 35"><g transform="matrix(1,0,0,1,2,-2.9999)"><g opacity="1" style="mix-blend-mode:normal"><defs><filter id="m8evgidb30116552_layerBlur_0" x="-20%" y="-20%" width="140%" height="140%" filterres="0.5" filterUnits="objectBoundingBox"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix"></feBlend><feGaussianBlur stdDeviation="0"><animate attributeName="stdDeviation" values="0;1;0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;0.17;1" keySplines="0 0 1 1;0 0 1 1" fill="freeze" begin="m8evgida46283542.mouseenter"></animate></feGaussianBlur></filter></defs><animateTransform attributeName="transform" type="translate" values="10.5 15;10.5 15" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8evgida46283542.mouseenter"></animateTransform><animateTransform attributeName="transform" type="translate" values="10.5 15;10.5 15" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8evgida46283542.mouseleave"></animateTransform><animateTransform attributeName="transform" type="skewY" values="0;-15" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8evgida46283542.mouseenter" additive="sum"></animateTransform><animateTransform attributeName="transform" type="skewY" values="-15;0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8evgida46283542.mouseleave" additive="sum"></animateTransform><animateTransform attributeName="transform" type="translate" values="-10.5 -15;-10.5 -15" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" additive="sum" begin="m8evgida46283542.mouseenter"></animateTransform><animateTransform attributeName="transform" type="translate" values="-10.5 -15;-10.5 -15" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" additive="sum" begin="m8evgida46283542.mouseleave"></animateTransform><g filter="url(#m8evgidb30116552_layerBlur_0)"><path d="M3.73672,24v-0.924h0.506c0.32267,0 0.616,-0.0293 0.88,-0.088c0.27867,-0.0733 0.49867,-0.2127 0.66,-0.418c0.176,-0.22 0.264,-0.5427 0.264,-0.968v-12.21h-2.112c-0.42533,0 -0.76267,0.088 -1.012,0.264c-0.24933,0.16133 -0.43267,0.3813 -0.55,0.66c-0.11733,0.264 -0.198,0.5573 -0.242,0.88l-0.11,0.946h-1.144l0.11,-3.85h12.38598l0.11,3.85h-1.144l-0.11,-0.946c-0.0293,-0.3227 -0.11,-0.616 -0.242,-0.88c-0.1173,-0.2787 -0.3006,-0.49867 -0.55,-0.66c-0.2493,-0.176 -0.594,-0.264 -1.034,-0.264h-2.13398v12.1c0,0.4547 0.08067,0.7993 0.242,1.034c0.16133,0.22 0.38133,0.3667 0.66,0.44c0.27867,0.0733 0.57933,0.11 0.90198,0.11h0.506v0.924zM18.1089,24.22c-1.1147,0 -1.9287,-0.2493 -2.442,-0.748c-0.4987,-0.5133 -0.748,-1.4007 -0.748,-2.662v-7.348h-1.672v-0.88c0.264,0 0.5573,-0.0513 0.88,-0.154c0.3227,-0.1173 0.6013,-0.3007 0.836,-0.55c0.2493,-0.264 0.4547,-0.5867 0.616,-0.968c0.1613,-0.3813 0.2933,-0.8507 0.396,-1.408h1.012v2.706h2.882v1.254h-2.882v7.414c0,0.748 0.154,1.298 0.462,1.65c0.308,0.352 0.7113,0.528 1.21,0.528c0.264,0 0.506,-0.0147 0.726,-0.044c0.22,-0.0293 0.4473,-0.066 0.682,-0.11v0.968c-0.1907,0.088 -0.4767,0.1687 -0.858,0.242c-0.3813,0.0733 -0.748,0.11 -1.1,0.11z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g></g></svg></button></div><div class="avee-captionedbutton"><span class="caption">Particles</span><button class="button iconbutton bbtn" id="particlebtn"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" class="roticon"><circle cx="7.5" cy="9.5" r="4.5" fill="currentcolor"></circle><circle cx="19" cy="9" r="3" fill="currentcolor"></circle><circle cx="14" cy="20" r="2" fill="currentcolor"></circle></svg></button></div><div class="avee-captionedbutton"><span class="caption">AudioProvider</span><button class="button iconbutton bbtn" id="audiobtn"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="m8ewsyge12370402" viewBox="-4 -4 35 35"><g transform="matrix(1,0,0,1,3,2)"><path d="M7.17004,17.46708c-0.57316,-0.3719 -1.86553,-1.11571 -4.15818,0c-2.29265,1.11571 -3.43894,2.78928 -2.86581,3.90499c0.57313,1.11572 2.47158,1.58649 4.5853,0.55786c2.29265,-1.11571 2.43869,-2.78928 2.43869,-4.46284zM7.17004,17.46708v-13.94638M19,3.5207h-11.82996M19,3.5207v-3.5207h-11.82996v3.5207M19,3.5207v13.94638M19,17.46708c-0.57316,-0.3719 -1.86553,-1.11571 -4.15818,0c-2.29265,1.11571 -3.43894,2.78928 -2.86581,3.90499c0.57313,1.11572 2.47158,1.58649 4.5853,0.55786c2.29265,-1.11571 2.43869,-2.78928 2.43869,-4.46284z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"><animate attributeName="fill-opacity" values="1;0;1" dur="0.5s" repeatCount="1" keyTimes="0;0.5;1" fill="freeze" begin="m8ewsyge12370402.mouseenter"></animate></path><path d="M7.17004,17.46708c-0.57316,-0.3719 -1.86553,-1.11571 -4.15818,0c-2.29265,1.11571 -3.43894,2.78928 -2.86581,3.90499c0.57313,1.11572 2.47158,1.58649 4.5853,0.55786c2.29265,-1.11571 2.43869,-2.78928 2.43869,-4.46284zM7.17004,17.46708v-13.94638M19,3.5207h-11.82996M19,3.5207v-3.5207h-11.82996v3.5207M19,3.5207v13.94638M19,17.46708c-0.57316,-0.3719 -1.86553,-1.11571 -4.15818,0c-2.29265,1.11571 -3.43894,2.78928 -2.86581,3.90499c0.57313,1.11572 2.47158,1.58649 4.5853,0.55786c2.29265,-1.11571 2.43869,-2.78928 2.43869,-4.46284z" fill="none" stroke="currentcolor" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 0" stroke-opacity="1"><animate attributeName="stroke-dashoffset" values="0;-22.4877;-76.4898;-98.9774" dur="0.5s" repeatCount="1" keyTimes="0;0.33;0.67;1" fill="freeze" begin="m8ewsyge12370402.mouseenter"></animate><animate attributeName="stroke-dasharray" values="98.9774 0.9898;24.0515 75.9157;23.6853 76.2819;98.9774 0.9898" dur="0.5s" repeatCount="1" keyTimes="0;0.33;0.67;1" fill="freeze" begin="m8ewsyge12370402.mouseenter"></animate></path></g></svg></button></div><div class="avee-captionedbutton"><span class="caption">RgbSplitEffect</span><button class="button iconbutton bbtn" id="rgbbtn"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="m8euv7g576686652" viewBox="0 0 26 26"><g><g transform="matrix(1,0,0,1,5,7)" style="mix-blend-mode:lighten"><path d="M12,6c0,3.3138 -2.6862,6 -6,6c-3.3138,0 -6,-2.6862 -6,-6c0,-3.3138 2.6862,-6 6,-6c3.3138,0 6,2.6862 6,6z" fill-rule="nonzero" fill="rgb(255, 0, 0)"></path></g><animateTransform attributeName="transform" type="translate" values="0 0;-4 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0.5 0.35 0.15 1" fill="freeze" begin="m8euv7g576686652.mouseenter"></animateTransform><animateTransform attributeName="transform" type="translate" values="-4 0;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0.5 0.35 0.15 1" fill="freeze" begin="m8euv7g576686652.mouseleave"></animateTransform></g><g><g transform="matrix(1,0,0,1,9,7)" style="mix-blend-mode:lighten"><path d="M12,6c0,3.3138 -2.6862,6 -6,6c-3.3138,0 -6,-2.6862 -6,-6c0,-3.3138 2.6862,-6 6,-6c3.3138,0 6,2.6862 6,6z" fill-rule="nonzero" fill="rgb(0, 0, 255)" fill-opacity="1" style="mix-blend-mode:normal"></path></g><animateTransform attributeName="transform" type="translate" values="0 0;4 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0.5 0.35 0.15 1" fill="freeze" begin="m8euv7g576686652.mouseenter"></animateTransform><animateTransform attributeName="transform" type="translate" values="4 0;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0.5 0.35 0.15 1" fill="freeze" begin="m8euv7g576686652.mouseleave"></animateTransform></g><g transform="matrix(1,0,0,1,7,7)" style="mix-blend-mode:lighten"><path d="M12,6c0,3.3138 -2.6862,6 -6,6c-3.3138,0 -6,-2.6862 -6,-6c0,-3.3138 2.6862,-6 6,-6c3.3138,0 6,2.6862 6,6z" fill-rule="nonzero" fill="rgb(0, 255, 0)" fill-opacity="1" style="mix-blend-mode:normal"></path></g></svg></button></div><div class="avee-captionedbutton"><span class="caption">MirrorEffect</span><button class="button iconbutton bbtn" id="mirrorbtn"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="m8ew3yw563857031" viewBox="-5 -5 35 35"><g transform="matrix(-0.9999999999984769,0.0000017453292519115186,-0.0000017453292519115186,-0.9999999999984769,25,22)"><defs><clipPath id="m8ew3yw617220323_stroke_clip_path" clipPathUnits="userSpaceOnUse"><path id="m8ew3yw617220323_stroke_path" d="M2,0h20c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-20c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z"></path></clipPath></defs><g clip-path="url(#m8ew3yw617220323_stroke_clip_path)"><path d="M2,0h20c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-20c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"></path></g></g><defs><mask id="m8ew3yw865292551_mask" style="mask-type:alpha" x="-50%" y="-50%" width="200%" height="200%"><path id="m8ew3yw865292551_fill_path" d="M0.01,0h12.98c0.00552,0 0.01,0.00448 0.01,0.01v25.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-12.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-25.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill-rule="nonzero" fill="rgb(217, 217, 217)" fill-opacity="1" style="mix-blend-mode:normal"></path></mask></defs><g mask="url(#m8ew3yw865292551_mask)"><defs><mask style="mask-type:alpha" x="-50%" y="-50%" width="200%" height="200%" id="m8ew3yw993134296_mask"><path d="M2,0h20c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-20c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z" fill-rule="nonzero" fill="rgb(255, 255, 255)" fill-opacity="1" style="mix-blend-mode:normal"></path></mask></defs><g transform="matrix(-1,0,0,1,25,4)" mask="url(#m8ew3yw993134296_mask)"><g><animateTransform attributeName="transform" type="translate" values="0 0;4 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8ew3yw563857031.mouseenter"></animateTransform><animateTransform attributeName="transform" type="translate" values="4 0;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8ew3yw563857031.mouseleave"></animateTransform><g transform="matrix(1,0,0,1,0,6)"><path id="m8ew3ywa11023073_fill_path" d="M6.3524,4l4.5,2.5l8.5,-6.5l7.6476,11.06137h-27z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g></g></g><defs><mask id="m8ew3ywe24879375_mask" style="mask-type:alpha" x="-50%" y="-50%" width="200%" height="200%"><g transform="matrix(1,0,0,1,13,1)"><path id="m8ew3ywe24879375_fill_path" d="M0.01,0h12.98c0.00552,0 0.01,0.00448 0.01,0.01v25.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-12.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-25.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill-rule="nonzero" fill="rgb(217, 217, 217)" fill-opacity="1" style="mix-blend-mode:normal"></path></g></mask></defs><g mask="url(#m8ew3ywe24879375_mask)"><g><g transform="matrix(-1,0,-0,-1,25,22)"><g transform="matrix(1,0,0,1,3,3)"><path d="M6,3c0,1.6569 -1.3431,3 -3,3c-1.6569,0 -3,-1.3431 -3,-3c0,-1.6569 1.3431,-3 3,-3c1.6569,0 3,1.3431 3,3z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g><g mask="url(#m8ew3yw993134296_mask)"><g transform="matrix(1,0,0,1,0,6)"><path id="m8ew3ywg08143144_fill_path" d="M6.3524,4l4.5,2.5l8.5,-6.5l7.6476,11.06137h-27z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g><animateTransform attributeName="transform" type="translate" values="0 0;4 -0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8ew3yw563857031.mouseenter"></animateTransform><animateTransform attributeName="transform" type="translate" values="4 0;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8ew3yw563857031.mouseleave"></animateTransform></g></g><animateTransform attributeName="transform" type="translate" values="0 0;-1 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8ew3yw563857031.mouseenter"></animateTransform><animateTransform attributeName="transform" type="translate" values="-1 0;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8ew3yw563857031.mouseleave"></animateTransform></g></g></svg></button></div></div></div>
+					<button class='button iconbutton bbtn' id='downbtn'>
+						<svg class='roticon' xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+							<use href='#avee-down-svg'></use>
+						</svg>
+					</button>
+					<button class='button iconbutton bbtn' id='upbtn'>
+						<svg class='roticon' xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+							<use href='#avee-up-svg'></use>
+						</svg>
+					</button>
+				</div>
+			</summary>
+		</details>
+	</template>
+	<template id='avee-effect-template'>
+		<details id='details' class='avee-effect-container'>
+			<summary>
+				<span id='title' class='avee-effect-title'>Error Effect</span>
+				<div class='avee-comp-temp-controls'>
+					<button class="button iconbutton rbtn" id='delete'>
+						<svg xmlns="http://www.w3.org/2000/svg" style='width:64px;height:66px;border-radius:inherit' class='icon' xmlns:xlink="http://www.w3.org/1999/xlink" id="trash29uhqsghod978gby9bo3lw" viewBox="-8 -8 48 49.5"><g><defs><clipPath id="m89vmf1p31561066_clipPath" x="-50%" y="-50%" width="200%" height="200%"><path d="M0.01,0h31.98c0.00552,0 0.01,0.00448 0.01,0.01v32.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-31.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-32.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill="white" clip-rule="nonzero"></path></clipPath></defs><g clip-path="url(#m89vmf1p31561066_clipPath)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 1.2424;0 0.9408;0 1.0143;0 1" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;0.28;0.55;0.81;1" keySplines="0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1" fill="freeze" begin="2912115da0ef4772895e4fdab22a508d.mouseenter"></animateTransform><g transform="matrix(1,0,0,1,7,11)"><g transform="matrix(1,0,0,1,8,4)"><path d="M1,0v0c0.55228,0 1,0.44772 1,1v9c0,0.55228 -0.44772,1 -1,1v0c-0.55228,0 -1,-0.44772 -1,-1v-9c0,-0.55228 0.44772,-1 1,-1z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g><g transform="matrix(1,0,0,1,0,0)"><defs><clipPath id="m89vmf1q04424234_stroke_clip_path" clipPathUnits="userSpaceOnUse"><path id="m89vmf1q04424234_stroke_path" d="M2,0h14c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-14c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z"></path></clipPath></defs><g clip-path="url(#m89vmf1q04424234_stroke_clip_path)"><path id="m89vmf1q04424234_stroke_path" d="M2,0h14c1.10457,0 2,0.89543 2,2v14c0,1.10457 -0.89543,2 -2,2h-14c-1.10457,0 -2,-0.89543 -2,-2v-14c0,-1.10457 0.89543,-2 2,-2z" fill="none" stroke="currentcolor" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"></path><defs><mask id="m89vmf1q04424234_gradient_mask"></mask></defs><rect x="-22" y="-22" width="66" height="66" fill="url(#m89vmf1q04424234ps0)" mask="url(#m89vmf1q04424234_gradient_mask)"></rect></g></g><g transform="matrix(1,0,0,1,12,4)"><path d="M1,0v0c0.55228,0 1,0.44772 1,1v9c0,0.55228 -0.44772,1 -1,1v0c-0.55228,0 -1,-0.44772 -1,-1v-9c0,-0.55228 0.44772,-1 1,-1z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g><g transform="matrix(1,0,0,1,4,4)"><path d="M1,0v0c0.55228,0 1,0.44772 1,1v9c0,0.55228 -0.44772,1 -1,1v0c-0.55228,0 -1,-0.44772 -1,-1v-9c0,-0.55228 0.44772,-1 1,-1z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="0 1;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" fill="freeze" begin="2912115da0ef4772895e4fdab22a508d.mouseleave"></animateTransform></g><g><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="5.0303 -5.9999;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" fill="freeze" begin="2912115da0ef4772895e4fdab22a508d.mouseleave"></animateTransform><animateTransform attributeName="transform" type="translate" values="0 0;6.2498 -7.4545;4.7326 -5.6448;5.1024 -6.0859;5.0303 -5.9999" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;0.28;0.55;0.81;1" keySplines="0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1" fill="freeze" begin="2912115da0ef4772895e4fdab22a508d.mouseenter"></animateTransform><g transform="matrix(1,0,0,1,5,5)"><g id="m89vmf1u57720251" opacity="1" style="mix-blend-mode:normal"><animateTransform attributeName="transform" type="rotate" values="0 0 0;27.6547 0 0;20.9411 0 0;22.5776 0 0;22.2585 0 0" dur="0.3" repeatCount="1" calcMode="spline" keyTimes="0;0.28;0.55;0.81;1" keySplines="0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1;0.33 0 0.67 1" fill="freeze" begin="2912115da0ef4772895e4fdab22a508d.mouseenter"></animateTransform><g transform="matrix(1,0,0,1,0,2)"><defs><clipPath id="m89vmf1u70867559_stroke_clip_path" clipPathUnits="userSpaceOnUse"><path id="m89vmf1u70867559_stroke_path" d="M2,0h18c1.10457,0 2,0.89543 2,2v2c0,1.10457 -0.89543,2 -2,2h-18c-1.10457,0 -2,-0.89543 -2,-2v-2c0,-1.10457 0.89543,-2 2,-2z"></path></clipPath></defs><g style="mix-blend-mode:normal"><g clip-path="url(#m89vmf1u70867559_stroke_clip_path)"><path id="m89vmf1u70867559_stroke_path" d="M2,0h18c1.10457,0 2,0.89543 2,2v2c0,1.10457 -0.89543,2 -2,2h-18c-1.10457,0 -2,-0.89543 -2,-2v-2c0,-1.10457 0.89543,-2 2,-2z" fill="none" stroke="currentcolor" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"></path><defs><mask id="m89vmf1u70867559_gradient_mask"></mask></defs><rect x="-26" y="-10" width="78" height="30" fill="url(#m89vmf1u70867559ps0)" mask="url(#m89vmf1u70867559_gradient_mask)"></rect></g></g></g><defs><mask id="m89vmf1v99593132_mask" style="mask-type:alpha" x="-50%" y="-50%" width="200%" height="200%"><g id="m89vmf1v99593132_translate"><g transform="matrix(1,0,0,1,7,0)"><g id="m89vmf1v99593132" opacity="1" style="mix-blend-mode:normal"><g><g><path d="M0.01,0h7.98c0.00552,0 0.01,0.00448 0.01,0.01v1.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-7.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-1.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill-rule="nonzero" fill="rgb(217, 217, 217)" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g></g></g></g></mask></defs><g mask="url(#m89vmf1v99593132_mask)"><g transform="matrix(1,0,0,1,9,0)"><path d="M2,0v0c1.10457,0 2,0.89543 2,2v0c0,1.10457 -0.89543,2 -2,2v0c-1.10457,0 -2,-0.89543 -2,-2v0c0,-1.10457 0.89543,-2 2,-2z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="rotate" values="22.2585 0 0;0 0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" fill="freeze" begin="2912115da0ef4772895e4fdab22a508d.mouseleave"></animateTransform></g></g></g></g></g></svg>
+					</button>
+					<button class="button iconbutton bbtn" id='duplicate'>
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class='icon' id="m8dk5vbw39033083" viewBox="-13 -13 60 60" style="width:72px;height:72px;border-radius: inherit;"><defs><clipPath id="m8dk5vbw39033083_clipPath" x="-50%" y="-50%" width="200%" height="200%"><path id="m8dk5vbw39033083_fill_path" d="M0.01,0h35.98c0.00552,0 0.01,0.00448 0.01,0.01v35.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-35.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-35.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill="white" clip-rule="nonzero"/></clipPath></defs><g clip-path="url(#m8dk5vbw39033083_clipPath)"><g xmlns="http://www.w3.org/2000/svg"><g transform="matrix(1,0,0,1,9,2)"><defs><clipPath id="m8dk5vbx78410969_stroke_clip_path" clipPathUnits="userSpaceOnUse"><path id="m8dk5vbx78410969_stroke_path" d="M0,0h13.2l8.8,9v18h-22z"/></clipPath></defs><g clip-path="url(#m8dk5vbx78410969_stroke_clip_path)"><path d="M0,0h13.2l8.8,9v18h-22z" fill="none" stroke="currentcolor" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"/></g><g transform="matrix(1,0,0,1,11,0)"><path d="M0,0l11,11h-11z" fill-rule="nonzero" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"/></g></g><animateTransform attributeName="transform" type="translate" values="0 0;1 -1" dur="0.1s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" fill="freeze" begin="m8dk5vbw39033083.mouseenter"/><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="1 -1;0 0" dur="0.1s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" fill="freeze" begin="m8dk5vbw39033083.mouseleave"/></g><g xmlns="http://www.w3.org/2000/svg"><g transform="matrix(1,0,0,1,4.5,7)"><path d="M21.5,20.5v6h-21.5v-26.5h6.5" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"/></g><animateTransform attributeName="transform" type="translate" values="0 0;-1.5 1.5" dur="0.1s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" fill="freeze" begin="m8dk5vbw39033083.mouseenter"/><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="-1.5 1.5;0 0" dur="0.1s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" begin="m8dk5vbw39033083.mouseleave" fill="freeze"/></g><g xmlns="http://www.w3.org/2000/svg"><g xmlns="http://www.w3.org/2000/svg" transform="matrix(1,0,0,1,4.5,7)" opacity="0"><path d="M21.5,19.5v7h-21.5v-26.5h7" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"/><animate attributeName="opacity" values="0;0;1;1" dur="0.1s" repeatCount="1" calcMode="spline" keyTimes="0;0.2;0.2;1" keySplines="0.5 0.35 0.15 1;0.5 0.35 0.15 1;0.5 0.35 0.15 1" fill="freeze" begin="m8dk5vbw39033083.mouseenter"/><animate xmlns="http://www.w3.org/2000/svg" attributeName="opacity" values="1;1;0;0" dur="0.1s" repeatCount="1" calcMode="spline" keyTimes="0;0.6;0.6;1" keySplines="0.5 0.35 0.15 1;0.5 0.35 0.15 1;0.5 0.35 0.15 1" begin="m8dk5vbw39033083.mouseleave" fill="freeze"/></g><animateTransform attributeName="transform" type="translate" values="0 0;-1.5 1.5" dur="0.1s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" fill="freeze" begin="m8dk5vbw39033083.mouseenter"/><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="-1.5 1.5; 0 0" dur="0.1s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" begin="m8dk5vbw39033083.mouseleave" fill="freeze"/></g></g></svg>
+					</button>
+					<button class="button iconbutton bbtn" id='move'>
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class='icon' id="m8dnne2y80551095" viewBox="-10 -10 54 54" style="border-radius: inherit;width: 50px;height: 50px;"><g transform="matrix(1,0,0,1,3,6)"><path d="M11.8951,0.4815c-0.3625,-0.3107 -0.8242,-0.4815 -1.3016,-0.4815h-8.5935c-1.1046,0 -2,0.8954 -2,2v2v17c0,1.1046 0.8954,2 2,2h26c1.1046,0 2,-0.8954 2,-2v-15c0,-1.1046 -0.8954,-2 -2,-2h-11.2602c-0.4774,0 -0.939,-0.1708 -1.3015,-0.4815c0,0 -3.3822,-2.8989 -3.4062,-2.9195c-0.024,-0.0206 -0.0448,-0.0376 -0.0697,-0.0571c-0.0249,-0.0195 -0.0462,-0.0354 -0.0719,-0.0537c-0.0257,-0.0183 -0.0479,-0.0333 -0.0745,-0.0505c-0.0266,-0.0172 -0.0493,-0.0312 -0.0765,-0.0471c-0.0272,-0.0159 0.1556,0.0909 0.1556,0.0909z" fill="none" stroke="currentcolor" stroke-width="3" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;3 8" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8dnne2y80551095.mouseenter"/><animateTransform attributeName="transform" type="translate" values="3 8;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8dnne2y80551095.mouseleave"/><g transform="matrix(1,0,0,1,3,10)"><g id="m8dnne3046480400" opacity="1" style="mix-blend-mode:normal"><animateTransform attributeName="transform" type="skewX" values="0;-15" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8dnne2y80551095.mouseenter"/><animateTransform attributeName="transform" type="skewX" values="-15;0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.15 1" fill="freeze" begin="m8dnne2y80551095.mouseleave"/><path d="M30,2c0,-1.1046 -0.8954,-2 -2,-2h-11c-0.5523,0 -1,0.4477 -1,1v0c0,0.5523 -0.4477,1 -1,1h-13c-1.1046,0 -2,0.8954 -2,2v13c0,1.1046 0.8954,2 2,2h26c1.1046,0 2,-0.8954 2,-2v-12v-3z" fill="none" stroke="currentcolor" stroke-width="1.5" stroke-linecap="butt" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"><animate xmlns="http://www.w3.org/2000/svg" attributeName="d" values="M30,2c0,-1.1046 -0.8954,-2 -2,-2h-11c-0.5523,0 -1,0.4477 -1,1c0,0.5523 -0.4477,1 -1,1h-13c-1.1046,0 -2,0.8954 -2,2v13c0,1.1046 0.8954,2 2,2h26c1.1046,0 2,-0.8954 2,-2v-12v-3z;M30,1.79037c0,-0.98882 -0.8954,-1.79037 -2,-1.79037h-11c-0.5523,0 -1,0.40077 -1,0.89518c0,0.49441 -0.4477,0.89518 -1,0.89518h-13c-1.1046,0 -2,0.80155 -2,1.79037v11.63739c0,0.98882 0.8954,1.79037 2,1.79037h26c1.1046,0 2,-0.80155 2,-1.79037v-10.74221v-2.68555z;M30,1.65548c0,-0.91432 -0.8954,-1.65548 -2,-1.65548h-11c-0.5523,0 -1,0.37058 -1,0.82774c0,0.45716 -0.4477,0.82774 -1,0.82774h-13c-1.1046,0 -2,0.74116 -2,1.65548v10.76065c0,0.91432 0.8954,1.65548 2,1.65548h26c1.1046,0 2,-0.74116 2,-1.65548v-9.93291v-2.48323z;M30,1.55234c0,-0.85736 -0.8954,-1.55234 -2,-1.55234h-11c-0.5523,0 -1,0.34749 -1,0.77617c0,0.42868 -0.4477,0.77617 -1,0.77617h-13c-1.1046,0 -2,0.69498 -2,1.55234v10.09019c0,0.85736 0.8954,1.55234 2,1.55234h26c1.1046,0 2,-0.69498 2,-1.55234v-9.31402v-2.32851z;M30,1.46975c0,-0.81174 -0.8954,-1.46975 -2,-1.46975h-11c-0.5523,0 -1,0.329 -1,0.73487c0,0.40587 -0.4477,0.73487 -1,0.73487h-13c-1.1046,0 -2,0.65801 -2,1.46975v9.55336c0,0.81174 0.8954,1.46975 2,1.46975h26c1.1046,0 2,-0.65801 2,-1.46975v-8.81848v-2.20462z;M30,1.40226c0,-0.77447 -0.8954,-1.40226 -2,-1.40226h-11c-0.5523,0 -1,0.3139 -1,0.70113c0,0.38723 -0.4477,0.70113 -1,0.70113h-13c-1.1046,0 -2,0.62779 -2,1.40226v9.11471c0,0.77447 0.8954,1.40226 2,1.40226h26c1.1046,0 2,-0.62779 2,-1.40226v-8.41358v-2.10339z;M30,1.34663c0,-0.74374 -0.8954,-1.34663 -2,-1.34663h-11c-0.5523,0 -1,0.30144 -1,0.67332c0,0.37187 -0.4477,0.67332 -1,0.67332h-13c-1.1046,0 -2,0.60289 -2,1.34663v8.75311c0,0.74374 0.8954,1.34663 2,1.34663h26c1.1046,0 2,-0.60289 2,-1.34663v-8.07979v-2.01995z;M30,1.30071c0,-0.71838 -0.8954,-1.30071 -2,-1.30071h-11c-0.5523,0 -1,0.29116 -1,0.65035c0,0.35919 -0.4477,0.65035 -1,0.65035h-13c-1.1046,0 -2,0.58233 -2,1.30071v8.45458c0,0.71838 0.8954,1.30071 2,1.30071h26c1.1046,0 2,-0.58233 2,-1.30071v-7.80423v-1.95106z;M30,1.26298c0,-0.69754 -0.8954,-1.26298 -2,-1.26298h-11c-0.5523,0 -1,0.28272 -1,0.63149c0,0.34877 -0.4477,0.63149 -1,0.63149h-13c-1.1046,0 -2,0.56544 -2,1.26298v8.20936c0,0.69754 0.8954,1.26298 2,1.26298h26c1.1046,0 2,-0.56544 2,-1.26298v-7.57787v-1.89447z;M30,1.23231c0,-0.6806 -0.8954,-1.23231 -2,-1.23231h-11c-0.5523,0 -1,0.27585 -1,0.61615c0,0.3403 -0.4477,0.61615 -1,0.61615h-13c-1.1046,0 -2,0.5517 -2,1.23231v8.00998c0,0.6806 0.8954,1.23231 2,1.23231h26c1.1046,0 2,-0.5517 2,-1.23231v-7.39383v-1.84846z;M30,1.20782c0,-0.66708 -0.8954,-1.20782 -2,-1.20782h-11c-0.5523,0 -1,0.27037 -1,0.60391c0,0.33354 -0.4477,0.60391 -1,0.60391h-13c-1.1046,0 -2,0.54074 -2,1.20782v7.85084c0,0.66708 0.8954,1.20782 2,1.20782h26c1.1046,0 2,-0.54074 2,-1.20782v-7.24693v-1.81173z;M30,1.18883c0,-0.65659 -0.8954,-1.18883 -2,-1.18883h-11c-0.5523,0 -1,0.26612 -1,0.59442c0,0.3283 -0.4477,0.59442 -1,0.59442h-13c-1.1046,0 -2,0.53224 -2,1.18883v7.72741c0,0.65659 0.8954,1.18883 2,1.18883h26c1.1046,0 2,-0.53224 2,-1.18883v-7.13299v-1.78325z;M30,1.17477c0,-0.64882 -0.8954,-1.17477 -2,-1.17477h-11c-0.5523,0 -1,0.26297 -1,0.58738c0,0.32441 -0.4477,0.58738 -1,0.58738h-13c-1.1046,0 -2,0.52594 -2,1.17477v7.63599c0,0.64882 0.8954,1.17477 2,1.17477h26c1.1046,0 2,-0.52594 2,-1.17477v-7.04861v-1.76215z;M30,1.16518c0,-0.64353 -0.8954,-1.16518 -2,-1.16518h-11c-0.5523,0 -1,0.26083 -1,0.58259c0,0.32176 -0.4477,0.58259 -1,0.58259h-13c-1.1046,0 -2,0.52165 -2,1.16518v7.57366c0,0.64353 0.8954,1.16518 2,1.16518h26c1.1046,0 2,-0.52165 2,-1.16518v-6.99107v-1.74777z;M30,1.15966c0,-0.64048 -0.8954,-1.15966 -2,-1.15966h-11c-0.5523,0 -1,0.25959 -1,0.57983c0,0.32024 -0.4477,0.57983 -1,0.57983h-13c-1.1046,0 -2,0.51918 -2,1.15966v7.53781c0,0.64048 0.8954,1.15966 2,1.15966h26c1.1046,0 2,-0.51918 2,-1.15966v-6.95798v-1.73949z;M30,1.15789c0,-0.63951 -0.8954,-1.15789 -2,-1.15789h-11c-0.5523,0 -1,0.25919 -1,0.57895c0,0.31975 -0.4477,0.57895 -1,0.57895h-13c-1.1046,0 -2,0.51839 -2,1.15789v7.52632c0,0.63951 0.8954,1.15789 2,1.15789h26c1.1046,0 2,-0.51839 2,-1.15789v-6.94737v-1.73684z" dur="0.3s" repeatCount="1" keyTimes="0;0.07;0.13;0.2;0.27;0.33;0.4;0.47;0.53;0.6;0.67;0.73;0.8;0.87;0.93;1" fill="freeze" begin="m8dnne2y80551095.mouseenter"/><animate xmlns="http://www.w3.org/2000/svg" attributeName="d" values="M30,1.15789c0,-0.63951 -0.8954,-1.15789 -2,-1.15789h-11c-0.5523,0 -1,0.25919 -1,0.57895c0,0.31975 -0.4477,0.57895 -1,0.57895h-13c-1.1046,0 -2,0.51839 -2,1.15789v7.52632c0,0.63951 0.8954,1.15789 2,1.15789h26c1.1046,0 2,-0.51839 2,-1.15789v-6.94737v-1.73684z;M30,1.36753c0,-0.75528 -0.8954,-1.36753 -2,-1.36753h-11c-0.5523,0 -1,0.30612 -1,0.68376c0,0.37764 -0.4477,0.68376 -1,0.68376h-13c-1.1046,0 -2,0.61224 -2,1.36753v8.88892c0,0.75528 0.8954,1.36753 2,1.36753h26c1.1046,0 2,-0.61224 2,-1.36753v-8.20516v-2.05129z;M30,1.50241c0,-0.82978 -0.8954,-1.50241 -2,-1.50241h-11c-0.5523,0 -1,0.33631 -1,0.75121c0,0.41489 -0.4477,0.75121 -1,0.75121h-13c-1.1046,0 -2,0.67263 -2,1.50241v9.76567c0,0.82978 0.8954,1.50241 2,1.50241h26c1.1046,0 2,-0.67263 2,-1.50241v-9.01446v-2.25362z;M30,1.60556c0,-0.88675 -0.8954,-1.60556 -2,-1.60556h-11c-0.5523,0 -1,0.3594 -1,0.80278c0,0.44337 -0.4477,0.80278 -1,0.80278h-13c-1.1046,0 -2,0.71881 -2,1.60556v10.43613c0,0.88675 0.8954,1.60556 2,1.60556h26c1.1046,0 2,-0.71881 2,-1.60556v-9.63335v-2.40834z;M30,1.68815c0,-0.93236 -0.8954,-1.68815 -2,-1.68815h-11c-0.5523,0 -1,0.37789 -1,0.84407c0,0.46618 -0.4477,0.84407 -1,0.84407h-13c-1.1046,0 -2,0.75578 -2,1.68815v10.97296c0,0.93236 0.8954,1.68815 2,1.68815h26c1.1046,0 2,-0.75578 2,-1.68815v-10.12888v-2.53222z;M30,1.75563c0,-0.96964 -0.8954,-1.75563 -2,-1.75563h-11c-0.5523,0 -1,0.393 -1,0.87782c0,0.48482 -0.4477,0.87782 -1,0.87782h-13c-1.1046,0 -2,0.786 -2,1.75563v11.41161c0,0.96964 0.8954,1.75563 2,1.75563h26c1.1046,0 2,-0.786 2,-1.75563v-10.53379v-2.63345z;M30,1.81126c0,-1.00036 -0.8954,-1.81126 -2,-1.81126h-11c-0.5523,0 -1,0.40545 -1,0.90563c0,0.50018 -0.4477,0.90563 -1,0.90563h-13c-1.1046,0 -2,0.8109 -2,1.81126v11.77321c0,1.00036 0.8954,1.81126 2,1.81126h26c1.1046,0 2,-0.8109 2,-1.81126v-10.86758v-2.71689z;M30,1.85719c0,-1.02573 -0.8954,-1.85719 -2,-1.85719h-11c-0.5523,0 -1,0.41573 -1,0.92859c0,0.51286 -0.4477,0.92859 -1,0.92859h-13c-1.1046,0 -2,0.83146 -2,1.85719v12.07173c0,1.02573 0.8954,1.85719 2,1.85719h26c1.1046,0 2,-0.83146 2,-1.85719v-11.14314v-2.78578z;M30,1.89492c0,-1.04656 -0.8954,-1.89492 -2,-1.89492h-11c-0.5523,0 -1,0.42418 -1,0.94746c0,0.52328 -0.4477,0.94746 -1,0.94746h-13c-1.1046,0 -2,0.84835 -2,1.89492v12.31695c0,1.04656 0.8954,1.89492 2,1.89492h26c1.1046,0 2,-0.84835 2,-1.89492v-11.36949v-2.84237z;M30,1.92559c0,-1.0635 -0.8954,-1.92559 -2,-1.92559h-11c-0.5523,0 -1,0.43104 -1,0.96279c0,0.53175 -0.4477,0.96279 -1,0.96279h-13c-1.1046,0 -2,0.86209 -2,1.92559v12.51633c0,1.0635 0.8954,1.92559 2,1.92559h26c1.1046,0 2,-0.86209 2,-1.92559v-11.55354v-2.88838z;M30,1.95007c0,-1.07703 -0.8954,-1.95007 -2,-1.95007h-11c-0.5523,0 -1,0.43652 -1,0.97504c0,0.53851 -0.4477,0.97504 -1,0.97504h-13c-1.1046,0 -2,0.87305 -2,1.95007v12.67548c0,1.07703 0.8954,1.95007 2,1.95007h26c1.1046,0 2,-0.87305 2,-1.95007v-11.70044v-2.92511z;M30,1.96906c0,-1.08751 -0.8954,-1.96906 -2,-1.96906h-11c-0.5523,0 -1,0.44077 -1,0.98453c0,0.54376 -0.4477,0.98453 -1,0.98453h-13c-1.1046,0 -2,0.88155 -2,1.96906v12.79891c0,1.08751 0.8954,1.96906 2,1.96906h26c1.1046,0 2,-0.88155 2,-1.96906v-11.81438v-2.95359z;M30,1.98313c0,-1.09528 -0.8954,-1.98313 -2,-1.98313h-11c-0.5523,0 -1,0.44392 -1,0.99156c0,0.54764 -0.4477,0.99156 -1,0.99156h-13c-1.1046,0 -2,0.88785 -2,1.98313v12.89032c0,1.09528 0.8954,1.98313 2,1.98313h26c1.1046,0 2,-0.88785 2,-1.98313v-11.89876v-2.97469z;M30,1.99272c0,-1.10058 -0.8954,-1.99272 -2,-1.99272h-11c-0.5523,0 -1,0.44607 -1,0.99636c0,0.55029 -0.4477,0.99636 -1,0.99636h-13c-1.1046,0 -2,0.89214 -2,1.99272v12.95265c0,1.10058 0.8954,1.99272 2,1.99272h26c1.1046,0 2,-0.89214 2,-1.99272v-11.95629v-2.98907z;M30,1.99823c0,-1.10362 -0.8954,-1.99823 -2,-1.99823h-11c-0.5523,0 -1,0.4473 -1,0.99912c0,0.55181 -0.4477,0.99912 -1,0.99912h-13c-1.1046,0 -2,0.89461 -2,1.99823v12.98851c0,1.10362 0.8954,1.99823 2,1.99823h26c1.1046,0 2,-0.89461 2,-1.99823v-11.98939v-2.99735z;M30,2c0,-1.1046 -0.8954,-2 -2,-2h-11c-0.5523,0 -1,0.4477 -1,1c0,0.5523 -0.4477,1 -1,1h-13c-1.1046,0 -2,0.8954 -2,2v13c0,1.1046 0.8954,2 2,2h26c1.1046,0 2,-0.8954 2,-2v-12v-3z" dur="0.3s" repeatCount="1" keyTimes="0;0.07;0.13;0.2;0.27;0.33;0.4;0.47;0.53;0.6;0.67;0.73;0.8;0.87;0.93;1" fill="freeze" begin="m8dnne2y80551095.mouseleave"/><animate xmlns="http://www.w3.org/2000/svg" attributeName="stroke-width" values="1.5;1.7489;1.9091;2.0316;2.1297;2.2098;2.2759;2.3304;2.3752;2.4116;2.4407;2.4633;2.48;2.4913;2.4979;2.5" dur="0.3s" repeatCount="1" keyTimes="0;0.07;0.13;0.2;0.27;0.33;0.4;0.47;0.53;0.6;0.67;0.73;0.8;0.87;0.93;1" fill="freeze" begin="m8dnne2y80551095.mouseenter"/><animate xmlns="http://www.w3.org/2000/svg" attributeName="stroke-width" values="2.5;2.2511;2.0909;1.9684;1.8703;1.7902;1.7241;1.6696;1.6248;1.5884;1.5593;1.5367;1.52;1.5087;1.5021;1.5" dur="0.3s" repeatCount="1" keyTimes="0;0.07;0.13;0.2;0.27;0.33;0.4;0.47;0.53;0.6;0.67;0.73;0.8;0.87;0.93;1" fill="freeze" begin="m8dnne2y80551095.mouseleave"/></path></g></g></g></svg>
+					</button>
+					<button class='button iconbutton bbtn' id='downbtn'>
+						<svg class='roticon' xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+							<use href='#avee-down-svg'></use>
+						</svg>
+					</button>
+					<button class='button iconbutton bbtn' id='upbtn'>
+						<svg class='roticon' xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+							<use href='#avee-up-svg'></use>
+						</svg>
+					</button>
+				</div>
+			</summary>
+		</details>
+	</template>
+	<svg id='avee-svg-defs'>
+		<defs>
+			<symbol id='avee-down-svg'>
+				<g clip-path="url(#clip0_0_1)">
+				<path d="M13.8384 21.7101C13.4441 22.3168 12.5559 22.3168 12.1616 21.7101L1.58804 5.44314C1.06917 4.64487 1.85389 3.64173 2.7536 3.95317L12.6729 7.38677C12.8848 7.46012 13.1152 7.46012 13.3271 7.38677L23.2464 3.95317C24.1461 3.64173 24.9308 4.64487 24.412 5.44314L13.8384 21.7101Z" fill="currentcolor"/>
+				</g>
+				<defs>
+				<clipPath id="clip0_0_1">
+				<rect width="26" height="26" fill="white"/>
+				</clipPath>
+				</defs>
+			</symbol>
+			<symbol id='avee-up-svg'>
+				<g clip-path="url(#clip0_0_1)">
+				<path d="M12.1616 4.28991C12.5559 3.68323 13.4441 3.68323 13.8384 4.28991L24.412 20.5569C24.9308 21.3551 24.1461 22.3583 23.2464 22.0468L13.3271 18.6132C13.1152 18.5399 12.8848 18.5399 12.6729 18.6132L2.7536 22.0468C1.85389 22.3583 1.06917 21.3551 1.58804 20.5569L12.1616 4.28991Z" fill="currentcolor"/>
+				</g>
+				<defs>
+				<clipPath id="clip0_0_1">
+				<rect width="26" height="26" fill="white"/>
+				</clipPath>
+				</defs>
+			</symbol>
+		</defs>
 	</svg>
+	<!-- my browser flipping crashed 2 times -->
 	<script>
-	/*
-	const filein = document.getElementById('avee-viz-input');
-	const status = document.getElementById('avee-status');
-	*/
+		const connectSvg = (n,s)=>{
+			const tempnode = n.getElementById(s);
+			tempnode.id = tempnode.id+crypto.randomUUID().split('-').join('');const transformelms = Array.from(tempnode.getElementsByTagName('animateTransform')).concat(Array.from(tempnode.getElementsByTagName('animate')));for(let i=0;i<transformelms.length;i++){const bsplit = transformelms[i].getAttribute('begin').split('.');bsplit[0] = tempnode.id;transformelms[i].setAttribute('begin',bsplit.join('.'));const endatt = transformelms[i].getAttribute('end');if(endatt){const esplit = endatt.split('.');esplit[0] = tempnode.id;transformelms[i].setAttribute('end',esplit.join('.'));}};
+		}
+		const template = document.getElementById('avee-file-template');
+		const orig = template.content.cloneNode;
+		template.content.cloneNode = (...args)=>{
+			const node = orig.apply(template.content,args);
+			connectSvg(node,'m89otsp870562513');
+			connectSvg(node,'m89vmf1p31561066');
+			return node;
+		};
+		const template2 = document.getElementById('avee-comp-template');
+		const orig2 = template2.content.cloneNode;
+		template2.content.cloneNode = (...args)=>{
+			const node = orig2.apply(template2.content,args);
+			connectSvg(node,'2912115da0ef4772895e4fdab22a508d');
+			connectSvg(node,'m8annzmc16585153');
+			connectSvg(node,'m8ew3yw563857031');
+			connectSvg(node,'m8euv7g576686652');
+			connectSvg(node,'m8ewsyge12370402');
+			connectSvg(node,'m8evgida46283542');
+			connectSvg(node,'m8eueg0k78822433');
+			connectSvg(node,'m8etfmld26321056');
+			return node;
+		};
+		const template3 = document.getElementById('avee-effect-template');
+		const orig3 = template3.content.cloneNode;
+		template3.content.cloneNode = (...args)=>{
+			const node = orig3.apply(template3.content,args);
+			connectSvg(node,'trash29uhqsghod978gby9bo3lw');
+			connectSvg(node,'m8dk5vbw39033083');
+			connectSvg(node,'m8dnne2y80551095');
+			return node;
+		};
+	</script>
+	<script>
 	class fsort{
+		static errorsuppress = false;
 		static quickSort(arr,carr=null){
 			carr || (carr = [...arr.keys()]);
 			if(arr.length > 3){
+				const oesval = fsort.errorsuppress;
 				const harr = Math.trunc(arr.length/2);
 				const earr = arr.length-1;
 				const pivsort = fsort.tsort([arr[0],arr[harr],arr[earr]],[carr[0],carr[harr],carr[earr]]);
@@ -468,20 +639,23 @@
 						}
 					}
 				}
+				fsort.errorsuppress = true;
 				temp = fsort.quickSort(arr.slice(0,si),carr.slice(0,si));
 				arr.splice(0,si,...temp[0]);
 				carr.splice(0,si,...temp[1]);
+				fsort.errorsuppress = true;
 				temp = fsort.quickSort(arr.slice(si+1),carr.slice(si+1));
 				arr.splice(si+1,temp[0].length,...temp[0]);
 				carr.splice(si+1,temp[1].length,...temp[1]);
+				fsort.errorsuppress = oesval;
 				return [arr,carr];
-			}else if(arr.length == 3){
+			}else if(arr.length === 3){
 				return fsort.tsort(arr,carr);
-			}else if(arr.length == 2){
-				console.warn("fsort.quickSort : Attempting to sort a length 2 array.");
+			}else if(arr.length === 2){
+				!fsort.errorsuppress && console.warn("fsort.quickSort : Attempting to sort a length 2 array.");
 				return (arr[0] > arr[1] ? [arr.toReversed(),carr.toReversed()] : [arr,carr]);
 			}else{
-				console.warn("fsort.quickSort : Array length is 0 or 1 no sort needed."); //throw new RangeError();
+				!fsort.errorsuppress && console.warn("fsort.quickSort : Array length is 0 or 1 no sort needed."); //throw new RangeError();
 				return [arr,carr];
 			}
 		}
@@ -513,8 +687,9 @@
 			return [[arr[indices[0]],arr[indices[1]],arr[indices[2]]],(carr ? [carr[indices[0]],carr[indices[1]],carr[indices[2]]] : indices)];
 		}
 	}
+	fsort.errorsuppress = true;
 	class aveesys{
-		constructor(fileinp,status,structure,exportbtn,filenameinp,controls,filecont,entrytemplate,imginp,compbtn){
+		constructor(fileinp,status,structure,exportbtn,filenameinp,controls,filecont,entrytemplate,imginp,compbtn,comptemplate,effecttemplate){
 			this.fileinp = fileinp;
 			this.exportbtn = exportbtn;
 			this.filenameinp = filenameinp;
@@ -524,9 +699,12 @@
 			this.scenedata = null;
 			this.filecont = filecont;
 			this.entrytemplate = entrytemplate;
+			this.comptemplate = comptemplate;
+			this.effecttemp = effecttemplate;
 			this.imginp = imginp;
 			this.compbtn = compbtn;
 			this.images = [];
+			this.compelms = [];
 			this.processFiles = this.processFiles.bind(this);
 			this.saveFile = this.saveFile.bind(this);
 			this.addImage = this.addImage.bind(this);
@@ -554,7 +732,7 @@
 			this.updateStatus(4);
 		}
 		addImage(){
-			if(this.imginp.files.length == 0){
+			if(this.imginp.files.length === 0){
 				alert("No files selected!");
 				return;
 			}
@@ -566,7 +744,7 @@
 		async processFiles(){
 			this.scenedata = null;
 			//console.log(this.fileinp.files.length);
-			if(this.fileinp.files.length == 0){
+			if(this.fileinp.files.length === 0){
 				alert("No files selected!");
 				return;
 			}else if(this.fileinp.files.length > 1){
@@ -589,7 +767,7 @@
 			let scenedata = null;
 			this.images.length = 0;
 			for(let i=0;i<entries.length;i++){
-				if(entries[i].filename == 'scene.json'){
+				if(entries[i].filename === 'scene.json'){
 					scenedata = JSON.parse(await (await entries[i].getData(new zip.BlobWriter())).text());
 				}else{
 					const tempwriter = new zip.BlobWriter;
@@ -607,17 +785,2135 @@
 			parent.console.log(scenedata);
 			this.updateStatus();
 		}
+		createEffectBase(i,j,compelm){
+			const elm = this.scenedata.compositions[i].elements[j];
+			const basenode = this.effecttemp.content.cloneNode(true);
+			const genelm = basenode.getElementById('details');
+			genelm.removeAttribute('id');
+			const gensummary = basenode.getElementById('title');
+			gensummary.innerText = elm._name;
+			gensummary.removeAttribute('id');
+			const delbtn = basenode.getElementById('delete');
+			delbtn.removeAttribute('id');
+			delbtn.addEventListener('click',()=>{
+				if(confirm('Are you sure you want to delete this effect?')){
+					genelm.remove();
+					const ind = this.scenedata.compositions[compelm.value].elements.indexOf(elm);
+					ind != -1 && this.scenedata.compositions[compelm.value].elements.splice(ind,1);
+				}
+			});
+			const upbtn = basenode.getElementById('upbtn');
+			upbtn.removeAttribute('id');
+			upbtn.addEventListener('click',()=>{
+				//console.log(compelm.value);
+				const ind = this.scenedata.compositions[compelm.value].elements.indexOf(elm);
+				if(ind > 0){
+					const temp = this.scenedata.compositions[compelm.value].elements[ind];
+					this.scenedata.compositions[compelm.value].elements[ind] = this.scenedata.compositions[compelm.value].elements[ind-1];
+					this.scenedata.compositions[compelm.value].elements[ind-1] = temp;
+					compelm.insertBefore(genelm,genelm.previousElementSibling);
+					const iconsgen = Array.from(genelm.getElementsByClassName('icon')).concat(Array.from(genelm.nextElementSibling.getElementsByClassName('icon')));
+					for(let k=0;k<iconsgen.length;k++){
+						const animates = Array.from(iconsgen[k].getElementsByTagName('animateTransform')).concat(Array.from(iconsgen[k].getElementsByTagName('animate')));
+						for(let l=0;l<animates.length;l++){
+							animates[l].setAttribute('begin', animates[l].getAttribute('begin')); //iconsgen[k].id + '.' + animates[l].getAttribute('begin').split('.')[1]
+						}
+					}
+				};
+			});
+			const downbtn = basenode.getElementById('downbtn');
+			downbtn.removeAttribute('id');
+			downbtn.addEventListener('click',()=>{
+				const ind = this.scenedata.compositions[compelm.value].elements.indexOf(elm);
+				if(ind != -1 && ind < this.scenedata.compositions[compelm.value].elements.length-1){
+					const temp = this.scenedata.compositions[compelm.value].elements[ind];
+					this.scenedata.compositions[compelm.value].elements[ind] = this.scenedata.compositions[compelm.value].elements[ind+1];
+					this.scenedata.compositions[compelm.value].elements[ind+1] = temp;
+					compelm.insertBefore(genelm.nextElementSibling,genelm);
+					const iconsgen = Array.from(genelm.getElementsByClassName('icon')).concat(Array.from(genelm.previousElementSibling.getElementsByClassName('icon')));
+					for(let k=0;k<iconsgen.length;k++){
+						const animates = Array.from(iconsgen[k].getElementsByTagName('animateTransform')).concat(Array.from(iconsgen[k].getElementsByTagName('animate')));
+						for(let l=0;l<animates.length;l++){
+							animates[l].setAttribute('begin', animates[l].getAttribute('begin'));
+						}
+					}
+				};
+			});
+			const dupbtn = basenode.getElementById('duplicate');
+			dupbtn.removeAttribute('id');
+			dupbtn.addEventListener('click',()=>{
+				const ind = this.scenedata.compositions[compelm.value].elements.indexOf(elm)+1;
+				this.scenedata.compositions[compelm.value].elements.splice(ind,0,structuredClone(elm));
+				compelm.insertBefore(this.createEffectBase(compelm.value,ind,compelm),genelm.nextElementSibling);
+			});
+			const movebtn = basenode.getElementById('move');
+			movebtn.removeAttribute('id');
+			movebtn.addEventListener('click',()=>{
+				const cid = parseInt(prompt('Enter the compositition# that you want to move it to'));
+				if(!Number.isNaN(cid) && cid < this.scenedata.compositions.length && cid >= 0){
+					const ind = this.scenedata.compositions[compelm.value].elements.indexOf(elm);
+					this.scenedata.compositions[compelm.value].elements.splice(ind,1);
+					this.scenedata.compositions[cid].elements.push(elm);
+					//const compconts = this.structure.getElementsByClassName('avee-comp-container');
+					for(let i=0;i<this.compelms.length;i++){
+						if(this.compelms[i].value == cid){
+							this.compelms[i].appendChild(genelm);
+							const iconsgen = Array.from(genelm.getElementsByClassName('icon')).concat(Array.from(genelm.previousElementSibling.getElementsByClassName('icon')));
+							for(let k=0;k<iconsgen.length;k++){
+								const animates = Array.from(iconsgen[k].getElementsByTagName('animateTransform')).concat(Array.from(iconsgen[k].getElementsByTagName('animate')));
+								for(let l=0;l<animates.length;l++){
+									animates[l].setAttribute('begin', animates[l].getAttribute('begin'));
+								}
+							}
+							compelm = this.compelms[i];
+							break;
+						}
+					}
+				}
+			});
+			const options = Object.getOwnPropertyNames(elm);
+			options.splice(options.indexOf('_name'),1);
+			options.splice(options.indexOf('v'),1);
+			options.splice(options.indexOf('ver'),1);
+			options.splice(options.indexOf('objType'),1);
+			//parent.console.log(options);
+			const cats = [];
+			const catos = [];
+			const catelms = [];
+			const catelmo = [];
+			for(let k=0;k<options.length;k++){
+				const title = aveesys.p2T(options[k]);
+				const ocont = document.createElement('div');
+				const osum = document.createElement('h2');
+				ocont.className = 'contsolid';
+				osum.innerText = title;
+				ocont.appendChild(osum);
+				ocont.appendChild(this.parseAveeInput(elm[options[k]],title));
+				const indofcat = cats.indexOf(elm[options[k]].tag);
+				if(indofcat === -1){
+					cats.push(elm[options[k]].tag);
+					const ordval = parseInt(elm[options[k]].tag.split('_')[0]);
+					catos.push(Number.isNaN(ordval) ? 100 : ordval);
+					catelms.push([ocont]);
+					catelmo.push([elm[options[k]].o]);
+				}else{
+					catelms[indofcat].push(ocont);
+					catelmo[indofcat].push(elm[options[k]].o);
+				}
+			}
+			const ninds = fsort.quickSort(catos)[1];
+			for(let k=0;k<ninds.length;k++){
+				if(!cats[ninds[k]]){continue;}
+				const catelm = document.createElement('details');
+				const catsum = document.createElement('summary');
+				catsum.innerText = aveesys.p2T(cats[ninds[k]].split('_')[1] ?? cats[ninds[k]]);
+				catelm.appendChild(catsum);
+				const nelminds = fsort.quickSort(catelmo[ninds[k]])[1];
+				for(let l=0;l<nelminds.length;l++){
+					catelm.appendChild(catelms[ninds[k]][nelminds[l]]);
+				}
+				genelm.appendChild(catelm);
+			}
+			return genelm;
+		}
 		createCompBase(i){
-			const compelm = document.createElement('details');
-			const compsummary = document.createElement('summary');
-			compsummary.innerText = i==0 ? 'Final Composition' : 'Composition '+i.toString();
-			compelm.appendChild(compsummary);
-			/*
-			const categoryio = document.createElement('details');
-			const categorysum = document.createElement('summary');
-			categorysum.innerText = 'Intro Outro';
-			categoryio.appendChild(categorysum);
-			*/
+			const fullelm = this.comptemplate.content.cloneNode(true);
+			const compelm = fullelm.getElementById('details');
+			const sumelm = fullelm.getElementById('title');
+			sumelm.innerText = i===0 ? 'Final Composition' : 'Composition '+i.toString();
+			sumelm.removeAttribute('id');
+			compelm.removeAttribute('id');
+			//compelm.id = crypto.randomUUID().split('-').join('');
+			//compelm.id = 'avee-comp-'+i.toString();
+			compelm.value = i;
+			this.compelms.push(compelm);
+			const delbtn = fullelm.getElementById('delete');
+			delbtn.removeAttribute('id');
+			delbtn.addEventListener('click',()=>{
+				if(confirm('Are you sure you want to delete this composition? (This is irreversable)')){
+					const ind = this.compelms.indexOf(compelm);
+					this.compelms.splice(ind,1);
+					//console.log(ind);
+					this.scenedata.compositions.splice(compelm.value,1);
+					compelm.remove();
+					for(let j=0;j<this.compelms.length;j++){
+						if(this.compelms[j].value > compelm.value){
+							this.compelms[j].value -= 1;
+							this.compelms[j].getElementsByClassName('avee-comp-title')[0].innerText = this.compelms[j].value===0 ? 'Final Composition' : 'Composition '+this.compelms[j].value.toString();
+						}
+					}
+					this.updateStatus(4);
+				}
+			});
+			const upbtn = fullelm.getElementById('upbtn');
+			upbtn.removeAttribute('id');
+			upbtn.addEventListener('click',()=>{
+				if(compelm.value > 0){
+					for(let j=0;j<this.compelms.length;j++){
+						if(this.compelms[j].value == compelm.value-1){
+							this.structure.insertBefore(compelm,this.compelms[j]);
+							const temp = this.scenedata.compositions[compelm.value];
+							this.scenedata.compositions[compelm.value] = this.scenedata.compositions[compelm.value-1];
+							this.scenedata.compositions[compelm.value-1] = temp;
+							compelm.value = this.compelms[j].value;
+							this.compelms[j].value += 1;
+							compelm.getElementsByClassName('avee-comp-title')[0].innerText = compelm.value===0 ? 'Final Composition' : 'Composition '+compelm.value.toString();
+							this.compelms[j].getElementsByClassName('avee-comp-title')[0].innerText = 'Composition '+this.compelms[j].value.toString();
+							break;
+						}
+					}
+				}
+			});
+			const downbtn = fullelm.getElementById('downbtn');
+			downbtn.removeAttribute('id');
+			downbtn.addEventListener('click',()=>{
+				if(compelm.value < this.scenedata.compositions.length-1){
+					for(let j=0;j<this.compelms.length;j++){
+						if(this.compelms[j].value == compelm.value+1){
+							this.structure.insertBefore(this.compelms[j],compelm);
+							//console.log(this.compelms[j]);
+							const temp = this.scenedata.compositions[compelm.value];
+							this.scenedata.compositions[compelm.value] = this.scenedata.compositions[compelm.value+1];
+							this.scenedata.compositions[compelm.value+1] = temp;
+							this.compelms[j].value = compelm.value;
+							compelm.value += 1;
+							compelm.getElementsByClassName('avee-comp-title')[0].innerText = 'Composition '+compelm.value.toString();
+							this.compelms[j].getElementsByClassName('avee-comp-title')[0].innerText = this.compelms[j].value===0 ? 'Final Composition' : 'Composition '+this.compelms[j].value.toString();
+							break;
+						}
+					}
+				}
+			});
+			const imgbtn = fullelm.getElementById('imgbtn');
+			imgbtn.removeAttribute('id');
+			imgbtn.addEventListener('click',()=>{
+				const imgobj = {
+					"Color": {
+						"hint": "",
+						"o": 28,
+						"t": "chsla4f",
+						"tag": "2_color",
+						"v": "1 1 1 1"
+					},
+					"ColorTo": {
+						"hint": "",
+						"o": 29,
+						"t": "chsla4f",
+						"tag": "2_color",
+						"v": "1 1 1 1"
+					},
+					"MaskImage": {
+						"o": 36,
+						"t": "img internalres:transparent internalres:white internalres:black internalres:particle_circle_blur4 internalres:particle_blur01 internalres:particle_blur_inv internalres:vignette80 composition:0",
+						"tag": "1_image",
+						"v": ""
+					},
+					"MeasureColorBlend": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 30,
+						"t": "_child",
+						"tag": "2_color",
+						"v": ""
+					},
+					"MeasurePos": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing BeatCamShakeMore BeatCamShakeLess BeatRandomShake ConstantShakeMore ConstantShake TrackPosition",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 6,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"Shape": {
+						"o": 35,
+						"t": "_child None Circle SidedPolygon",
+						"tag": "1_image",
+						"v": "None"
+					},
+					"_id": {
+						"hint": "",
+						"o": 0,
+						"t": "ih",
+						"tag": "",
+						"v": 180
+					},
+					"_name": "Image",
+					"alignmentPosition": {
+						"hint": "",
+						"o": 7,
+						"t": "f2 0 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"anchorX": {
+						"o": 4,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"anchorY": {
+						"o": 5,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"autoDetectColorKey": {
+						"hint": "",
+						"o": 22,
+						"t": "b",
+						"tag": "2_ColorKey",
+						"v": 1
+					},
+					"blendMode": {
+						"o": 2,
+						"t": "_child Alpha PreMulAlpha Screen Add AddAlpha",
+						"tag": "0_general",
+						"v": "Alpha"
+					},
+					"blurDivider": {
+						"hint": "",
+						"o": 33,
+						"t": "i 0 10",
+						"tag": "blur",
+						"v": 5
+					},
+					"blurEnabled": {
+						"hint": "",
+						"o": 32,
+						"t": "b",
+						"tag": "blur",
+						"v": 0
+					},
+					"blurRadius": {
+						"hint": "",
+						"o": 34,
+						"t": "i 1 25",
+						"tag": "blur",
+						"v": 7
+					},
+					"blurredBorder": {
+						"hint": "",
+						"o": 27,
+						"t": "b",
+						"tag": "1_image",
+						"v": 1
+					},
+					"colorKey": {
+						"hint": "",
+						"o": 23,
+						"t": "crgb_hl",
+						"tag": "2_ColorKey",
+						"v": -16711936
+					},
+					"colorKeyEnabled": {
+						"hint": "",
+						"o": 21,
+						"t": "b",
+						"tag": "2_ColorKey",
+						"v": 0
+					},
+					"customImage": {
+						"o": 13,
+						"t": "img internalres:white internalres:black internalres:particle_circle_blur4 internalres:vignette80 internalres:rainbow128 internalres:particle_blur01_more internalres:lens_flare internalres:lens_flare_2 composition:0",
+						"tag": "1_image",
+						"v": ""
+					},
+					"generatedAlbumArtColor": {
+						"hint": "",
+						"o": 19,
+						"t": "crgba",
+						"tag": "generatedAlbumArt",
+						"v": -1
+					},
+					"generatedAlbumArtHint": {
+						"hint": "",
+						"o": 15,
+						"t": "ih 0 7",
+						"tag": "generatedAlbumArt",
+						"v": 0
+					},
+					"generatedAlbumArtHintForceGen": {
+						"hint": "",
+						"o": 18,
+						"t": "b",
+						"tag": "generatedAlbumArt",
+						"v": 0
+					},
+					"generatedAlbumArtHintNoText": {
+						"hint": "",
+						"o": 17,
+						"t": "b",
+						"tag": "generatedAlbumArt",
+						"v": 0
+					},
+					"generatedAlbumArtHintShiftHue": {
+						"hint": "",
+						"o": 16,
+						"t": "b",
+						"tag": "generatedAlbumArt",
+						"v": 0
+					},
+					"keepAspectRatio": {
+						"hint": "",
+						"o": 26,
+						"t": "b",
+						"tag": "1_image",
+						"v": 1
+					},
+					"keepAspectRatioAndCropToFit": {
+						"hint": "",
+						"o": 20,
+						"t": "b",
+						"tag": "1_image",
+						"v": 0
+					},
+					"maskMode": {
+						"o": 37,
+						"t": "sel Transparency TransparencyAndBlacks TransparencyAndWhites InvertedTransparency",
+						"tag": "1_image",
+						"v": "Transparency"
+					},
+					"measureAnimationSpeed": {
+						"A": {
+							"hint": "Speed",
+							"o": 1,
+							"t": "f 0 1",
+							"tag": "misc",
+							"v": 0.5
+						},
+						"B": {
+							"hint": "Beat Amount",
+							"o": 2,
+							"t": "f 0 1",
+							"tag": "misc",
+							"v": 0.5
+						},
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "TotalTimeAndBeat"
+						},
+						"o": 14,
+						"t": "_child",
+						"tag": "1_image",
+						"v": ""
+					},
+					"measureRot": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 12,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"measureScale": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 10,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"objType": "Image",
+					"opacityStrength": {
+						"hint": "",
+						"o": 25,
+						"t": "f 0 4",
+						"tag": "2_ColorKey",
+						"v": 1
+					},
+					"position": {
+						"hint": "",
+						"o": 3,
+						"t": "f2 -1 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"rotation": {
+						"hint": "",
+						"o": 11,
+						"t": "f 0 300",
+						"tag": "0_general",
+						"v": 0
+					},
+					"saturation": {
+						"o": 31,
+						"t": "mvarf 0 1",
+						"tag": "2_color",
+						"v": "Constant 0 1"
+					},
+					"scale": {
+						"hint": "",
+						"o": 9,
+						"t": "f2 0 2",
+						"tag": "0_general",
+						"v": "1 1"
+					},
+					"scaleIsUniform": {
+						"hint": "",
+						"o": 8,
+						"t": "b",
+						"tag": "0_general",
+						"v": 0
+					},
+					"transparencyStrength": {
+						"hint": "",
+						"o": 24,
+						"t": "f 0 4",
+						"tag": "2_ColorKey",
+						"v": 1
+					},
+					"v": "Image",
+					"ver": "10",
+					"visible": {
+						"hint": "",
+						"o": 1,
+						"t": "b",
+						"tag": "0_general",
+						"v": 1
+					}
+				};
+				this.scenedata.compositions[compelm.value].elements.push(imgobj);
+				compelm.appendChild(this.createEffectBase(compelm.value,this.scenedata.compositions[compelm.value].elements.length-1,compelm));
+			});
+			const mirrorbtn = fullelm.getElementById('mirrorbtn');
+			mirrorbtn.removeAttribute('id');
+			mirrorbtn.addEventListener('click',()=>{
+				const mirobj = {
+					"MeasurePos": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing BeatCamShakeMore BeatCamShakeLess BeatRandomShake ConstantShakeMore ConstantShake TrackPosition",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 6,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"TargetImage": {
+						"o": 13,
+						"t": "img composition:0",
+						"tag": "1_appearance",
+						"v": ""
+					},
+					"_id": {
+						"hint": "",
+						"o": 0,
+						"t": "ih",
+						"tag": "",
+						"v": 403
+					},
+					"_name": "Mirror Effect",
+					"alignmentPosition": {
+						"hint": "",
+						"o": 7,
+						"t": "f2 0 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"anchorX": {
+						"o": 4,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"anchorY": {
+						"o": 5,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"blendMode": {
+						"o": 2,
+						"t": "_child Alpha PreMulAlpha Screen Add AddAlpha",
+						"tag": "0_general",
+						"v": "PreMulAlpha"
+					},
+					"color": {
+						"hint": "",
+						"o": 16,
+						"t": "crgba",
+						"tag": "1_appearance",
+						"v": -1
+					},
+					"flipMirror": {
+						"hint": "",
+						"o": 15,
+						"t": "b",
+						"tag": "1_appearance",
+						"v": 1
+					},
+					"measureRot": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 12,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"measureScale": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 10,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"mirrorMode": {
+						"o": 14,
+						"t": "sel Horizontal Vertical HorizontalAndVertical",
+						"tag": "1_appearance",
+						"v": "Horizontal"
+					},
+					"objType": "MirrorEffect",
+					"position": {
+						"hint": "",
+						"o": 3,
+						"t": "f2 -1 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"rotation": {
+						"hint": "",
+						"o": 11,
+						"t": "f 0 300",
+						"tag": "0_general",
+						"v": 0
+					},
+					"scale": {
+						"hint": "",
+						"o": 9,
+						"t": "f2 0 2",
+						"tag": "0_general",
+						"v": "1 1"
+					},
+					"scaleIsUniform": {
+						"hint": "",
+						"o": 8,
+						"t": "b",
+						"tag": "0_general",
+						"v": 0
+					},
+					"v": "MirrorEffect",
+					"ver": "10",
+					"visible": {
+						"hint": "",
+						"o": 1,
+						"t": "b",
+						"tag": "0_general",
+						"v": 1
+					}
+				};
+				this.scenedata.compositions[compelm.value].elements.push(mirobj);
+				compelm.appendChild(this.createEffectBase(compelm.value,this.scenedata.compositions[compelm.value].elements.length-1,compelm));
+			});
+			const rgbbtn = fullelm.getElementById('rgbbtn');
+			rgbbtn.removeAttribute('id');
+			rgbbtn.addEventListener('click',()=>{
+				const rgbobj = {
+					"MeasurePos": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing BeatCamShakeMore BeatCamShakeLess BeatRandomShake ConstantShakeMore ConstantShake TrackPosition",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 6,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"_id": {
+						"hint": "",
+						"o": 0,
+						"t": "ih",
+						"tag": "",
+						"v": 359
+					},
+					"_name": "Rgb Split",
+					"alignmentPosition": {
+						"hint": "",
+						"o": 7,
+						"t": "f2 0 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"anchorX": {
+						"o": 4,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"anchorY": {
+						"o": 5,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"blendMode": {
+						"o": 2,
+						"t": "_child Alpha PreMulAlpha Screen Add AddAlpha",
+						"tag": "0_general",
+						"v": "Alpha"
+					},
+					"blendModeContent": {
+						"o": 13,
+						"t": "_child Alpha PreMulAlpha Screen Add AddAlpha",
+						"tag": "1_appearance",
+						"v": "Add"
+					},
+					"color": {
+						"hint": "",
+						"o": 14,
+						"t": "crgb",
+						"tag": "1_appearance",
+						"v": -1
+					},
+					"measureRot": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 12,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"measureScale": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 10,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"objType": "RgbSplitEffect",
+					"position": {
+						"hint": "",
+						"o": 3,
+						"t": "f2 -1 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"rotation": {
+						"hint": "",
+						"o": 11,
+						"t": "f 0 300",
+						"tag": "0_general",
+						"v": 0
+					},
+					"scale": {
+						"hint": "",
+						"o": 9,
+						"t": "f2 0 2",
+						"tag": "0_general",
+						"v": "1 1"
+					},
+					"scaleIsUniform": {
+						"hint": "",
+						"o": 8,
+						"t": "b",
+						"tag": "0_general",
+						"v": 0
+					},
+					"showUnblurredContent": {
+						"hint": "",
+						"o": 16,
+						"t": "b",
+						"tag": "1_appearance",
+						"v": 1
+					},
+					"showUnblurredContentUnder": {
+						"hint": "",
+						"o": 17,
+						"t": "b",
+						"tag": "1_appearance",
+						"v": 0
+					},
+					"splitAmount": {
+						"o": 19,
+						"t": "mvarf2 -0.5 0.5",
+						"tag": "2_splitEffect",
+						"v": "BeatRandomShake 0.5 0.5"
+					},
+					"splitColor0": {
+						"hint": "",
+						"o": 20,
+						"t": "crgb",
+						"tag": "2_splitEffect",
+						"v": -65284
+					},
+					"splitColor1": {
+						"hint": "",
+						"o": 21,
+						"t": "crgb",
+						"tag": "2_splitEffect",
+						"v": -16777216
+					},
+					"splitColor2": {
+						"hint": "",
+						"o": 22,
+						"t": "crgb",
+						"tag": "2_splitEffect",
+						"v": -16711692
+					},
+					"splitMultiplier": {
+						"o": 18,
+						"t": "mvarf 0 6",
+						"tag": "2_splitEffect",
+						"v": "Constant 1.5 6"
+					},
+					"targetImage": {
+						"o": 15,
+						"t": "img composition:0",
+						"tag": "1_appearance",
+						"v": ""
+					},
+					"v": "RgbSplitEffect",
+					"ver": "10",
+					"visible": {
+						"hint": "",
+						"o": 1,
+						"t": "b",
+						"tag": "0_general",
+						"v": 1
+					}
+				};				
+				this.scenedata.compositions[compelm.value].elements.push(rgbobj);
+				compelm.appendChild(this.createEffectBase(compelm.value,this.scenedata.compositions[compelm.value].elements.length-1,compelm));
+			});
+			const audiobtn = fullelm.getElementById('audiobtn');
+			audiobtn.removeAttribute('id');
+			audiobtn.addEventListener('click',()=>{
+				const audobj = {
+					"_name": "Audio Provider",
+					"audioDurationMs": {
+						"hint": "",
+						"o": 1,
+						"t": "i 20 300",
+						"tag": "1_AudioCapture",
+						"v": 60
+					},
+					"beatRangeBarFirst": {
+						"hint": "",
+						"o": 15,
+						"t": "f 0 1",
+						"tag": "beat",
+						"v": 0
+					},
+					"beatRangeBarLast": {
+						"hint": "",
+						"o": 16,
+						"t": "f 0 1",
+						"tag": "beat",
+						"v": 0.2
+					},
+					"beatRangeValueHigher": {
+						"hint": "",
+						"o": 18,
+						"t": "f 0 100",
+						"tag": "beat",
+						"v": 35
+					},
+					"beatRangeValueLower": {
+						"hint": "",
+						"o": 17,
+						"t": "f 0 50",
+						"tag": "beat",
+						"v": 0.7
+					},
+					"beatSmooth": {
+						"hint": "",
+						"o": 14,
+						"t": "f 0.1 1",
+						"tag": "beat",
+						"v": 0.4
+					},
+					"filterRadius": {
+						"hint": "",
+						"o": 12,
+						"t": "i 0 20",
+						"tag": "2_spectrum",
+						"v": 1
+					},
+					"filterStrength": {
+						"hint": "",
+						"o": 13,
+						"t": "f 0.1 2",
+						"tag": "2_spectrum",
+						"v": 1
+					},
+					"freqShift": {
+						"hint": "",
+						"o": 7,
+						"t": "f 0 1",
+						"tag": "2_spectrumHz",
+						"v": 0
+					},
+					"highQualityAudioCapture": {
+						"hint": "",
+						"o": 2,
+						"t": "b",
+						"tag": "1_AudioCapture",
+						"v": 0
+					},
+					"higherHz": {
+						"hint": "",
+						"o": 5,
+						"t": "f 300 18000",
+						"tag": "2_spectrumHz",
+						"v": 18000
+					},
+					"hzLinearFactor": {
+						"hint": "",
+						"o": 6,
+						"t": "f 0 1",
+						"tag": "2_spectrumHz",
+						"v": 0.06
+					},
+					"lowerFreqMagnitude": {
+						"hint": "",
+						"o": 19,
+						"t": "f 0 1",
+						"tag": "2_spectrum",
+						"v": 0.25
+					},
+					"lowerHz": {
+						"hint": "",
+						"o": 4,
+						"t": "f 0 300",
+						"tag": "2_spectrumHz",
+						"v": 20
+					},
+					"mirrorSamples": {
+						"hint": "",
+						"o": 8,
+						"t": "b",
+						"tag": "2_spectrum",
+						"v": 0
+					},
+					"objType": "AudioProvider",
+					"outputMultiplier": {
+						"hint": "",
+						"o": 20,
+						"t": "f 0.1 3",
+						"tag": "2_spectrum",
+						"v": 1
+					},
+					"repeatSamples": {
+						"hint": "",
+						"o": 9,
+						"t": "i 1 6",
+						"tag": "2_spectrum",
+						"v": 1
+					},
+					"sampleOutCount": {
+						"hint": "",
+						"o": 3,
+						"t": "i 0 512",
+						"tag": "2_spectrum",
+						"v": 128
+					},
+					"sampleProvider": {
+						"o": 0,
+						"t": "_child Waveform Spectrum Spectrum2",
+						"tag": "0_general",
+						"v": "Spectrum2"
+					},
+					"smooth": {
+						"hint": "",
+						"o": 11,
+						"t": "f 0.1 1",
+						"tag": "2_spectrum",
+						"v": 0.8
+					},
+					"starAndEndGap": {
+						"hint": "",
+						"o": 10,
+						"t": "i 0 30",
+						"tag": "2_spectrum",
+						"v": 0
+					},
+					"v": "AudioProvider",
+					"ver": "10"
+				};
+				this.scenedata.compositions[compelm.value].elements.push(audobj);
+				compelm.appendChild(this.createEffectBase(compelm.value,this.scenedata.compositions[compelm.value].elements.length-1,compelm));
+			});
+			const particlebtn = fullelm.getElementById('particlebtn');
+			particlebtn.removeAttribute('id');
+			particlebtn.addEventListener('click',()=>{
+				const partobj = {
+					"ColorFrom": {
+						"hint": "",
+						"o": 25,
+						"t": "chsla4f",
+						"tag": "appearance",
+						"v": "0 0 1 1"
+					},
+					"ColorTo": {
+						"hint": "",
+						"o": 26,
+						"t": "chsla4f",
+						"tag": "appearance",
+						"v": "0 0 1 1"
+					},
+					"CountLimit": {
+						"hint": "",
+						"o": 13,
+						"t": "i 1 5000",
+						"tag": "1_overall",
+						"v": 1000
+					},
+					"ForceField": {
+						"o": 41,
+						"t": "_child None Vortex",
+						"tag": "1_overall",
+						"v": "None"
+					},
+					"MeasureOverallSpeed": {
+						"A": {
+							"hint": "X Amount",
+							"o": 1,
+							"t": "f 0 2",
+							"tag": "misc",
+							"v": 1.5
+						},
+						"B": {
+							"hint": "Y Amount",
+							"o": 2,
+							"t": "f 0 2",
+							"tag": "misc",
+							"v": 1.5
+						},
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Beat"
+						},
+						"o": 21,
+						"t": "_child",
+						"tag": "behaviour",
+						"v": ""
+					},
+					"MeasurePos": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing BeatCamShakeMore BeatCamShakeLess BeatRandomShake ConstantShakeMore ConstantShake TrackPosition",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 6,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"SpawnArea": {
+						"o": 20,
+						"t": "_child HorizontalLine Rectangle",
+						"tag": "1_overall",
+						"useRandomVectorInstead": {
+							"hint": "",
+							"o": 1,
+							"t": "b",
+							"tag": "misc",
+							"v": 0
+						},
+						"v": "HorizontalLine",
+						"vectorAngle": {
+							"hint": "",
+							"o": 2,
+							"t": "f 0 360",
+							"tag": "misc",
+							"v": 90
+						},
+						"vectorAngleZ": {
+							"hint": "",
+							"o": 3,
+							"t": "f -1 1",
+							"tag": "misc",
+							"v": 0.5
+						},
+						"verticalOrientation": {
+							"hint": "",
+							"o": 0,
+							"t": "b",
+							"tag": "misc",
+							"v": 0
+						}
+					},
+					"Speed": {
+						"hint": "",
+						"o": 22,
+						"t": "f -300 300",
+						"tag": "behaviour",
+						"v": 50
+					},
+					"_id": {
+						"hint": "",
+						"o": 0,
+						"t": "ih",
+						"tag": "",
+						"v": 293
+					},
+					"_name": "Particles",
+					"alignmentPosition": {
+						"hint": "",
+						"o": 7,
+						"t": "f2 0 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"anchorX": {
+						"o": 4,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"anchorY": {
+						"o": 5,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"blendMode": {
+						"o": 2,
+						"t": "_child Alpha PreMulAlpha Screen Add AddAlpha",
+						"tag": "0_general",
+						"v": "Add"
+					},
+					"color": {
+						"hint": "",
+						"o": 12,
+						"t": "crgba",
+						"tag": "1_overall",
+						"v": -1
+					},
+					"customImage": {
+						"o": 11,
+						"t": "pimg internalres:particle_blur01 internalres:particle_circle_blur4 internalres:particle_circle_w_a_64 internalres:particle_sharp composition:0",
+						"tag": "appearance",
+						"v": "internalres:particle_blur01"
+					},
+					"endSize": {
+						"hint": "",
+						"o": 34,
+						"t": "f 0 20",
+						"tag": "appearance",
+						"v": 0.5
+					},
+					"endSizeRandom": {
+						"hint": "",
+						"o": 35,
+						"t": "f 0 20",
+						"tag": "appearance",
+						"v": 5
+					},
+					"endSizeZFactor": {
+						"hint": "",
+						"o": 36,
+						"t": "f 0 40",
+						"tag": "appearance",
+						"v": 0
+					},
+					"fadeInAndOutTime": {
+						"hint": "",
+						"o": 28,
+						"t": "f 0 0.5",
+						"tag": "appearance",
+						"v": 0.25
+					},
+					"fadeInSize": {
+						"hint": "",
+						"o": 33,
+						"t": "f 0 20",
+						"tag": "appearance",
+						"v": 5
+					},
+					"gravity": {
+						"hint": "",
+						"o": 29,
+						"t": "f2 -300 300",
+						"tag": "behaviour",
+						"v": "0 50"
+					},
+					"lifetime": {
+						"hint": "",
+						"o": 27,
+						"t": "f 0.1 10",
+						"tag": "behaviour",
+						"v": 1
+					},
+					"measureScale": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 10,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"mirrorX": {
+						"hint": "",
+						"o": 16,
+						"t": "b",
+						"tag": "1_overall",
+						"v": 0
+					},
+					"mirrorY": {
+						"hint": "",
+						"o": 17,
+						"t": "b",
+						"tag": "1_overall",
+						"v": 0
+					},
+					"nearCameraFadeOutDistance": {
+						"hint": "",
+						"o": 42,
+						"t": "f 0 500",
+						"tag": "appearance",
+						"v": 250
+					},
+					"objType": "Particles",
+					"particleScale": {
+						"hint": "",
+						"o": 14,
+						"t": "f 0.25 8",
+						"tag": "appearance",
+						"v": 1.99999988
+					},
+					"perspectiveDepth": {
+						"hint": "",
+						"o": 18,
+						"t": "f 0 1000",
+						"tag": "1_overall",
+						"v": 0
+					},
+					"perspectiveFov": {
+						"hint": "",
+						"o": 19,
+						"t": "f 30 180",
+						"tag": "1_overall",
+						"v": 120
+					},
+					"position": {
+						"hint": "",
+						"o": 3,
+						"t": "f2 -1 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"scale": {
+						"hint": "",
+						"o": 9,
+						"t": "f2 0 2",
+						"tag": "0_general",
+						"v": "1 1"
+					},
+					"scaleIsUniform": {
+						"hint": "",
+						"o": 8,
+						"t": "b",
+						"tag": "0_general",
+						"v": 0
+					},
+					"sideSineWaveFreq": {
+						"hint": "",
+						"o": 37,
+						"t": "f 0 10",
+						"tag": "waveBehaviour",
+						"v": 0
+					},
+					"sideSineWaveFreqRandom": {
+						"hint": "",
+						"o": 38,
+						"t": "f -10 10",
+						"tag": "waveBehaviour",
+						"v": 10
+					},
+					"sideSineWaveMag": {
+						"hint": "",
+						"o": 39,
+						"t": "f 0 10",
+						"tag": "waveBehaviour",
+						"v": 0
+					},
+					"sideSineWaveMagRandom": {
+						"hint": "",
+						"o": 40,
+						"t": "f -10 10",
+						"tag": "waveBehaviour",
+						"v": 1.5
+					},
+					"sizeAspectRatio": {
+						"hint": "",
+						"o": 31,
+						"t": "f 0.1 10",
+						"tag": "appearance",
+						"v": 1
+					},
+					"spawnTime": {
+						"hint": "",
+						"o": 15,
+						"t": "f 0.005 0.05",
+						"tag": "behaviour",
+						"v": 0.0300000012
+					},
+					"speedRandom": {
+						"hint": "",
+						"o": 23,
+						"t": "f -300 300",
+						"tag": "behaviour",
+						"v": 50
+					},
+					"startSize": {
+						"hint": "",
+						"o": 32,
+						"t": "f 0 20",
+						"tag": "appearance",
+						"v": 1
+					},
+					"trailLength": {
+						"hint": "",
+						"o": 24,
+						"t": "f 0 1",
+						"tag": "appearance",
+						"v": 0.5
+					},
+					"v": "Particles",
+					"velocityAngle": {
+						"hint": "",
+						"o": 30,
+						"t": "b",
+						"tag": "appearance",
+						"v": 1
+					},
+					"ver": "10",
+					"visible": {
+						"hint": "",
+						"o": 1,
+						"t": "b",
+						"tag": "0_general",
+						"v": 1
+					}
+				}
+				this.scenedata.compositions[compelm.value].elements.push(partobj);
+				compelm.appendChild(this.createEffectBase(compelm.value,this.scenedata.compositions[compelm.value].elements.length-1,compelm));
+			});
+			const textbtn = fullelm.getElementById('textbtn');
+			textbtn.removeAttribute('id');
+			textbtn.addEventListener('click',()=>{
+				const txtobj = {
+					"MeasurePos": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing BeatCamShakeMore BeatCamShakeLess BeatRandomShake ConstantShakeMore ConstantShake TrackPosition",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 6,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"_id": {
+						"hint": "",
+						"o": 0,
+						"t": "ih",
+						"tag": "",
+						"v": 173
+					},
+					"_name": "Text",
+					"alignmentPosition": {
+						"hint": "",
+						"o": 7,
+						"t": "f2 0 1",
+						"tag": "0_general",
+						"v": "0 0"
+					},
+					"anchorX": {
+						"o": 4,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"anchorY": {
+						"o": 5,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"blendMode": {
+						"o": 2,
+						"t": "_child Alpha PreMulAlpha Screen Add AddAlpha",
+						"tag": "0_general",
+						"v": "PreMulAlpha"
+					},
+					"color": {
+						"hint": "",
+						"o": 14,
+						"t": "crgba",
+						"tag": "appearance",
+						"v": -1
+					},
+					"fontSize": {
+						"hint": "",
+						"o": 15,
+						"t": "i 8 100",
+						"tag": "appearance",
+						"v": 27
+					},
+					"measureRot": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 12,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"measureScale": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 10,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"objType": "Text",
+					"position": {
+						"hint": "",
+						"o": 3,
+						"t": "f2 -1 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"rotation": {
+						"hint": "",
+						"o": 11,
+						"t": "f 0 300",
+						"tag": "0_general",
+						"v": 0
+					},
+					"scale": {
+						"hint": "",
+						"o": 9,
+						"t": "f2 0 2",
+						"tag": "0_general",
+						"v": "1 1"
+					},
+					"scaleIsUniform": {
+						"hint": "",
+						"o": 8,
+						"t": "b",
+						"tag": "0_general",
+						"v": 1
+					},
+					"text": {
+						"o": 13,
+						"t": "ptxt",
+						"tag": "appearance",
+						"v": "{ArtistOrTitle}"
+					},
+					"typeFace": {
+						"o": 16,
+						"t": "passet",
+						"tag": "appearance",
+						"v": "internal_2"
+					},
+					"v": "Text",
+					"ver": "10",
+					"visible": {
+						"hint": "",
+						"o": 1,
+						"t": "b",
+						"tag": "0_general",
+						"v": 1
+					}
+				};
+				this.scenedata.compositions[compelm.value].elements.push(txtobj);
+				compelm.appendChild(this.createEffectBase(compelm.value,this.scenedata.compositions[compelm.value].elements.length-1,compelm));
+			});
+			const motionblurbtn = fullelm.getElementById('motionblurbtn');
+			motionblurbtn.removeAttribute('id');
+			motionblurbtn.addEventListener('click',()=>{
+				const mtnobj = {
+					"MeasurePos": {
+						"A": {
+							"hint": "Amount",
+							"o": 1,
+							"t": "f 0 2",
+							"tag": "misc",
+							"v": 0.5
+						},
+						"B": {
+							"hint": "Speed",
+							"o": 2,
+							"t": "f 0 2",
+							"tag": "misc",
+							"v": 0.5
+						},
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing BeatCamShakeMore BeatCamShakeLess BeatRandomShake ConstantShakeMore ConstantShake TrackPosition",
+							"tag": "misc",
+							"v": "BeatCamShakeMore"
+						},
+						"o": 6,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"TargetImage": {
+						"o": 15,
+						"t": "img composition:0",
+						"tag": "1_appearance",
+						"v": ""
+					},
+					"_id": {
+						"hint": "",
+						"o": 0,
+						"t": "ih",
+						"tag": "",
+						"v": 353
+					},
+					"_name": "Motion Blur Effect",
+					"alignmentPosition": {
+						"hint": "",
+						"o": 7,
+						"t": "f2 0 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"anchorX": {
+						"o": 4,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"anchorY": {
+						"o": 5,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"blendMode": {
+						"o": 2,
+						"t": "_child Alpha PreMulAlpha Screen Add AddAlpha",
+						"tag": "0_general",
+						"v": "Alpha"
+					},
+					"blendModeContent": {
+						"o": 13,
+						"t": "_child Alpha PreMulAlpha Screen Add AddAlpha",
+						"tag": "1_appearance",
+						"v": "Add"
+					},
+					"blurAmountMultiplier": {
+						"o": 18,
+						"t": "mvarf 0 2",
+						"tag": "2_motionBlur",
+						"v": "Constant 1 1"
+					},
+					"color": {
+						"hint": "",
+						"o": 14,
+						"t": "crgb",
+						"tag": "1_appearance",
+						"v": -1
+					},
+					"measureRot": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 12,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"measureScale": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 10,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"motionSource": {
+						"o": 19,
+						"t": "_child EffectTransform Manual",
+						"tag": "2_motionBlur",
+						"v": "EffectTransform"
+					},
+					"objType": "MotionBlurEffect",
+					"position": {
+						"hint": "",
+						"o": 3,
+						"t": "f2 -1 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"relativeMotionMode": {
+						"hint": "",
+						"o": 20,
+						"t": "b",
+						"tag": "2_motionBlur",
+						"v": 1
+					},
+					"rotation": {
+						"hint": "",
+						"o": 11,
+						"t": "f 0 300",
+						"tag": "0_general",
+						"v": 0
+					},
+					"scale": {
+						"hint": "",
+						"o": 9,
+						"t": "f2 0 2",
+						"tag": "0_general",
+						"v": "1 1"
+					},
+					"scaleIsUniform": {
+						"hint": "",
+						"o": 8,
+						"t": "b",
+						"tag": "0_general",
+						"v": 0
+					},
+					"showUnblurredContent": {
+						"hint": "",
+						"o": 16,
+						"t": "b",
+						"tag": "1_appearance",
+						"v": 0
+					},
+					"showUnblurredContentUnder": {
+						"hint": "",
+						"o": 17,
+						"t": "b",
+						"tag": "1_appearance",
+						"v": 0
+					},
+					"v": "MotionBlurEffect",
+					"ver": "10",
+					"visible": {
+						"hint": "",
+						"o": 1,
+						"t": "b",
+						"tag": "0_general",
+						"v": 1
+					}
+				};
+				this.scenedata.compositions[compelm.value].elements.push(mtnobj);
+				compelm.appendChild(this.createEffectBase(compelm.value,this.scenedata.compositions[compelm.value].elements.length-1,compelm));
+			});
+			const blurbtn = fullelm.getElementById('blurbtn');
+			blurbtn.removeAttribute('id');
+			blurbtn.addEventListener('click',()=>{
+				const blurobj = {
+					"1layerColor": {
+						"hint": "",
+						"o": 24,
+						"t": "crgba",
+						"tag": "2_blur",
+						"v": -1
+					},
+					"1layerScale": {
+						"hint": "",
+						"o": 21,
+						"t": "f2 0 10",
+						"tag": "2_blur",
+						"v": "1 1"
+					},
+					"2layerColor": {
+						"hint": "",
+						"o": 25,
+						"t": "crgba",
+						"tag": "2_blur",
+						"v": -10855846
+					},
+					"2layerScale": {
+						"hint": "",
+						"o": 22,
+						"t": "f2 0 10",
+						"tag": "2_blur",
+						"v": "1.25 1.25"
+					},
+					"3layerColor": {
+						"hint": "",
+						"o": 26,
+						"t": "crgba",
+						"tag": "2_blur",
+						"v": -10592674
+					},
+					"3layerScale": {
+						"hint": "",
+						"o": 23,
+						"t": "f2 0 10",
+						"tag": "2_blur",
+						"v": "0.75 0.75"
+					},
+					"MaskImage": {
+						"o": 16,
+						"t": "img internalres:transparent internalres:white internalres:black internalres:particle_circle_blur4 internalres:particle_blur01 internalres:particle_blur_inv internalres:vignette80 composition:0",
+						"tag": "1_appearance",
+						"v": "internalres:transparent"
+					},
+					"MeasurePos": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing BeatCamShakeMore BeatCamShakeLess BeatRandomShake ConstantShakeMore ConstantShake TrackPosition",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 6,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"_id": {
+						"hint": "",
+						"o": 0,
+						"t": "ih",
+						"tag": "",
+						"v": 195
+					},
+					"_name": "Blur Effect",
+					"alignmentPosition": {
+						"hint": "",
+						"o": 7,
+						"t": "f2 0 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"anchorX": {
+						"o": 4,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"anchorY": {
+						"o": 5,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"blendMode": {
+						"o": 2,
+						"t": "_child Alpha PreMulAlpha Screen Add AddAlpha",
+						"tag": "0_general",
+						"v": "Alpha"
+					},
+					"blendModeContent": {
+						"o": 13,
+						"t": "_child Alpha PreMulAlpha Screen Add AddAlpha",
+						"tag": "1_appearance",
+						"v": "Add"
+					},
+					"blurMultiplier": {
+						"hint": "",
+						"o": 18,
+						"t": "f 1 6",
+						"tag": "2_blur",
+						"v": 3.75
+					},
+					"blurRadius": {
+						"hint": "",
+						"o": 17,
+						"t": "f 0 3",
+						"tag": "2_blur",
+						"v": 2.025
+					},
+					"color": {
+						"hint": "",
+						"o": 14,
+						"t": "crgba",
+						"tag": "1_appearance",
+						"v": -16777216
+					},
+					"measureRot": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 12,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"measureScale": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 10,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"objType": "BlurEffect",
+					"position": {
+						"hint": "",
+						"o": 3,
+						"t": "f2 -1 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"rotation": {
+						"hint": "",
+						"o": 11,
+						"t": "f 0 300",
+						"tag": "0_general",
+						"v": 0
+					},
+					"scale": {
+						"hint": "",
+						"o": 9,
+						"t": "f2 0 2",
+						"tag": "0_general",
+						"v": "1 1"
+					},
+					"scaleIsUniform": {
+						"hint": "",
+						"o": 8,
+						"t": "b",
+						"tag": "0_general",
+						"v": 0
+					},
+					"showUnblurredContent": {
+						"hint": "",
+						"o": 19,
+						"t": "b",
+						"tag": "1_appearance",
+						"v": 1
+					},
+					"showUnblurredContentUnder": {
+						"hint": "",
+						"o": 20,
+						"t": "b",
+						"tag": "1_appearance",
+						"v": 0
+					},
+					"sourceCompositionIndex": {
+						"hint": "",
+						"o": 15,
+						"t": "i 1 5",
+						"tag": "1_appearance",
+						"v": 1
+					},
+					"v": "BlurEffect",
+					"ver": "10",
+					"visible": {
+						"hint": "",
+						"o": 1,
+						"t": "b",
+						"tag": "0_general",
+						"v": 1
+					}
+				};
+				this.scenedata.compositions[compelm.value].elements.push(blurobj);
+				compelm.appendChild(this.createEffectBase(compelm.value,this.scenedata.compositions[compelm.value].elements.length-1,compelm));
+			});
+			const barbtn = fullelm.getElementById('barbtn');
+			barbtn.removeAttribute('id');
+			barbtn.addEventListener('click',()=>{
+				const barobj = {
+					"MeasurePos": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing BeatCamShakeMore BeatCamShakeLess BeatRandomShake ConstantShakeMore ConstantShake TrackPosition",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 6,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"Segment1": {
+						"barHeightMultiplier": {
+							"hint": "",
+							"o": 3,
+							"t": "f -2 2",
+							"tag": "misc",
+							"v": 1
+						},
+						"barWidth": {
+							"hint": "",
+							"o": 4,
+							"t": "f 0 2",
+							"tag": "misc",
+							"v": 0.5
+						},
+						"barWidthAffectedByShape": {
+							"hint": "",
+							"o": 5,
+							"t": "b",
+							"tag": "b",
+							"v": 0
+						},
+						"colorFrom": {
+							"hint": "",
+							"o": 0,
+							"t": "crgba",
+							"tag": "misc",
+							"v": -1
+						},
+						"colorTo": {
+							"hint": "",
+							"o": 1,
+							"t": "crgba",
+							"tag": "misc",
+							"v": -1
+						},
+						"fixedHeight": {
+							"hint": "",
+							"o": 2,
+							"t": "f -50 50",
+							"tag": "misc",
+							"v": 0
+						},
+						"mirror": {
+							"hint": "",
+							"o": 6,
+							"t": "b",
+							"tag": "b",
+							"v": 0
+						},
+						"o": 23,
+						"t": "_child None Bars Line SharpBars RoundBars",
+						"tag": "1_bars",
+						"v": "Bars"
+					},
+					"Segment2": {
+						"o": 24,
+						"t": "_child None Bars Line SharpBars RoundBars",
+						"tag": "1_bars",
+						"v": "None"
+					},
+					"ShapePath": {
+						"o": 17,
+						"t": "_child HorizontalLine Circle SidedPolygon Letter",
+						"tag": "1_bars",
+						"v": "HorizontalLine"
+					},
+					"_id": {
+						"hint": "",
+						"o": 0,
+						"t": "ih",
+						"tag": "",
+						"v": 297
+					},
+					"_name": "Bars/Segments",
+					"alignmentPosition": {
+						"hint": "",
+						"o": 7,
+						"t": "f2 0 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"anchorX": {
+						"o": 4,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"anchorY": {
+						"o": 5,
+						"t": "sel unset start center end",
+						"tag": "0_general",
+						"v": "unset"
+					},
+					"audioProviderIndex": {
+						"hint": "",
+						"o": 22,
+						"t": "i 1 4",
+						"tag": "2_Behavior",
+						"v": 1
+					},
+					"blendMode": {
+						"o": 2,
+						"t": "_child Alpha PreMulAlpha Screen Add AddAlpha",
+						"tag": "0_general",
+						"v": "Alpha"
+					},
+					"colorBlendOffset": {
+						"o": 18,
+						"t": "mvarf 0 1",
+						"tag": "1_bars",
+						"v": "Constant 0 0"
+					},
+					"flipInput": {
+						"hint": "",
+						"o": 13,
+						"t": "b",
+						"tag": "1_bars",
+						"v": 0
+					},
+					"heightScale": {
+						"hint": "",
+						"o": 14,
+						"t": "f -10 10",
+						"tag": "1_bars",
+						"v": 1
+					},
+					"maxHeightScale": {
+						"hint": "",
+						"o": 16,
+						"t": "f 0.1 1",
+						"tag": "1_bars",
+						"v": 1
+					},
+					"measureRot": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 12,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"measureScale": {
+						"measureWhat": {
+							"o": 0,
+							"t": "_child Nothing Beat TotalTime TotalTimeBackward TotalTimeWhenPlaying TotalTimeAndBeat TrackPosition BeatRandomShake BeatCamShakeRotMore BeatCamShakeRotLess ConstantShakeRotMore ConstantShakeRotLess BeatTriggerAnim",
+							"tag": "misc",
+							"v": "Nothing"
+						},
+						"o": 10,
+						"t": "_child",
+						"tag": "0_general",
+						"v": ""
+					},
+					"minHeightScale": {
+						"hint": "",
+						"o": 15,
+						"t": "f -0.03 0.03",
+						"tag": "1_bars",
+						"v": 0
+					},
+					"objType": "Bars",
+					"position": {
+						"hint": "",
+						"o": 3,
+						"t": "f2 -1 1",
+						"tag": "0_general",
+						"v": "0.5 0.5"
+					},
+					"reactionAccumulatedDelay": {
+						"hint": "",
+						"o": 21,
+						"t": "i 0 9",
+						"tag": "2_Behavior",
+						"v": 0
+					},
+					"reactionDelay": {
+						"hint": "",
+						"o": 20,
+						"t": "i 0 9",
+						"tag": "2_Behavior",
+						"v": 0
+					},
+					"rotation": {
+						"hint": "",
+						"o": 11,
+						"t": "f 0 300",
+						"tag": "0_general",
+						"v": 0
+					},
+					"scale": {
+						"hint": "",
+						"o": 9,
+						"t": "f2 0 2",
+						"tag": "0_general",
+						"v": "1 1"
+					},
+					"scaleIsUniform": {
+						"hint": "",
+						"o": 8,
+						"t": "b",
+						"tag": "0_general",
+						"v": 0
+					},
+					"softness": {
+						"hint": "",
+						"o": 19,
+						"t": "i 0 20",
+						"tag": "2_Behavior",
+						"v": 2
+					},
+					"v": "Bars",
+					"ver": "10",
+					"visible": {
+						"hint": "",
+						"o": 1,
+						"t": "b",
+						"tag": "0_general",
+						"v": 1
+					}
+				};
+				this.scenedata.compositions[compelm.value].elements.push(barobj);
+				compelm.appendChild(this.createEffectBase(compelm.value,this.scenedata.compositions[compelm.value].elements.length-1,compelm));
+			});
 			const options = Object.getOwnPropertyNames(this.scenedata.compositions[i]);
 			options.splice(options.indexOf('_name'),1);
 			options.splice(options.indexOf('elements'),1);
@@ -645,7 +2941,7 @@
 				*/
 				//optionelms[this.scenedata.compositions[i][options[j]].o] = ocont;
 				const indofcat = cats.indexOf(this.scenedata.compositions[i][options[j]].tag);
-				if(indofcat == -1){
+				if(indofcat === -1){
 					cats.push(this.scenedata.compositions[i][options[j]].tag);
 					catos.push(parseInt(this.scenedata.compositions[i][options[j]].tag.split('_')[0]));
 					catelms.push([ocont]);
@@ -656,21 +2952,6 @@
 				}
 			}
 			//There's so many ways of sorting the categories and so many edge cases that can happen... Gosh, I hate this format
-			/*
-			for(let j=0;j<optionelms.length;j++){
-				categoryio.appendChild(optionelms[j]);
-			}
-			const ifd = document.createElement('div');
-			const ifdsum = document.createElement('h2');
-			ifd.className = 'contsolid';
-			ifdsum.innerText = 'Intro Fade Duration';
-			ifd.appendChild(ifdsum);
-			ifd.appendChild(this.parseAveeInput(this.scenedata.compositions[i].introFadeDuration.t,this.scenedata.compositions[i].introFadeDuration.v,inp=>{
-				//alert(inp);
-				this.scenedata.compositions[i].introFadeDuration.v = inp;
-			}));
-			categoryio.appendChild(ifd);
-			*/
 			const controlselm = document.createElement('details');
 			controlselm.className = 'avee-elm-controls';
 			const controlssum = document.createElement('summary');
@@ -691,6 +2972,53 @@
 			}
 			compelm.appendChild(controlselm);
 			return compelm;
+		}
+		static chsla4f2rgb(h, s, l) {
+			const c = (1 - Math.abs(2 * l - 1)) * s;
+			const x = c * (1 - Math.abs((h * 6) % 2 - 1));
+			const m = l - c / 2;
+			let r, g, b;
+
+			if (h < (1/6)) { r = c; g = x; b = 0; }
+			else if (h < (1/3)) { r = x; g = c; b = 0; }
+			else if (h < 0.5) { r = 0; g = c; b = x; }
+			else if (h < (2/3)) { r = 0; g = x; b = c; }
+			else if (h < (5/6)) { r = x; g = 0; b = c; }
+			else { r = c; g = 0; b = x; }
+
+			return new Uint8Array([Math.round((r + m) * 255), Math.round((g + m) * 255), Math.round((b + m) * 255)]);
+		}
+		static rgb2chsla4f(r, g, b) {
+			r /= 255;
+			g /= 255;
+			b /= 255;
+			
+			const sorted = fsort.tsort(new Float32Array([r,g,b]));
+			
+			let h, s, l = (sorted[0][2] + sorted[0][0]) / 2;
+			
+			switch(sorted[0][2]){
+			case sorted[0][0]:
+				h = s = 0;
+				break;
+			default:
+				const d = sorted[0][2] - sorted[0][0];
+				s = l > 0.5 ? d / (2 - sorted[0][2] - sorted[0][0]) : d / (sorted[0][2] + sorted[0][0]);
+				
+				switch(sorted[1][2]){
+				case 0:
+					h = ((g - b) / d + (g < b ? 6 : 0))/6;
+					break;
+				case 1:
+					h = ((b - r) / d + 2)/6;
+					break;
+				case 2:
+					h = ((r - g) / d + 4)/6;
+					break;
+				}
+			}
+
+			return new Float32Array([h, s, l]);
 		}
 		updateStatus(mode=0){
 			this.status.innerText = "VERSION: "+this.scenedata.ver+"\nCOMPOSITIONS: "+this.scenedata.compositions.length.toString()+"\nTEMPLATE: "+this.scenedata.template.toString()+"\nIMAGES: "+this.images.length;
@@ -734,72 +3062,12 @@
 			}
 			switch(mode){
 			case 0:
+				this.compelms.length = 0;
 				const tempstruct = document.createElement('div');
 				for(let i=0;i<this.scenedata.compositions.length;i++){
 					const compelm = this.createCompBase(i);
 					for(let j=0;j<this.scenedata.compositions[i].elements.length;j++){
-						const genelm = document.createElement('details');
-						const gensummary = document.createElement('summary');
-						gensummary.innerText = this.scenedata.compositions[i].elements[j]._name;
-						const categoryio = document.createElement('details');
-						const categorysum = document.createElement('summary');
-						categorysum.innerText = 'Ctrl';
-						categoryio.appendChild(categorysum);
-						const options = Object.getOwnPropertyNames(this.scenedata.compositions[i].elements[j]);
-						options.splice(options.indexOf('_name'),1);
-						options.splice(options.indexOf('v'),1);
-						options.splice(options.indexOf('ver'),1);
-						options.splice(options.indexOf('objType'),1);
-						//parent.console.log(options);
-						const cats = [];
-						const catos = [];
-						const catelms = [];
-						const catelmo = [];
-						for(let k=0;k<options.length;k++){
-							const title = aveesys.p2T(options[k]);
-							const ocont = document.createElement('div');
-							const osum = document.createElement('h2');
-							ocont.className = 'contsolid';
-							osum.innerText = title;
-							ocont.appendChild(osum);
-							ocont.appendChild(this.parseAveeInput(this.scenedata.compositions[i].elements[j][options[k]],title));
-							/*
-							,(this.scenedata.compositions[i].elements[j][options[k]].hasOwnProperty("t") ? this.scenedata.compositions[i].elements[j][options[k]].t : ""),this.scenedata.compositions[i].elements[j][options[k]].v,title,inp=>{
-								//alert(inp);
-								this.scenedata.compositions[i].elements[j][options[k]].v = inp;
-							}
-							*/
-							//optionelms[this.scenedata.compositions[i].elements[j][options[k]].o] = ocont;
-							const indofcat = cats.indexOf(this.scenedata.compositions[i].elements[j][options[k]].tag);
-							if(indofcat == -1){
-								cats.push(this.scenedata.compositions[i].elements[j][options[k]].tag);
-								const ordval = parseInt(this.scenedata.compositions[i].elements[j][options[k]].tag.split('_')[0]);
-								catos.push(Number.isNaN(ordval) ? 100 : ordval);
-								catelms.push([ocont]);
-								catelmo.push([this.scenedata.compositions[i].elements[j][options[k]].o]);
-							}else{
-								catelms[indofcat].push(ocont);
-								catelmo[indofcat].push(this.scenedata.compositions[i].elements[j][options[k]].o);
-							}
-						}
-						//parent.console.log(optionelms);
-						//parent.console.log(cats);
-						//parent.console.log(catos);
-						genelm.appendChild(gensummary);
-						const ninds = fsort.quickSort(catos)[1];
-						for(let k=0;k<ninds.length;k++){
-							if(!cats[ninds[k]]){continue;}
-							const catelm = document.createElement('details');
-							const catsum = document.createElement('summary');
-							catsum.innerText = aveesys.p2T(cats[ninds[k]].split('_')[1] ?? cats[ninds[k]]);
-							catelm.appendChild(catsum);
-							const nelminds = fsort.quickSort(catelmo[ninds[k]])[1];
-							for(let l=0;l<nelminds.length;l++){
-								catelm.appendChild(catelms[ninds[k]][nelminds[l]]);
-							}
-							genelm.appendChild(catelm);
-						}
-						compelm.appendChild(genelm);
+						compelm.appendChild(this.createEffectBase(i,j,compelm));
 					}
 					tempstruct.appendChild(compelm);
 				}
@@ -886,7 +3154,6 @@
 		parseAveeInput(obj,title){ //,inputstr,v,title,cbk
 			const splitted = obj.t.split(' ');
 			const cmd = splitted.splice(0,1)[0];
-			//parent.console.log(obj.v ? true : false);
 			switch(cmd){
 				case '_child':{
 					const outelm = document.createElement('div');
@@ -902,7 +3169,6 @@
 						sel.value = obj.v;
 						sel.addEventListener('change',()=>{obj.v = sel.value});
 						outelm.appendChild(sel);
-						//parent.console.log(obj.v);
 					}
 					const children = Object.getOwnPropertyNames(obj);
 					children.splice(children.indexOf('o'),1);
@@ -917,13 +3183,7 @@
 						ocont.className = 'contsolid';
 						osum.innerText = ctitle;
 						ocont.appendChild(osum);
-						ocont.appendChild(this.parseAveeInput(obj[children[i]],ctitle)); 
-						/*
-						,obj[children[i]].t,obj[children[i]].v,ctitle,inp=>{
-							//alert(inp);
-							obj[children[i]].v = inp;
-						}
-						*/
+						ocont.appendChild(this.parseAveeInput(obj[children[i]],ctitle));
 						childelms[obj[children[i]].o] = ocont;
 					}
 					for(let i=0;i<childelms.length;i++){
@@ -937,7 +3197,7 @@
 					splitted.push('');
 					for(let i=0;i<this.scenedata.compositions.length;i++){
 						const compstr = "composition:"+i.toString();
-						(splitted.indexOf(compstr) == -1) && (splitted.push(compstr));
+						(splitted.indexOf(compstr) === -1) && (splitted.push(compstr));
 					}
 					for(let i=0;i<this.images.length;i++){
 						splitted.push('local:'+this.images[i][0]);
@@ -969,22 +3229,21 @@
 					ainp.value = parseInt(clr.substr(0,2),16);
 					outelm.appendChild(clrinp);
 					outelm.appendChild(ainp);
-					clrinp.addEventListener('change',()=>{obj.v = parseInt(ainp.value.toString(16)+clrinp.value.substr(1),16) | 0;});
-					ainp.addEventListener('change',()=>{obj.v = parseInt(ainp.value.toString(16)+clrinp.value.substr(1),16) | 0;});
+					const updobj = ()=>{obj.v = parseInt(ainp.value.toString(16)+clrinp.value.substr(1),16) | 0;};
+					clrinp.addEventListener('change',updobj);
+					ainp.addEventListener('change',updobj);
 					return outelm;
 					break;
 				}
 				case 'crgb_hl':
 				case 'crgb':{
-					const outelm = document.createElement('div');
-					outelm.className = 'avee-struct-'+cmd;
 					const clrinp = document.createElement('input');
+					clrinp.className = 'avee-struct-'+cmd;
 					const clr = (obj.v & 0xFFFFFF).toString("16").padStart(6,"0");
 					clrinp.type = 'color';
 					clrinp.value = "#"+clr;
-					outelm.appendChild(clrinp);
 					clrinp.addEventListener('change',()=>{obj.v = (4278190080 + parseInt(clrinp.value.substr(1),16)) | 0;});
-					return outelm;
+					return clrinp;
 					break;
 				}
 				case 'f':{
@@ -1115,7 +3374,8 @@
 					});
 					return outelm;
 				}
-				case 'passet':{
+				case 'passet':
+				case 'ptxt':{
 					const outelm = document.createElement("input");
 					outelm.className = 'avee-struct-'+cmd;
 					outelm.type = 'text';
@@ -1132,14 +3392,48 @@
 					break;
 				}
 				case 'mvarf2':{
+					//okay, this definately needs a template
 					const outelm = document.createElement("h2");
+					const vsplit = obj.v.split(';');
+					for(let i=0;i<vsplit.length;i++){
+						
+					}
 					outelm.innerText = "mvarf2";
 					return outelm;
 					break;
 				}
 				case 'chsla4f':{
-					const outelm = document.createElement("h2");
-					outelm.innerText = "chsla4f";
+					const outelm = document.createElement('div');
+					outelm.className = 'avee-struct-'+cmd;
+					const clrinp = document.createElement('input');
+					const ainp = document.createElement('input');
+					clrinp.type = 'color';
+					let clr = "#";
+					const vsplit = obj.v.split(' ');
+					//parent.console.log(vsplit);
+					const rgbcomp = aveesys.chsla4f2rgb(...(vsplit.splice(0,3).map(v=>parseFloat(v))));
+					for(let i=0;i<rgbcomp.length;i++){clr += rgbcomp[i].toString(16).padStart(2,'0');}
+					clrinp.value = clr;
+					//parent.console.log(rgbcomp);
+					//parent.console.log(clr);
+					ainp.type = 'range'
+					ainp.min = 0;
+					ainp.max = 1;
+					ainp.value = vsplit[0];
+					ainp.step = 1/300;
+					outelm.appendChild(clrinp);
+					outelm.appendChild(ainp);
+					const updobj = ()=>{
+						obj.v = '';
+						const chsla4fvals = aveesys.rgb2chsla4f(parseInt(clrinp.value.substr(1,2),16),parseInt(clrinp.value.substr(3,2),16),parseInt(clrinp.value.substr(5,2),16));
+						for(let i=0;i<chsla4fvals.length;i++){
+							obj.v += chsla4fvals[i].toString() + ' ';
+						};
+						obj.v += ainp.value;
+						//alert(obj.v);
+					};
+					clrinp.addEventListener('change',updobj);
+					ainp.addEventListener('change',updobj);
 					return outelm;
 					break;
 				}
@@ -1152,8 +3446,7 @@
 			}
 		}
 	}
-	const sys = new aveesys(document.getElementById('avee-viz-input'),document.getElementById('avee-status'),document.getElementById('avee-structure'),document.getElementById('avee-export'),document.getElementById('avee-filename'),document.getElementById('avee-controls'),document.getElementById('avee-files'),document.getElementById('avee-file-template'),document.getElementById('avee-img-input'),document.getElementById('avee-addcomp-btn'));
-	//alert(aveesys.p2T('helloWrldLol'))
+	const sys = new aveesys(document.getElementById('avee-viz-input'),document.getElementById('avee-status'),document.getElementById('avee-structure'),document.getElementById('avee-export'),document.getElementById('avee-filename'),document.getElementById('avee-controls'),document.getElementById('avee-files'),document.getElementById('avee-file-template'),document.getElementById('avee-img-input'),document.getElementById('avee-addcomp-btn'),document.getElementById('avee-comp-template'),document.getElementById('avee-effect-template'));
 	</script>
 </body>
 </html>
