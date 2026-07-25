@@ -389,6 +389,7 @@
 			justify-content: flex-start;
 			align-items: center;
 			align-content: center;
+			position: relative;
 		}
 		.avee-add-menu {
 			display: flex;
@@ -398,14 +399,13 @@
 			align-content: flex-end;
 			justify-content: flex-start;
 			position: absolute;
-			/* margin-top: 53px; */
 			pointer-events: none;
 			transition: opacity .3s ease, height .4s ease;
 			opacity: 0;
 			overflow-y: clip;
 			height: 53px;
-			width: 53px;
-			overflow-x: visible;
+			top:0;
+			right:0;
 		}
 		.avee-add-btn:hover .avee-add-menu {
 			opacity: 100%;
@@ -417,15 +417,20 @@
 			display: flex;
 			align-content: center;
 			align-items: center;
+			position: relative;
 		}
 		.avee-captionedbutton > span.caption {
 			background: rgba(0, 0, 0, 0.6);
-			padding: 4px;
 			border-radius: 7px;
+			padding: 4px;
 			opacity: 0;
 			pointer-events: none;
 			transition: opacity .5s ease;
 			transition-delay: .2s;
+			position:absolute;
+			left: -4px;
+			top:50%;
+			transform: translate(-100%, -50%);
 		}
 		.avee-add-btn:hover span.caption {
 			opacity: 1;
@@ -474,7 +479,7 @@
 	<span class='button bbtn'>Upload Image</span>
 	</label>
 	<div id='avee-files'></div>
-	<footer>Version: Ra1.1.2<br/>Copyright 2025 Frost. CC-BY-NC-SA 4.0</footer>
+	<footer>Ra1.1.3<br/>© 2026 Frostbyte | AGPL-3.0</footer>
 	<script src="zip.min.js"></script>
 	<template id='avee-file-template'>
 		<div class='avee-file-entry contsolid'>
@@ -705,7 +710,7 @@
 	}
 	fsort.errorsuppress = true;
 	class aveesys{
-		constructor(fileinp,status,structure,exportbtn,filenameinp,controls,filecont,entrytemplate,imginp,compbtn,comptemplate,effecttemplate){
+		constructor(fileinp,status,structure,exportbtn,filenameinp,controls,filecont,entrytemplate,imginp,addCompositionButton,comptemplate,effecttemplate){
 			this.fileinp = fileinp;
 			this.exportbtn = exportbtn;
 			this.filenameinp = filenameinp;
@@ -718,25 +723,26 @@
 			this.comptemplate = comptemplate;
 			this.effecttemp = effecttemplate;
 			this.imginp = imginp;
-			this.compbtn = compbtn;
+			this.addCompositionButton = addCompositionButton;
 			this.images = [];
 			this.compelms = [];
 			this.processFiles = this.processFiles.bind(this);
 			this.saveFile = this.saveFile.bind(this);
 			this.addImage = this.addImage.bind(this);
-			this.addComp = this.addComp.bind(this);
+			this.addComposition = this.addComposition.bind(this);
 			this.fileinp.addEventListener('change',this.processFiles);
 			this.exportbtn.addEventListener('click',this.saveFile);
 			this.imginp.addEventListener('change',this.addImage);
-			this.compbtn.addEventListener('click',this.addComp);
+			this.addCompositionButton.addEventListener('click',this.addComposition);
 		}
-		addComp(){
+		addComposition(){
 			const comp = {
 				objType: "Composition",
 				v:"Composition",
 				ver:"10",
 				_name:"Composition",
 				elements:[],
+				allowRecursion:{ v: 0, t: "b", o: 4, tag:'misc' },
 				introBlendMode:{'o':0,'t':'sel Alpha AddAlpha','tag':'2_introOutro','v':'Alpha'},
 				introFadeColor:{"hint": "","o": 3,"t": "crgba","tag": "2_introOutro","v": -553648128},
 				introFadeDuration:{"hint": "","o": 1,"t": "f 0 10","tag": "2_introOutro","v": 0},
@@ -870,7 +876,7 @@
 			const movebtn = basenode.getElementById('move');
 			movebtn.removeAttribute('id');
 			movebtn.addEventListener('click',()=>{
-				const cid = parseInt(prompt('Enter the compositition# that you want to move it to'));
+				const cid = parseInt(prompt('Enter the compositition# that you want to move it to (0 is final):'));
 				if(!Number.isNaN(cid) && cid < this.scenedata.compositions.length && cid >= 0){
 					const ind = this.scenedata.compositions[compelm.value].elements.indexOf(elm);
 					this.scenedata.compositions[compelm.value].elements.splice(ind,1);
@@ -2963,8 +2969,9 @@
 				//optionelms[this.scenedata.compositions[i][options[j]].o] = ocont;
 				const indofcat = cats.indexOf(this.scenedata.compositions[i][options[j]].tag);
 				if(indofcat === -1){
-					cats.push(this.scenedata.compositions[i][options[j]].tag);
-					catos.push(parseInt(this.scenedata.compositions[i][options[j]].tag.split('_')[0]));
+					const controlTag = this.scenedata.compositions[i][options[j]].tag;
+					cats.push(controlTag);
+					catos.push(parseInt(controlTag.split('_')[0]));
 					catelms.push([ocont]);
 					catelmo.push([this.scenedata.compositions[i][options[j]].o]);
 				}else{
@@ -2983,7 +2990,12 @@
 			for(let j=0;j<ninds.length;j++){
 				const catelm = document.createElement('details');
 				const catsum = document.createElement('summary');
-				catsum.innerText = aveesys.p2T(cats[ninds[j]].split('_')[1]);
+				const tagParts = cats[ninds[j]].split('_');
+				if(tagParts.length < 2){
+					catsum.innerText = aveesys.p2T(cats[ninds[j]]);
+				}else{
+					catsum.innerText = aveesys.p2T(tagParts[1]);
+				}
 				catelm.appendChild(catsum);
 				const nelminds = fsort.quickSort(catelmo[ninds[j]])[1];
 				for(let k=0;k<nelminds.length;k++){
