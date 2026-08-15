@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Avee Editor</title>
+	<title>Avee Player Editor</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 	<!-- https://cdn.jsdelivr.net/npm/@zip.js/zip.js@2.7.57/dist/zip.min.js
@@ -13,31 +13,33 @@
 <body lang="en">
 	<div id='mainWorkspace'>
 		<div id='avee-controls' class='span-2'>
-			<input placeholder='AveeEditorExport.viz' title='Name of export' id='avee-filename'></input>
 			<label class='neofilebutton'>
 			<input type='file' id='avee-viz-input' accept='.viz, .zip'></input>
 			<span class='button bbtn'>Import Vizualizer</span>
 			</label>
 			<button class='button' id='avee-export'>Export Vizualizer</button>
+			<input placeholder='AveeEditorExport.viz' title='Name of export' id='avee-filename'></input>
 		</div>
 		<div class='mainSection'>
-			<h2>Compositions</h2>
-			<hr/>
-			<button class='button bbtn' id='avee-addcomp-btn'>Add Composition</button>
+			<div class='sectionHeader'>
+				<h2>Compositions</h2>
+				<button class='button bbtn' id='avee-addcomp-btn'>Add Composition</button>
+			</div>
 			<div id='avee-structure'>There doesn't seem to be any compositions...<br/>Try pressing "Import visualizer"</div>
 		</div>
 		<div class='mainSection'>
-			<h2>Images</h2>
-			<hr/>
-			<label class='neofilebutton'>
-			<input type='file' id='avee-img-input' accept='image/*' multiple></input>
-			<span class='button bbtn'>Upload Image</span>
-			</label>
+			<div class='sectionHeader'>
+				<h2>Images</h2>
+				<label class='neofilebutton'>
+				<input type='file' id='avee-img-input' accept='image/*' multiple></input>
+				<span class='button bbtn'>Upload Image</span>
+				</label>
+			</div>
 			<div id='avee-files'>There doesn't seem to be any images...<br/>Try pressing "Import visualizer"</div>
 		</div>
-		<h2 id='avee-status'class='span-2'>IDLE</h2>
+		<h3 id='avee-status'class='span-2'>IDLE</h3>
 	</div>
-	<footer>Ra1.1.4<br/>© 2026 Frostbyte | AGPL-3.0</footer>
+	<footer>Ra1.2.0<br/>© 2026 Frostbyte | AGPL-3.0</footer>
 	<template id='avee-file-template'>
 		<div class='avee-file-entry contsolid'>
 			<div class="avee-file-entry-control">

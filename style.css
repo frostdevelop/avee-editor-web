@@ -36,6 +36,10 @@ body {
 	--radius: 45px;
 	--height: 15px;
 }
+#avee-filename {
+	margin: 0 auto;
+	min-width: 30vw;
+}
 textarea{border-radius:20px !important;font-family:inherit;}
 input:active,select:active,input[type="text"]:focus,.button:active {background-image: linear-gradient(to left top, #292929, #121212)};
 .button,input,select {font-family: Tahoma, Arial, sans-serif;}
@@ -145,8 +149,6 @@ details[open] {
 .indent {
 	margin: 5px 10px;
 }
-
-hr {width:95%;border-color: #3d3d3d;margin:0 auto;}
 h2 {
 	font-size: 1.5rem;
 }
@@ -410,7 +412,7 @@ img.avee-file-entry-img {
 	align-items: center;
 	align-content: center;
 	position: absolute;
-	top: -15px;
+	top: -1rem;
 	right: 0;
 }
 @keyframes rotateicon {
@@ -503,11 +505,11 @@ img.avee-file-entry-img.expanded {
 	display:grid;
 	grid-template-columns: 3fr 2fr;
 	grid-template-rows: 1fr 20fr 1fr;
-	gap:20px;
 	height:100vh;
 	overflow:hidden;
-	padding: 30px 40px;
+	padding: 30px 80px;
 	box-sizing: border-box;
+	gap:20px;
 }
 .mainSection {
 	display: flex;
@@ -533,7 +535,19 @@ img.avee-file-entry-img.expanded {
 	display:flex;
 	gap:10px;
 	align-items:center;
+	padding-bottom:10px;
+	border-bottom: 1px solid #3d3d3d;
 }
 .avee-comp-container {
 	font-size:1.3rem;
+}
+.align-end {
+	display:flex;
+	justify-content:flex-end;
+	align-items:center;
+}
+.sectionHeader {
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
 }
