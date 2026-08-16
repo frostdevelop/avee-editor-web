@@ -1,3 +1,10 @@
+/*
+Todo:
+Get rid of fsort (it sucks)
+Make code actually readable
+Add mvarf and mvarf2 options
+Add Custom Shader effect
+*/
 class fsort{
 	static errorsuppress = false;
 	static quickSort(arr,carr=null){
@@ -106,6 +113,10 @@ class aveesys{
 		this.addCompositionButton.addEventListener('click',this.addComposition);
 	}
 	addComposition(){
+		if(!this.scenedata){
+			alert('Please import a visualizer first!');
+			return;
+		}
 		const comp = {
 			objType: "Composition",
 			v:"Composition",
@@ -282,7 +293,7 @@ class aveesys{
 			const title = aveesys.p2T(options[k]);
 			const ocont = document.createElement('div');
 			const osum = document.createElement('h3');
-			ocont.className = 'contsolid';
+			ocont.className = 'thinContainer';
 			osum.innerText = title;
 			ocont.appendChild(osum);
 			ocont.appendChild(this.parseAveeInput(elm[options[k]],title));
@@ -2326,7 +2337,7 @@ class aveesys{
 			const title = aveesys.p2T(options[j]);
 			const ocont = document.createElement('div');
 			const osum = document.createElement('h3');
-			ocont.className = 'contsolid';
+			ocont.className = 'thinContainer';
 			osum.innerText = title;
 			ocont.appendChild(osum);
 			ocont.appendChild(this.parseAveeInput(this.scenedata.compositions[i][options[j]],title));
@@ -2591,7 +2602,7 @@ class aveesys{
 					const ctitle = aveesys.p2T(children[i]);
 					const ocont = document.createElement('div');
 					const osum = document.createElement('h3');
-					ocont.className = 'contsolid';
+					ocont.className = 'thinContainer';
 					osum.innerText = ctitle;
 					ocont.appendChild(osum);
 					ocont.appendChild(this.parseAveeInput(obj[children[i]],ctitle));

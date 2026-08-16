@@ -18,7 +18,7 @@
 			<span class='button bbtn'>Import Vizualizer</span>
 			</label>
 			<button class='button' id='avee-export'>Export Vizualizer</button>
-			<input placeholder='AveeEditorExport.viz' title='Name of export' id='avee-filename'></input>
+			<input placeholder='AveeEditorExport.viz' type="text" title='Name of export' id='avee-filename'></input>
 		</div>
 		<div class='mainSection'>
 			<div class='sectionHeader'>
@@ -39,7 +39,7 @@
 		</div>
 		<h3 id='avee-status'class='span-2'>IDLE</h3>
 	</div>
-	<footer>Ra1.2.0<br/>© 2026 Frostbyte | AGPL-3.0</footer>
+	<footer>Ra1.2.1<br/>© 2026 Frostbyte | AGPL-3.0</footer>
 	<template id='avee-file-template'>
 		<div class='avee-file-entry contsolid'>
 			<div class="avee-file-entry-control">
@@ -49,8 +49,8 @@
 				<button class="button iconbutton bbtn" id='download'>
 					<svg xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px;border-radius:inherit" class='icon' xmlns:xlink="http://www.w3.org/1999/xlink" id="m89otsp870562513" class="icon" viewBox="-12 -12 48 48"><g><defs><clipPath id="m89otsp870562513_clipPath" x="-50%" y="-50%" width="200%" height="200%"><path d="M0.01,0h23.98c0.00552,0 0.01,0.00448 0.01,0.01v23.98c0,0.00552 -0.00448,0.01 -0.01,0.01h-23.98c-0.00552,0 -0.01,-0.00448 -0.01,-0.01v-23.98c0,-0.00552 0.00448,-0.01 0.01,-0.01z" fill="white" clip-rule="nonzero"></path></clipPath></defs><g clip-path="url(#m89otsp870562513_clipPath)"><g><g transform="matrix(1,0,0,1,2,12)"><g opacity="1" style="mix-blend-mode:normal"><g><g><path d="M0.85,0c-0.4694,0 -0.85,0.3806 -0.85,0.85v4.15c0,2.1263 1.7237,3.85 3.85,3.85h12c2.1263,0 3.85,-1.7237 3.85,-3.85v-4.15c0,-0.4694 -0.3806,-0.85 -0.85,-0.85v0c-0.4694,0 -0.85,0.3806 -0.85,0.85v4.15c0,1.1874 -0.9626,2.15 -2.15,2.15h-12c-1.1874,0 -2.15,-0.9626 -2.15,-2.15v-4.15c0,-0.4694 -0.3806,-0.85 -0.85,-0.85v0z" fill-rule="evenodd" fill="currentcolor" fill-opacity="1" style="mix-blend-mode:normal"></path></g></g></g></g><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="0 0;0 3" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" begin="m89otsp870562513.mouseenter" fill="freeze"></animateTransform><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="0 3;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" keySplines="0 0 0.58 1" begin="m89otsp870562513.mouseleave" fill="freeze"></animateTransform></g><g><g transform="matrix(0,1,-1,0,12,3)"><g opacity="1" style="mix-blend-mode:normal"><path d="M0,0h13" fill="none" stroke="currentcolor" stroke-width="1.7" stroke-linejoin="miter" stroke-dasharray="0 0" stroke-opacity="1"></path><path d="M-0.85,0c0,-0.46944 0.38056,-0.85 0.85,-0.85c0.46944,0 0.85,0.38056 0.85,0.85c0,0.46944 -0.38056,0.85 -0.85,0.85c-0.46944,0 -0.85,-0.38056 -0.85,-0.85z" transform="matrix(-1,1.2246467991473532e-16,-1.2246467991473532e-16,-1,0,0)" fill="currentcolor"></path><path d="M3.3095 4.5L0.3255 1.457C0.1315 1.26 0.1355 0.942998 0.3315 0.749998C0.5295 0.556998 0.8455 0.559998 1.0385 0.756998L4.8575 4.65C5.0475 4.844 5.0475 5.156 4.8575 5.35L1.0385 9.243C0.8455 9.44 0.5285 9.443 0.3315 9.25C0.1345 9.057 0.1315 8.74 0.3255 8.543L3.3095 5.5V4.5Z" transform="matrix(1.7,0,0,1.7,7.05,-8.5)" fill="currentcolor"></path></g></g><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="0 0;0 -2" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" begin="m89otsp870562513.mouseenter" keySplines="0 0 0.58 1" fill="freeze"></animateTransform><animateTransform xmlns="http://www.w3.org/2000/svg" attributeName="transform" type="translate" values="0 -2;0 0" dur="0.3s" repeatCount="1" calcMode="spline" keyTimes="0;1" begin="m89otsp870562513.mouseleave" keySplines="0 0 0.58 1" fill="freeze"></animateTransform></g></g></g></svg>
 				</button>
+				<input type='text' class='avee-file-entry-name' title='The file name of the image' id='name'></input>
 			</div>
-			<input type='text' class='avee-file-entry-name' title='The file name of the image' id='name'></input>
 			<img class='avee-file-entry-img' id='img'></img>
 		</div>
 	</template>
@@ -133,7 +133,6 @@
 			</symbol>
 		</defs>
 	</svg>
-	<!-- my browser flipping crashed 2 times -->
 	<script>
 		const connectSvg = (n,s)=>{
 			//supports filteranimations now.
