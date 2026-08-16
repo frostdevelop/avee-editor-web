@@ -548,3 +548,12 @@ img.avee-file-entry-img.expanded {
 	justify-content:space-between;
 	align-items:center;
 }
+@media (width <= 768px) {
+  #mainWorkspace {
+    grid-template-rows: 1fr 30fr 15fr 0.5fr;
+	padding: 20px 30px;
+  }
+  .mainSection {
+	grid-column: span 2;
+  }
+}
